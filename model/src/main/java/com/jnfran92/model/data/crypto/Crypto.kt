@@ -1,11 +1,14 @@
-package com.jnfran92.model.entity
+package com.jnfran92.model.data.crypto
 
 import com.google.gson.annotations.SerializedName
 
-class CryptoEntity(
+/**
+ * Crypto-currency object
+ */
+class Crypto(
     @SerializedName("id") var cryptoId:Int,
     @SerializedName("name") var name:String,
     @SerializedName("symbol") var symbol:String,
     @SerializedName("slug") var slug:String,
-    @SerializedName("quote") var quoteEntity: QuoteEntity
+    @SerializedName("quote") var quoteEntity: Quote
     )

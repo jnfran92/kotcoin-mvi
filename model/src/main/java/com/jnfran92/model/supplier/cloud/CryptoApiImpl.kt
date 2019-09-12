@@ -1,12 +1,9 @@
 package com.jnfran92.model.supplier.cloud
 
 import android.accounts.NetworkErrorException
-import com.jnfran92.model.entity.CryptoEntity
-import com.jnfran92.model.entity.api.DefaultApiRequestEntity
+import com.jnfran92.model.data.crypto.Crypto
+import com.jnfran92.model.data.api.DefaultApiRequest
 import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.rxkotlin.subscribeBy
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,27 +17,27 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
 
     private val cryptoApi = this.retrofit.create(CryptoRetrofitService::class.java)
 
-    override fun getCryptoEntityById(cryptoId: Int): Observable<CryptoEntity> {
+    override fun getCryptoById(cryptoId: Int): Observable<Crypto> {
         throw NotImplementedError()
     }
 
-    override fun getCryptoList(): Observable<List<CryptoEntity>> {
+    override fun getCryptoList(): Observable<List<Crypto>> {
         return Observable.create { emitter ->
 
-            val call: Call<DefaultApiRequestEntity<CryptoEntity>> = cryptoApi.requestCryptoList()
-            call.enqueue(object : Callback<DefaultApiRequestEntity<CryptoEntity>> {
+            val call: Call<DefaultApiRequest<Crypto>> = cryptoApi.requestCryptoList()
+            call.enqueue(object : Callback<DefaultApiRequest<Crypto>> {
                 override fun onFailure(
-                    call: Call<DefaultApiRequestEntity<CryptoEntity>>,
+                    call: Call<DefaultApiRequest<Crypto>>,
                     t: Throwable
                 ) {
                     emitter!!.onError(NetworkErrorException())
                 }
 
                 override fun onResponse(
-                    call: Call<DefaultApiRequestEntity<CryptoEntity>>,
-                    response: Response<DefaultApiRequestEntity<CryptoEntity>>
+                    call: Call<DefaultApiRequest<Crypto>>,
+                    response: Response<DefaultApiRequest<Crypto>>
                 ) {
-                    val cryptoEntityList: ArrayList<CryptoEntity> =
+                    val cryptoEntityList: ArrayList<Crypto> =
                         response.body()?.cryptoEntityList ?: ArrayList()
                     emitter.onNext(cryptoEntityList)
                     emitter.onComplete()

@@ -1,10 +1,10 @@
-package com.jnfran92.model.entity.api
+package com.jnfran92.model.data.api
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * Status field included by default in the JSON API response.
  */
-class ApiRequestStatusEntity(
+class ApiRequestStatus(
     @SerializedName("error_code") var error_code:Int
 )
