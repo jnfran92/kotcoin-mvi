@@ -8,8 +8,6 @@ import io.reactivex.Observable
  * It establishes : Get and GetList methods
  */
 interface CryptoApi {
-
-
     /**
      * Get Crypto
      */

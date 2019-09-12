@@ -20,7 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
+
+def gsonVersion = "2.5.0"
+def rxJavaVersion = "2.0.2"
+def rxAndroidVersion = "2.0.1"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,4 +38,30 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation project(':model')
+    implementation project(':controller')
+
+
+    // Gson
+    implementation "com.github.salomonbrys.kotson:kotson:${gsonVersion}"
+
+    // JavaRx
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
+    // Java Annotation and Inject
+    compileOnly "javax.annotation:jsr250-api:1.0"
+    implementation "javax.inject:javax.inject:1"
+
+    // RetroFit
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.2.0")
+
+
 }

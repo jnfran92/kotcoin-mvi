@@ -1,18 +1,12 @@
 package com.jnfran92.model.supplier.cloud
 
 import com.google.gson.GsonBuilder
-import com.jnfran92.model.entity.CryptoEntity
-import io.reactivex.rxkotlin.subscribeBy
-import org.junit.Assert
-import org.junit.Test
-
+import okhttp3.OkHttpClient
 import org.junit.Before
+import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.HttpUrl
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 
@@ -51,32 +45,7 @@ class CryptoApiImplTest {
 
     @Before
     fun setup(){
-        this.cryptoApi = CryptoApiImpl(this.retrofit)
+//        this.cryptoApi = CryptoApiImpl(this.retrofit)
     }
 
-    @Test
-    fun getCryptoList() {
-
-        var cryptoList: ArrayList<CryptoEntity> = ArrayList()
-        var flagError = false
-        var flagComplete = false
-
-        this.cryptoApi.getCryptoList().subscribeBy(
-            onComplete = {flagComplete = true},
-            onError = { e -> run{
-                println("onError")
-                println(e.message)
-                flagError = true
-            } },
-            onNext = {cryptoList = it as ArrayList<CryptoEntity>}
-        )
-
-        println(cryptoList.size)
-
-
-        Assert.assertTrue(cryptoList.size > 0)
-        Assert.assertFalse(flagError)
-        Assert.assertTrue(flagComplete)
-
-    }
 }
