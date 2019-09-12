@@ -3,6 +3,7 @@ package com.jnfran92.model.supplier.cloud
 import com.jnfran92.model.entity.CryptoEntity
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Path
 
 /**
@@ -10,6 +11,7 @@ import retrofit2.http.Path
  */
 interface CryptoRetrofitService {
 
+//    @Headers({"Cache-Control: max-age=640000", "User-Agent: My-App-Name"})
     @GET("/v1/cryptocurrency/listings/latest")
     fun requestCryto(@Path("id") cryptoId:Int): Observable<CryptoEntity>
 

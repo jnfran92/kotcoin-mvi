@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jnfran92.model" />
+    package="com.jnfran92.model" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>
+
