@@ -24,6 +24,11 @@ android {
 
 }
 
+
+def gsonVersion = "2.5.0"
+def rxJavaVersion = "2.0.2"
+def rxAndroidVersion = "2.0.1"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -32,4 +37,19 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+
+
+    // Gson
+    implementation "com.github.salomonbrys.kotson:kotson:${gsonVersion}"
+
+    // JavaRx
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
+    // Java Annotation and Inject
+    compileOnly "javax.annotation:jsr250-api:1.0"
+    implementation "javax.inject:javax.inject:1"
+
 }

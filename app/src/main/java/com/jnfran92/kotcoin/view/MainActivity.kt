@@ -1,7 +1,8 @@
-package com.jnfran92.kotcoin
+package com.jnfran92.kotcoin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jnfran92.kotcoin.R
 
 class MainActivity : AppCompatActivity() {
 
