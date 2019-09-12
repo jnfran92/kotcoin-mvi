@@ -51,5 +51,11 @@ dependencies {
     // Java Annotation and Inject
     compileOnly "javax.annotation:jsr250-api:1.0"
     implementation "javax.inject:javax.inject:1"
+    
+    // RetroFit
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
 
 }
