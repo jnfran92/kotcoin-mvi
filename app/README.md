@@ -1,0 +1,3 @@
+# Kotcoin
+
+Crypto matters!
