@@ -1,2 +1,2 @@
-include ':app', ':model', ':controller'
+include ':app', ':model'
 rootProject.name='kotcoin'

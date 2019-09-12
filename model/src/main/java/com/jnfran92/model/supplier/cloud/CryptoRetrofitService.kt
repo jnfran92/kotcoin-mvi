@@ -14,7 +14,7 @@ import retrofit2.http.Path
 interface CryptoRetrofitService {
 
 //    @Headers({"Cache-Control: max-age=640000", "User-Agent: My-App-Name"})
-    @GET("/v1/cryptocurrency/listings/latest")
+    @GET("")
     fun requestCrypto(@Path("id") cryptoId:Int): Call<DefaultApiRequestEntity<CryptoEntity>>
 
     @GET("/v1/cryptocurrency/listings/latest")

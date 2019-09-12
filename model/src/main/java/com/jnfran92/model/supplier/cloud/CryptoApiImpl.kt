@@ -34,7 +34,6 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
                     t: Throwable
                 ) {
                     emitter!!.onError(NetworkErrorException())
-//                                            println("on Failure")
                 }
 
                 override fun onResponse(
@@ -49,18 +48,4 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
             })
         }
     }
-
-
-
-//    override fun getCryptoEntityById(cryptoId: Int): Observable<CryptoEntity> {
-//        throw NotImplementedError()
-//    }
-//
-//    override fun getCryptoList(): Observable<List<CryptoEntity>> {
-//        return this.cryptoApi.requestCryptoList()
-//    }
-
-
-
-
 }
