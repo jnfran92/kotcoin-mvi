@@ -15,8 +15,9 @@ class CryptoModelImp @Inject constructor(
     private val context: Context,
     private val cryptoDataSourceFactory: CryptoDataSourceFactory): CryptoModel {
 
+
     /**
-     * This data can be stored in cache, maybe...
+     * This data fi a single crypto can be stored in cache, maybe..., but not implemented yet
      */
     override fun getCryptoById(cryptoId: Int): Observable<Crypto> {
         throw NotImplementedError("API just provides a list of crypto data.")
@@ -28,6 +29,10 @@ class CryptoModelImp @Inject constructor(
     override fun getCryptoList(): Observable<List<Crypto>> {
         val cloudDataSource = this.cryptoDataSourceFactory.createCloudDataSource()
         return cloudDataSource.getCryptoList()
+    }
+
+    override fun addCrypto(crypto: Crypto): Observable<Void> {
+        throw NotImplementedError("API just provides a list of crypto data.")
     }
 
     override fun editCrypto(crypto: Crypto): Observable<Void> {

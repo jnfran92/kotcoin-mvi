@@ -21,6 +21,11 @@ interface CryptoModel {
     /**
      * Edit Crypto object.
      */
+    fun addCrypto(crypto: Crypto): Observable<Void>
+
+    /**
+     * Edit Crypto object.
+     */
     fun editCrypto(crypto: Crypto): Observable<Void>
 
     /**
