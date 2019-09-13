@@ -17,7 +17,6 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     BaseController<Crypto>(observerThread, subscriberExecutor) {
 
 
-    //Controller methods
     /**
      * Display a List of [Crypto] objects
      */
@@ -33,7 +32,7 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     }
 
     /**
-     * Display an specific Crypto object by its Id
+     * Display an specific Crypto object by its Id.  Note: not implemented yet
      */
     fun displayCryptoById(cryptoId:Int){
         this.prepareViewForOperation()
@@ -78,7 +77,7 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     And the list of methods goes on...
      */
 
-    fun prepareViewForOperation(){
+    private  fun prepareViewForOperation(){
         viewListener.hideRetry()
         viewListener.showLoading()
     }
@@ -86,7 +85,7 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     /**
      * Disposable for retrieving a List of [Crypto] objects.
      */
-    inner class ListCryptoDisposable: DisposableObserver<List<Crypto>>(){
+    private inner class ListCryptoDisposable: DisposableObserver<List<Crypto>>(){
         override fun onComplete() {
             viewListener.hideLoading()
         }
@@ -111,7 +110,7 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     /**
      * Disposable for retrieving a [Crypto] object. Not implemented yet...
      */
-    inner class CryptoDisposable: DisposableObserver<Crypto>(){
+    private inner class CryptoDisposable: DisposableObserver<Crypto>(){
         override fun onComplete() {
             throw NotImplementedError()
         }
@@ -130,7 +129,7 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
     /**
      * Disposable for add, remove, update operations... Not implemented yet...
      */
-    inner class VoidDisposable: DisposableObserver<Void>(){
+    private inner class VoidDisposable: DisposableObserver<Void>(){
         override fun onComplete() {
             throw NotImplementedError()
         }

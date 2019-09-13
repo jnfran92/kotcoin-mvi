@@ -7,40 +7,42 @@ import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
 import com.jnfran92.kotcoin.view.ViewListener
 import com.jnfran92.model.data.crypto.Crypto
+import timber.log.Timber
+import javax.inject.Inject
 
 class MainActivity : BaseActivity(), ViewListener<Crypto> {
 
     private lateinit var cryptoComponent: CryptoComponent
-    private lateinit var cryptosController: CryptoController
+
+    @Inject
+    lateinit var cryptoController: CryptoController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Injection Stuff
         initCryptoComponent()
+        initInjection()
 
-//
-//        val cryptoModel = cryptoComponent.cryptoModel()
-//
-//
-//
-//        cryptoModel.getCryptoList()
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .subscribeBy(
-//                onComplete = { println("onComplete")},
-//                onError = { println("onComplete")},
-//                onNext = {
-//                    run{
-//                        println("onNext")
-//                        for (i in it){
-//                            println("-----")
-//                            println(i.name + " " + i.symbol + "   USD $" + i.quoteEntity.usd.price)
-//                        }
-//                    }
-//                }
-//            )
+        // Controller View
+        setControllerViewListener()
 
+        // Controller action
+        cryptoController.displayCryptoList()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposeController()
+    }
+
+    override fun setControllerViewListener() {
+        this.cryptoController.viewListener = this
+    }
+
+    override fun disposeController() {
+       this.cryptoController.dispose()
     }
 
     private fun initCryptoComponent(){
@@ -51,33 +53,47 @@ class MainActivity : BaseActivity(), ViewListener<Crypto> {
             .build()
     }
 
+    private fun initInjection(){
+        this.cryptoComponent.inject(this)
+    }
 
     override fun showLoading() {
+        Timber.d("showLoading")
 
     }
 
     override fun hideLoading() {
+        Timber.d("hideLoading")
 
     }
 
     override fun showErrorMessage(message: String) {
+        Timber.d("showErrorMessage: %s", message)
 
     }
 
     override fun showRetry() {
+        Timber.d("showRetry")
 
     }
 
     override fun hideRetry() {
+        Timber.d("hideRetry")
 
     }
 
     override fun showData(t: Crypto) {
+        Timber.d("showData")
 
     }
 
     override fun showDataList(t: List<Crypto>) {
+        Timber.d("showDataList")
 
+        for (i in t){
+            println("-----")
+            println(i.name + " " + i.symbol + "   USD $" + i.quoteEntity.usd.price)
+        }
     }
 
 

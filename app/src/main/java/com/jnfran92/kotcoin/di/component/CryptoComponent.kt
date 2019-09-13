@@ -1,8 +1,10 @@
 package com.jnfran92.kotcoin.di.component
 
+import com.jnfran92.kotcoin.controller.CryptoController
 import com.jnfran92.kotcoin.di.PerActivity
 import com.jnfran92.kotcoin.di.module.ActivityModule
 import com.jnfran92.kotcoin.di.module.CryptoModule
+import com.jnfran92.kotcoin.view.activity.MainActivity
 import com.jnfran92.model.CryptoModel
 import dagger.Component
 
@@ -11,6 +13,6 @@ import dagger.Component
     modules =[CryptoModule::class, ActivityModule::class])
 interface CryptoComponent: ActivityComponent {
 
-    // exposed to sub-graphs
-    fun cryptoModel(): CryptoModel
+    // Inject Main Activity
+    fun inject(mainActivity: MainActivity)
 }

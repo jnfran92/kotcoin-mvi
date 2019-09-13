@@ -17,7 +17,7 @@ abstract class BaseController<T>(private val observerThread: ObserverThread,
                               private val subscriberExecutor: SubscriberExecutor) {
 
 
-    protected lateinit var viewListener: ViewListener<T>
+    lateinit var viewListener: ViewListener<T>
 
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 

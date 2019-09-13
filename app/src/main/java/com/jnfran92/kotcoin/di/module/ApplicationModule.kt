@@ -3,6 +3,10 @@ package com.jnfran92.kotcoin.di.module
 import android.app.Application
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.jnfran92.kotcoin.rx.JobExecutor
+import com.jnfran92.kotcoin.rx.ObserverThread
+import com.jnfran92.kotcoin.rx.SubscriberExecutor
+import com.jnfran92.kotcoin.rx.UIThread
 import com.jnfran92.model.CryptoModel
 import com.jnfran92.model.CryptoModelImp
 import com.jnfran92.model.supplier.cache.CryptoCache
@@ -70,6 +74,16 @@ class ApplicationModule(private val application: Application) {
                 chain.proceed(request)
             }
         return client.build()
+    }
+
+    @Provides @Singleton
+    fun subscriberThread(jobExecutor: JobExecutor): SubscriberExecutor {
+        return jobExecutor
+    }
+
+    @Provides @Singleton
+    fun observerThread(uiThread: UIThread): ObserverThread {
+        return uiThread
     }
 
 }
