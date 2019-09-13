@@ -4,6 +4,7 @@ import com.jnfran92.kotcoin.di.PerActivity
 import com.jnfran92.kotcoin.di.module.ActivityModule
 import com.jnfran92.kotcoin.di.module.CryptoModule
 import com.jnfran92.kotcoin.view.activity.CryptoActivity
+import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
 import dagger.Component
 
 @PerActivity
@@ -12,5 +13,9 @@ import dagger.Component
 interface CryptoComponent: ActivityComponent {
 
     // Inject Main Activity
-    fun inject(mainActivity: CryptoActivity)
+//    fun inject(mainActivity: CryptoActivity)
+
+    // inject Crypto Fragment
+    fun inject(cryptoListFragment: CryptoListFragment)
+
 }

@@ -14,9 +14,6 @@ abstract class BaseActivity: AppCompatActivity() {
     lateinit var applicationComponent: ApplicationComponent
     lateinit var activityModule: ActivityModule
 
-    abstract fun setControllerViewListener()
-    abstract fun disposeController()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.initApplicationComponent()

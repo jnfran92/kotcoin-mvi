@@ -1,21 +1,16 @@
 package com.jnfran92.kotcoin.view.activity
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.jnfran92.kotcoin.R
-import com.jnfran92.kotcoin.controller.CryptoController
 import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
-import com.jnfran92.kotcoin.view.ViewListener
-import com.jnfran92.model.data.crypto.Crypto
-import timber.log.Timber
-import javax.inject.Inject
+import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
 
-class CryptoActivity : BaseActivity(), ViewListener<Crypto> {
+class CryptoActivity : BaseActivity() {
 
-    @Inject
-    lateinit var cryptoController: CryptoController
-
-    private lateinit var cryptoComponent: CryptoComponent
+    lateinit var cryptoComponent: CryptoComponent
+    lateinit var cryptoListFragment: CryptoListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,27 +18,10 @@ class CryptoActivity : BaseActivity(), ViewListener<Crypto> {
 
         // Injection Stuff
         initCryptoComponent()
-        initInjection()
 
-        // Controller View
-        setControllerViewListener()
-
-        // Controller action
-        cryptoController.displayCryptoList()
+        initView()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposeController()
-    }
-
-    override fun setControllerViewListener() {
-        this.cryptoController.viewListener = this
-    }
-
-    override fun disposeController() {
-       this.cryptoController.dispose()
-    }
 
     private fun initCryptoComponent(){
         this.cryptoComponent = DaggerCryptoComponent
@@ -53,47 +31,21 @@ class CryptoActivity : BaseActivity(), ViewListener<Crypto> {
             .build()
     }
 
-    private fun initInjection(){
-        this.cryptoComponent.inject(this)
+    private fun initView(){
+        cryptoListFragment = CryptoListFragment()
+        this.addFragment(R.id.fy_cryptoActivity_container, cryptoListFragment)
     }
 
-    override fun showLoading() {
-        Timber.d("showLoading")
-
+    fun addFragment(containerId:Int, fragment: Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(containerId, fragment)
+        fragmentTransaction.commit()
     }
 
-    override fun hideLoading() {
-        Timber.d("hideLoading")
-
-    }
-
-    override fun showErrorMessage(message: String) {
-        Timber.d("showErrorMessage: %s", message)
-
-    }
-
-    override fun showRetry() {
-        Timber.d("showRetry")
-
-    }
-
-    override fun hideRetry() {
-        Timber.d("hideRetry")
-
-    }
-
-    override fun showData(t: Crypto) {
-        Timber.d("showData")
-
-    }
-
-    override fun showDataList(t: List<Crypto>) {
-        Timber.d("showDataList")
-
-        for (i in t){
-            println("-----")
-            println(i.name + " " + i.symbol + "   USD $" + i.quoteEntity.usd.price)
-        }
+    fun updateFragment(containerId:Int, fragment:Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(containerId, fragment)
+        fragmentTransaction.commit()
     }
 
 
