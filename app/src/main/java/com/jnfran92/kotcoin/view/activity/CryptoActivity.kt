@@ -10,16 +10,16 @@ import com.jnfran92.model.data.crypto.Crypto
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), ViewListener<Crypto> {
-
-    private lateinit var cryptoComponent: CryptoComponent
+class CryptoActivity : BaseActivity(), ViewListener<Crypto> {
 
     @Inject
     lateinit var cryptoController: CryptoController
 
+    private lateinit var cryptoComponent: CryptoComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_crypto)
 
         // Injection Stuff
         initCryptoComponent()

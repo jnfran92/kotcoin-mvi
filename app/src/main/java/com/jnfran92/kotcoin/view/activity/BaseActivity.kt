@@ -23,10 +23,16 @@ abstract class BaseActivity: AppCompatActivity() {
         this.initActivityModule()
     }
 
+    /**
+     * Getting appComponent from [KotcoinApp]
+     */
     private fun initApplicationComponent(){
         this.applicationComponent = (application as KotcoinApp).applicationComponent
     }
 
+    /**
+     * Init Activity Module for Injection
+     */
     private fun initActivityModule(){
         this.activityModule = ActivityModule(this)
     }
