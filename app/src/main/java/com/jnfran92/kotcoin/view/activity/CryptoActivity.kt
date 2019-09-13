@@ -6,6 +6,7 @@ import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
 import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
+import timber.log.Timber
 
 class CryptoActivity : BaseActivity() {
 
@@ -16,12 +17,18 @@ class CryptoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crypto)
 
+        Timber.d("onCreate")
+
         // Injection Stuff
         initCryptoComponent()
 
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Timber.d("onResume")
+    }
 
     private fun initCryptoComponent(){
         this.cryptoComponent = DaggerCryptoComponent
@@ -36,7 +43,7 @@ class CryptoActivity : BaseActivity() {
         this.addFragment(R.id.fy_cryptoActivity_container, cryptoListFragment)
     }
 
-    fun addFragment(containerId:Int, fragment: Fragment){
+    private fun addFragment(containerId:Int, fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(containerId, fragment)
         fragmentTransaction.commit()

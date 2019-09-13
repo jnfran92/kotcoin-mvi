@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.controller.CryptoController
+import com.jnfran92.kotcoin.di.PerActivity
 import com.jnfran92.kotcoin.view.ViewListener
 import com.jnfran92.kotcoin.view.activity.CryptoActivity
 import com.jnfran92.kotcoin.view.adapter.CryptoListAdapter
@@ -22,13 +24,13 @@ import javax.inject.Inject
  */
 class CryptoListFragment : Fragment(), ViewListener<Crypto> {
 
-    @Inject
+    @Inject @PerActivity
     lateinit var cryptoController: CryptoController
 
-    @Inject
+    @Inject @PerActivity
     lateinit var cryptoListAdapter: CryptoListAdapter
 
-    @Inject
+    @Inject @PerActivity
     lateinit var cryptoLayoutManager: RecyclerView.LayoutManager
 
 
@@ -47,7 +49,7 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
 
     override fun onDestroy() {
         super.onDestroy()
-        Timber.d("OnDestroy")
+        Timber.d("onDestroy")
         this.cryptoController.dispose()
     }
 
@@ -59,8 +61,10 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
     private fun initViewElements(){
         this.cryptoController.viewListener = this
 
+        this.cryptoListAdapter.setData(ArrayList())
+
         rv_cryptoFragment_cryptoList.adapter = this.cryptoListAdapter
-        rv_cryptoFragment_cryptoList.layoutManager = this.cryptoLayoutManager
+        rv_cryptoFragment_cryptoList.layoutManager = LinearLayoutManager(context)
     }
 
     private fun showToastMessage(message: String){
