@@ -1,27 +1,25 @@
 package com.jnfran92.kotcoin.view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.jnfran92.kotcoin.R
-import com.jnfran92.kotcoin.di.component.DaggerApplicationComponent
-import com.jnfran92.kotcoin.di.module.ApplicationModule
+import com.jnfran92.kotcoin.di.component.CryptoComponent
+import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
+import com.jnfran92.kotcoin.view.activity.BaseActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    private lateinit var cryptoComponent: CryptoComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initCryptoComponent()
 
-        val applicationComponent = DaggerApplicationComponent
-            .builder()
-            .applicationModule(ApplicationModule(application))
-            .build()
-
-        val cryptoModel = applicationComponent.cryptoModel()
+        val cryptoModel = cryptoComponent.cryptoModel()
 
 
         cryptoModel.getCryptoList()
@@ -41,5 +39,14 @@ class MainActivity : AppCompatActivity() {
                 }
             )
 
+    }
+
+
+    private fun initCryptoComponent(){
+        this.cryptoComponent = DaggerCryptoComponent
+            .builder()
+            .activityModule(activityModule)
+            .applicationComponent(applicationComponent)
+            .build()
     }
 }

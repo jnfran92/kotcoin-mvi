@@ -9,5 +9,6 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
 
+    // exposed to sub-graphs
     fun cryptoModel(): CryptoModel
 }

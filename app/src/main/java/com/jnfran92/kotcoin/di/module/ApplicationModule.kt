@@ -47,20 +47,6 @@ class ApplicationModule(private val application: Application) {
 
     @Provides @Singleton
     fun retrofit(okHttpClient: OkHttpClient): Retrofit{
-//        val client = OkHttpClient.Builder()
-//            .connectTimeout(10, TimeUnit.SECONDS)
-//            .writeTimeout(10, TimeUnit.SECONDS)
-//            .readTimeout(30, TimeUnit.SECONDS)
-//            .addInterceptor{chain ->
-//                val original = chain.request()
-//                val requestBuilder = original.newBuilder()
-//                    .header("X-CMC_PRO_API_KEY", "bacdbc14-d7d9-4a0c-8ec5-77351a6be042")
-//                val request = requestBuilder.build()
-//                chain.proceed(request)
-//            }
-//
-//        val okHttpClient = client.build()
-
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -83,7 +69,6 @@ class ApplicationModule(private val application: Application) {
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }
-
         return client.build()
     }
 
