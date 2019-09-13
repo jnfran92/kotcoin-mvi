@@ -3,7 +3,7 @@ package com.jnfran92.model.data.crypto
 import com.google.gson.annotations.SerializedName
 
 /**
- * Auxiliary class for [Crypto], for getting the price in dollars of each crypto-currency.
+ * Auxiliary class for [Crypto], needed for getting the price in dollars of each crypto-currency.
  */
 class Usd (
     @SerializedName("price") var price:Double,

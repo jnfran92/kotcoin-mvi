@@ -3,7 +3,7 @@ package com.jnfran92.model.data.crypto
 import com.google.gson.annotations.SerializedName
 
 /**
- * Crypto-currency object
+ * Crypto-currency data
  */
 class Crypto(
     @SerializedName("id") var cryptoId:Int,
