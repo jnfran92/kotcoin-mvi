@@ -16,18 +16,6 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) (Note: a f
 - Kotson
 - Android Rx
 
-## Basic Guide
-
-**IMPORTANT:** Add API Key to global `.gradle`, to do that (macOS):
-
-    cd .gradle
-    vim gradle.properties
-
-Add in `gradle.properties` your API KEY:
-
-    kotcoinApiKey="xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxx"
-
-Now, compile the project!
 
 ## About Kotcoin
 
@@ -49,6 +37,20 @@ Lastly, API service is consumed by using `Retrofit`.
 
 Data flow is managed by `reactive` Libraries. In such regard, all actions are managed by `Observable` 
 objects, so data flows to an `Observer` when it is subscribed.
+
+
+## Basic Guide
+
+**IMPORTANT:** Add API Key to global `.gradle`, to do that (macOS):
+
+    cd .gradle
+    vim gradle.properties
+
+Add in `gradle.properties` your API KEY:
+
+    kotcoinApiKey="xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxx"
+
+Now, compile the project!
 
 
 ## Bugs
