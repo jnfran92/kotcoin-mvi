@@ -2,7 +2,7 @@
 
 Crypto matters!
 
-<img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="easy-wave-based">
+<img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
 
 
 Android Application MVC-based and written all in Kotlin for retrieving 10 most capitalized 
@@ -18,6 +18,8 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) (Note: a f
 
 
 ## About Kotcoin
+
+<img src="./app/src/main/res/drawable/backkotcoin.png" alt="kotcoin-back">
 
 Kotcoin is based on Model View Controller Arch. This means that there is a controller which manages the 
 data for every action coming from the view. Ideally, `Model` is separated from the view and 
