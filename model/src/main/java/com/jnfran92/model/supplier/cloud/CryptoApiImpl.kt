@@ -30,7 +30,7 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
                     call: Call<DefaultApiRequest<Crypto>>,
                     t: Throwable
                 ) {
-                    emitter!!.onError(NetworkErrorException())
+                    emitter?.onError(NetworkErrorException("Failed to retrieve data."))
                 }
 
                 override fun onResponse(

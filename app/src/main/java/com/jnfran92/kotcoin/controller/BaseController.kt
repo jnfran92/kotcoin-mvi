@@ -18,7 +18,6 @@ abstract class BaseController<T>(private val observerThread: ObserverThread,
 
 
     lateinit var viewListener: ViewListener<T>
-
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     /**

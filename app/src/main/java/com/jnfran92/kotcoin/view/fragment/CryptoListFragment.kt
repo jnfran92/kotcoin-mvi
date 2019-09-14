@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.controller.CryptoController
-import com.jnfran92.kotcoin.di.PerActivity
 import com.jnfran92.kotcoin.view.ViewListener
 import com.jnfran92.kotcoin.view.activity.CryptoActivity
 import com.jnfran92.kotcoin.view.adapter.CryptoListAdapter
@@ -24,13 +22,13 @@ import javax.inject.Inject
  */
 class CryptoListFragment : Fragment(), ViewListener<Crypto> {
 
-    @Inject @PerActivity
+    @Inject
     lateinit var cryptoController: CryptoController
 
-    @Inject @PerActivity
+    @Inject
     lateinit var cryptoListAdapter: CryptoListAdapter
 
-    @Inject @PerActivity
+    @Inject
     lateinit var cryptoLayoutManager: RecyclerView.LayoutManager
 
 
@@ -54,17 +52,14 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
     }
 
     private fun initInjection(){
-        val cryptoComponent = (activity as CryptoActivity).cryptoComponent
+        val cryptoComponent = (activity as CryptoActivity).getCryptoComponent()
         cryptoComponent.inject(this)
     }
 
     private fun initViewElements(){
         this.cryptoController.viewListener = this
-
-        this.cryptoListAdapter.setData(ArrayList())
-
         rv_cryptoFragment_cryptoList.adapter = this.cryptoListAdapter
-        rv_cryptoFragment_cryptoList.layoutManager = LinearLayoutManager(context)
+        rv_cryptoFragment_cryptoList.layoutManager = this.cryptoLayoutManager
     }
 
     private fun showToastMessage(message: String){
@@ -104,10 +99,5 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
     override fun showDataList(t: List<Crypto>) {
         Timber.d("showDataList")
         this.cryptoListAdapter.setData(t as ArrayList<Crypto>)
-
-        for (i in t){
-            println("-----")
-            println(i.name + " " + i.symbol + "   USD $" + i.quoteEntity.usd.price)
-        }
     }
 }

@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="horizontal">
+    android:layout_margin="15dp"
+    android:background="@drawable/rounded_item"
+    android:orientation="horizontal"
+    android:padding="6dp">
 
     <TextView
         android:id="@+id/tv_cryptoItem_symbol"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:background="#292929"
-        android:padding="20dp"
+        android:layout_weight="4"
+        android:gravity="center"
         android:text="BTC"
-        android:textAlignment="center"
+        android:textAlignment="gravity"
         android:textColor="#FFC107"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -32,6 +33,7 @@
             android:layout_weight="1"
             android:text="Bitcoin"
             android:textAllCaps="true"
+            android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -51,8 +53,8 @@
                     android:id="@+id/textView40"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Price:"
-                    android:textColor="#FF5722"
+                    android:text="@string/price"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="12sp" />
 
                 <TextView
@@ -60,7 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="$1000"
-                    android:textSize="18sp" />
+                    android:textColor="@android:color/background_light"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -73,8 +76,8 @@
                     android:id="@+id/textView44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MarketCap:"
-                    android:textColor="#FF9800"
+                    android:text="@string/market_cap"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="12sp" />
 
                 <TextView
@@ -82,7 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="$1000"
-                    android:textSize="18sp" />
+                    android:textColor="@android:color/background_light"
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -93,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Last update on: 12/12/12"
+            android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />
 
     </LinearLayout>

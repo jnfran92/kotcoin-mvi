@@ -37,13 +37,18 @@ class CryptoListAdapter @Inject constructor(private val context: Context)
         holder.itemName.text = crypto.name
         holder.itemSymbol.text = crypto.symbol
 
-        val price = "%.3f".format(crypto.quoteEntity.usd.price)
-        holder.itemPrice.text = "$ $price"
+        val price:String = context.getText(R.string.money_symbol).toString() +
+                "%,.3f".format(crypto.quoteEntity.usd.price)
+        holder.itemPrice.text = price
 
-        val marketCap = "%.2f".format(crypto.quoteEntity.usd.marketCap)
-        holder.itemMarketCap.text = "$ $marketCap"
+        val marketCap =  context.getText(R.string.money_symbol).toString() +
+                "%,.2f".format(crypto.quoteEntity.usd.marketCap/10e9) +
+                "MM"
+        holder.itemMarketCap.text = marketCap
 
-        holder.itemLastUpdate.text = "Updated: " + crypto.quoteEntity.usd.lastUpdated
+        val lastUpdate:String = context.getString(R.string.updated_at) + " " +
+                crypto.quoteEntity.usd.lastUpdated
+        holder.itemLastUpdate.text = lastUpdate
 
     }
 

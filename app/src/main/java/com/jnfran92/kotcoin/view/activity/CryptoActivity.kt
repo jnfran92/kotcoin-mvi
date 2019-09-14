@@ -7,21 +7,22 @@ import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
 import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
 import timber.log.Timber
+import kotlinx.android.synthetic.main.activity_scrolling.*
 
+/**
+ * View for display a list of [Crypto] objects.
+ */
 class CryptoActivity : BaseActivity() {
 
-    lateinit var cryptoComponent: CryptoComponent
     lateinit var cryptoListFragment: CryptoListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crypto)
-
+        setSupportActionBar(toolbar)
         Timber.d("onCreate")
 
-        // Injection Stuff
-        initCryptoComponent()
-
+        // Fragments
         initView()
     }
 
@@ -30,8 +31,9 @@ class CryptoActivity : BaseActivity() {
         Timber.d("onResume")
     }
 
-    private fun initCryptoComponent(){
-        this.cryptoComponent = DaggerCryptoComponent
+
+    fun getCryptoComponent(): CryptoComponent{
+        return DaggerCryptoComponent
             .builder()
             .activityModule(activityModule)
             .applicationComponent(applicationComponent)
@@ -43,9 +45,11 @@ class CryptoActivity : BaseActivity() {
         this.addFragment(R.id.fy_cryptoActivity_container, cryptoListFragment)
     }
 
+
+
     private fun addFragment(containerId:Int, fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(containerId, fragment)
+        fragmentTransaction.replace(containerId, fragment)
         fragmentTransaction.commit()
     }
 

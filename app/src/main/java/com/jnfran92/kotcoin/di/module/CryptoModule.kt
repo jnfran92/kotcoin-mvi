@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.di.PerActivity
 import dagger.Module
 import dagger.Provides
+import androidx.recyclerview.widget.GridLayoutManager
+
+
 
 @Module
 class CryptoModule {
@@ -13,6 +16,6 @@ class CryptoModule {
     @Provides
     @PerActivity
     fun layoutManager(context: Context): RecyclerView.LayoutManager{
-        return LinearLayoutManager(context)
+        return GridLayoutManager(context, 2)
     }
 }

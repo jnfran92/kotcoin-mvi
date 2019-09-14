@@ -18,7 +18,7 @@ class KotcoinApp: Application() {
         this.initApplicationComponent()
     }
 
-    fun initApplicationComponent(){
+    private fun initApplicationComponent(){
         this.applicationComponent = DaggerApplicationComponent
             .builder()
             .applicationModule(ApplicationModule(this))
