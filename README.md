@@ -1,6 +1,6 @@
-# Kotcoin
+# Kotcoin  [![Build Status](https://travis-ci.org/jnfran92/kotcoin.svg?branch=master)](https://travis-ci.org/jnfran92/kotcoin)
 
-Crypto matters! [![Build Status](https://travis-ci.org/jnfran92/kotcoin.svg?branch=master)](https://travis-ci.org/jnfran92/kotcoin)
+Crypto matters!
 
 <img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
 

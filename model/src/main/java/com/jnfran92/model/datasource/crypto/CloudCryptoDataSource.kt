@@ -1,6 +1,5 @@
 package com.jnfran92.model.datasource.crypto
 
-import android.content.Context
 import com.jnfran92.model.data.crypto.Crypto
 import com.jnfran92.model.supplier.cloud.CryptoApi
 import io.reactivex.Observable
