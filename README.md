@@ -1,6 +1,6 @@
 # Kotcoin
 
-Crypto matters!
+Crypto matters! [![Build Status](https://travis-ci.org/jnfran92/kotcoin.svg?branch=master)](https://travis-ci.org/jnfran92/kotcoin)
 
 <img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
 
@@ -12,9 +12,9 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 - Dagger
 - Retrofit
-- Gson
-- Kotson
-- Android Rx
+- Gson/Kotson
+- AndroidRx
+- Mockito (Just few tests)
 
 
 ## About Kotcoin
