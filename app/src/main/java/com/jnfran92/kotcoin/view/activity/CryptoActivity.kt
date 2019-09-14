@@ -1,6 +1,7 @@
 package com.jnfran92.kotcoin.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.di.component.CryptoComponent
@@ -24,6 +25,12 @@ class CryptoActivity : BaseActivity() {
 
         // Fragments
         initView()
+
+        // Fab button to re-load data
+        val fab: View = findViewById(R.id.fab)
+        fab.setOnClickListener {
+            this.cryptoListFragment.displayCryptoList()
+        }
     }
 
     override fun onResume() {

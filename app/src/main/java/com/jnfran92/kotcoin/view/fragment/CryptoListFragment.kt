@@ -43,13 +43,18 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
         this.initInjection()
         this.initViewElements()
 
-        this.cryptoController.displayCryptoList()
+        this.displayCryptoList()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Timber.d("onDestroy")
         this.cryptoController.dispose()
+    }
+
+    fun displayCryptoList(){
+        this.cryptoListAdapter.setData(ArrayList())
+        this.cryptoController.displayCryptoList()
     }
 
     private fun initInjection(){
