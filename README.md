@@ -57,7 +57,7 @@ objects, so data flows to an `Observer` when it is subscribed.
 
 ## What's Next!
 
-- Add Cyrpto single views
+- Add Crypto single views
 - Add Controller methods for filter, apply, modify data.
 - Unit, Integration and UI Testing
 - Errors handling
