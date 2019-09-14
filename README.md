@@ -19,7 +19,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) (Note: a f
 
 ## About Kotcoin
 
-<img src="./app/src/main/res/drawable/backkotcoin.png" alt="kotcoin-background" width="80">
+<img src="./app/src/main/res/drawable/backkotcoin.png" alt="kotcoin-background" width="250">
 
 Kotcoin is based on Model View Controller Arch. This means that there is a controller which manages the 
 data for every action coming from the view. Ideally, `Model` is separated from the view and 
