@@ -3,6 +3,7 @@ package com.jnfran92.kotcoin.di.module
 import android.app.Application
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
@@ -69,7 +70,7 @@ class ApplicationModule(private val application: Application) {
             .addInterceptor{chain ->
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
-                    .header("X-CMC_PRO_API_KEY", "bacdbc14-d7d9-4a0c-8ec5-77351a6be042")
+                    .header("X-CMC_PRO_API_KEY", BuildConfig.API_TOKEN)
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }

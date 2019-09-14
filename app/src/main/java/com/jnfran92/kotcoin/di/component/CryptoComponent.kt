@@ -12,10 +12,7 @@ import dagger.Component
     modules =[CryptoModule::class, ActivityModule::class])
 interface CryptoComponent: ActivityComponent {
 
-    // Inject Main Activity
-//    fun inject(mainActivity: CryptoActivity)
-
-    // inject Crypto Fragment
+    // inject CryptoListFragment
     fun inject(cryptoListFragment: CryptoListFragment)
 
 }

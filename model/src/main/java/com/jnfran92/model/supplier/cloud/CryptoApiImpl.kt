@@ -24,7 +24,7 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
     override fun getCryptoList(): Observable<List<Crypto>> {
         return Observable.create { emitter ->
 
-            val call: Call<DefaultApiRequest<Crypto>> = cryptoApi.requestCryptoList()
+            val call: Call<DefaultApiRequest<Crypto>> = cryptoApi.requestCryptoList(10)
             call.enqueue(object : Callback<DefaultApiRequest<Crypto>> {
                 override fun onFailure(
                     call: Call<DefaultApiRequest<Crypto>>,

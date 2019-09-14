@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'API_TOKEN', kotcoinApiKey
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
