@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".view.activity.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".view.activity.CryptoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

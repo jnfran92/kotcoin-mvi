@@ -14,6 +14,7 @@ import com.jnfran92.kotcoin.view.activity.CryptoActivity
 import com.jnfran92.kotcoin.view.adapter.CryptoListAdapter
 import com.jnfran92.model.data.crypto.Crypto
 import kotlinx.android.synthetic.main.frament_crypto_list.*
+import kotlinx.android.synthetic.main.view_loading.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -68,12 +69,13 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
 
     override fun showLoading() {
         Timber.d("showLoading")
-
+        pb_viewLoading_loading.visibility = View.VISIBLE
+        pb_viewLoading_loading.isIndeterminate = true
     }
 
     override fun hideLoading() {
         Timber.d("hideLoading")
-
+        pb_viewLoading_loading.visibility = View.GONE
     }
 
     override fun showErrorMessage(message: String) {

@@ -11,13 +11,12 @@
         android:id="@+id/tv_cryptoItem_symbol"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"
+        android:layout_weight="3"
         android:gravity="center"
         android:text="BTC"
         android:textAlignment="gravity"
         android:textColor="#FFC107"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

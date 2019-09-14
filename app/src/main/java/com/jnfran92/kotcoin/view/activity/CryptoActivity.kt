@@ -6,8 +6,8 @@ import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
 import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
+import kotlinx.android.synthetic.main.activity_crypto.*
 import timber.log.Timber
-import kotlinx.android.synthetic.main.activity_scrolling.*
 
 /**
  * View for display a list of [Crypto] objects.
