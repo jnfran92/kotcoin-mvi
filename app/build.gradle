@@ -24,7 +24,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'API_TOKEN', kotcoinApiKeyLocal
+        it.buildConfigField 'String', 'API_TOKEN', kotcoinApiKey
     }
 
     kotlinOptions {

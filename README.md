@@ -43,12 +43,7 @@ objects, so data flows to an `Observer` when it is subscribed.
 
 ## Basic Guide
 
-**IMPORTANT:** Add API Key to global `.gradle`, to do that (macOS):
-
-    cd .gradle
-    vim gradle.properties
-
-Add in `gradle.properties` your API KEY:
+**IMPORTANT:** Add in `gradle.properties` your API KEY:
 
     kotcoinApiKey="xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxx"
 
