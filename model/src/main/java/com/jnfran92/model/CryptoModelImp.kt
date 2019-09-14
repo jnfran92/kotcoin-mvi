@@ -1,6 +1,5 @@
 package com.jnfran92.model
 
-import android.content.Context
 import com.jnfran92.model.data.crypto.Crypto
 import com.jnfran92.model.datasource.CryptoDataSourceFactory
 import io.reactivex.Observable
@@ -12,7 +11,6 @@ import javax.inject.Singleton
  */
 @Singleton
 class CryptoModelImp @Inject constructor(
-    private val context: Context,
     private val cryptoDataSourceFactory: CryptoDataSourceFactory): CryptoModel {
 
 
