@@ -6,7 +6,7 @@ Crypto matters!
 
 
 Android Application MVC-based and written all in Kotlin for retrieving 10 most capitalized 
-Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) (Note: a free API Key is needed).
+Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note: a free API Key is needed).
 
 ## Requirements
 
