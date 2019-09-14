@@ -29,7 +29,7 @@ Add in `gradle.properties` your API KEY:
 
 Now, compile the project!
 
-## About Kotcoin:
+## About Kotcoin
 
 Kotcoin is based on Model View Controller Arch. This means that there is a controller which manages the 
 data for every action coming from the view. Ideally, `Model` is separated from the view and 
@@ -41,11 +41,19 @@ provided by `CoinMarketCap` documentation.
 
 
 `View` and `Controller` has dependencies of `Model`. `Model` has a FactoryClass to manage data sources.
-`Controller` implements a `ViewListener` which is the interface fro View Actions and Requests.
+`Controller` implements a `ViewListener` which is the interface for `View` actions and requests.
 
 
-Dependency Injection is performed at `App`, `Activity` and `Model entity` level by using `Dagger`. 
+Dependency Injection is performed at `App`, `Activity` and `Model` entity level by using `Dagger`. 
 Lastly, API service is consumed by using `Retrofit`.
+
+Data flow is managed by `reactive` Libraries. In such regard, all actions are managed by `Observable` 
+objects, so data flows to an `Observer` when it is subscribed.
+
+
+## Bugs
+
+- When orientation change and there is no network connection, `androidRx` throws an Exception.
 
 ## What's Next!
 
