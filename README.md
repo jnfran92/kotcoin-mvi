@@ -31,7 +31,8 @@ provided by `CoinMarketCap` documentation.
 
 
 `View` and `Controller` has dependencies of `Model`. `Model` has a FactoryClass to manage data sources.
-`Controller` implements a `ViewListener` which is the interface for `View` actions and requests.
+`Controller` has a `ViewListener` Interface which have to be implemented by the `View` for handling
+actions and requests.
 
 
 Dependency Injection is performed at `App`, `Activity` and `Model` entity level by using `Dagger`. 

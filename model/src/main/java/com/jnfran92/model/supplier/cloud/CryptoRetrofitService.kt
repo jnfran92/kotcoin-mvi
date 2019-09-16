@@ -12,7 +12,6 @@ import retrofit2.http.Query
  */
 interface CryptoRetrofitService {
 
-//    @Headers({"Cache-Control: max-age=640000", "User-Agent: My-App-Name"})
     @GET("")
     fun requestCrypto(@Path("id") cryptoId:Int): Call<DefaultApiRequest<Crypto>>
 

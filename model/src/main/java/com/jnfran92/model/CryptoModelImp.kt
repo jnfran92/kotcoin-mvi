@@ -15,7 +15,7 @@ class CryptoModelImp @Inject constructor(
 
 
     /**
-     * This data fi a single crypto can be stored in cache, maybe..., but not implemented yet
+     * Single crypto data can be stored in cache, maybe..., but not implemented yet
      */
     override fun getCryptoById(cryptoId: Int): Observable<Crypto> {
         throw NotImplementedError("API just provides a list of crypto data.")
