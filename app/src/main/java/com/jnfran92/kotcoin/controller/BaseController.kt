@@ -20,6 +20,27 @@ abstract class BaseController<T>(private val observerThread: ObserverThread,
     lateinit var viewListener: ViewListener<T>
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
+    /*
+    Life cycle of the Controller
+     */
+    /**
+     * Method that control the lifecycle of the view. It should be called in the view's
+     * (Activity or Fragment) onResume method.
+     */
+    abstract fun onResume()
+
+    /**
+     * Method that control the lifecycle of the view. It should be called in the view's onPause().
+     */
+    abstract fun onPause()
+
+    /**
+     * Method tha control de lifecycle of the view. It should be called in the view's
+     * (Activity or Fragment) onDestroy() method.
+     */
+    abstract fun onDestroy()
+
+
     /**
      * Add a new Disposable Observer
      */

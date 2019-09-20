@@ -46,11 +46,23 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
         this.displayCryptoList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        this.cryptoController.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        this.cryptoController.onPause()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Timber.d("onDestroy")
         this.cryptoController.dispose()
+        this.cryptoController.onDestroy()
     }
+
 
     fun displayCryptoList(){
         this.cryptoListAdapter.setData(ArrayList())

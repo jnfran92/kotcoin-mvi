@@ -6,6 +6,7 @@ import com.jnfran92.model.CryptoModel
 import com.jnfran92.model.data.crypto.Crypto
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -15,6 +16,17 @@ class CryptoController @Inject constructor(private val cryptoModel: CryptoModel,
                                            private val observerThread: ObserverThread,
                                            private val subscriberExecutor: SubscriberExecutor):
     BaseController<Crypto>(observerThread, subscriberExecutor) {
+    override fun onResume() {
+        Timber.d("onResume")
+    }
+
+    override fun onPause() {
+        Timber.d("onPause")
+    }
+
+    override fun onDestroy() {
+        Timber.d("onDestroy")
+    }
 
 
     /**
