@@ -14,6 +14,8 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Adding DataBinding
 - Migrating to MVI
 - Using ViewModel instead of Controllers
+- Using Material Elements: Cards mainly!
+- Using CLEAN structure modules: data + domain + presentation(app)
 - Adding Use Cases
 - Migrating to Hilt
 - Adding Workers for saving daily price
