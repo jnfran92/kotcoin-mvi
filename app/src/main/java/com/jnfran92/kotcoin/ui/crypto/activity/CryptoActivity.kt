@@ -1,36 +1,35 @@
 package com.jnfran92.kotcoin.ui.crypto.activity
 
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import com.jnfran92.kotcoin.KotcoinApp
 import com.jnfran92.kotcoin.R
+import com.jnfran92.kotcoin.databinding.ActivityCryptoBinding
 import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
-import com.jnfran92.kotcoin.ui.crypto.fragment.CryptoListFragment
-import kotlinx.android.synthetic.main.activity_crypto.*
+import com.jnfran92.kotcoin.di.module.ActivityModule
+
 import timber.log.Timber
 
 /**
  * View for display a list of [Crypto] objects.
  */
-class CryptoActivity : BaseActivity() {
+class CryptoActivity : AppCompatActivity(){
 
-    lateinit var cryptoListFragment: CryptoListFragment
+    /**
+     * Data binding
+     */
+    lateinit var binding: ActivityCryptoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crypto)
-        setSupportActionBar(toolbar)
         Timber.d("onCreate")
+        binding = ActivityCryptoBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        // Fragments
-        initView()
-
-        // Fab button to re-load data
-        val fab: View = findViewById(R.id.fab)
-        fab.setOnClickListener {
-            this.cryptoListFragment.displayCryptoList()
-        }
+        // action bar
+        setSupportActionBar(binding.tbCryptoActivityBar.tbGenericViewBar)
     }
 
     override fun onResume() {
@@ -40,31 +39,11 @@ class CryptoActivity : BaseActivity() {
 
 
     fun getCryptoComponent(): CryptoComponent{
+        val appComponent = (application as KotcoinApp).applicationComponent
         return DaggerCryptoComponent
             .builder()
-            .activityModule(activityModule)
-            .applicationComponent(applicationComponent)
+            .activityModule(ActivityModule(this))
+            .applicationComponent(appComponent)
             .build()
     }
-
-    private fun initView(){
-        cryptoListFragment = CryptoListFragment()
-        this.addFragment(R.id.fy_cryptoActivity_container, cryptoListFragment)
-    }
-
-
-
-    private fun addFragment(containerId:Int, fragment: Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(containerId, fragment)
-        fragmentTransaction.commit()
-    }
-
-    fun updateFragment(containerId:Int, fragment:Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(containerId, fragment)
-        fragmentTransaction.commit()
-    }
-
-
 }

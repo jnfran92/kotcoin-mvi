@@ -8,6 +8,9 @@ import timber.log.Timber
 
 class KotcoinApp: Application() {
 
+    /**
+     * Dagger component
+     */
     lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate() {
