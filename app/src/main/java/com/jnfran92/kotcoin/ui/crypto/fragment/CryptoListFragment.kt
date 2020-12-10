@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.view.fragment
+package com.jnfran92.kotcoin.ui.crypto.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
-import com.jnfran92.kotcoin.controller.CryptoController
-import com.jnfran92.kotcoin.view.ViewListener
-import com.jnfran92.kotcoin.view.activity.CryptoActivity
-import com.jnfran92.kotcoin.view.adapter.CryptoListAdapter
+import com.jnfran92.kotcoin.presentation.crypto.controller.CryptoController
+import com.jnfran92.kotcoin.ui.ViewListener
+import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
+import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import com.jnfran92.data.data.crypto.Crypto
 import kotlinx.android.synthetic.main.frament_crypto_list.*
 import kotlinx.android.synthetic.main.view_loading.*

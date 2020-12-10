@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.view.adapter
+package com.jnfran92.kotcoin.ui.crypto.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

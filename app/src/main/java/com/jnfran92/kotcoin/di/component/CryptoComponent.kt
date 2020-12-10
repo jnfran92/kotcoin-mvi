@@ -3,8 +3,7 @@ package com.jnfran92.kotcoin.di.component
 import com.jnfran92.kotcoin.di.PerActivity
 import com.jnfran92.kotcoin.di.module.ActivityModule
 import com.jnfran92.kotcoin.di.module.CryptoModule
-import com.jnfran92.kotcoin.view.activity.CryptoActivity
-import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
+import com.jnfran92.kotcoin.ui.crypto.fragment.CryptoListFragment
 import dagger.Component
 
 @PerActivity

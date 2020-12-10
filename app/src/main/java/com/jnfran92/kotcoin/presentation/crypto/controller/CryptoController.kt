@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.controller
+package com.jnfran92.kotcoin.presentation.crypto.controller
 
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor

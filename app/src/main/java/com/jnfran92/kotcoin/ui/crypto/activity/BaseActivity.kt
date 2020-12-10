@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.view.activity
+package com.jnfran92.kotcoin.ui.crypto.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

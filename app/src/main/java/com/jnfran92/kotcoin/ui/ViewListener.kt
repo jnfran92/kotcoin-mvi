@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.view
+package com.jnfran92.kotcoin.ui
 
 /**
  * Interface for each ViewListener in the UI for handling [T] objects.

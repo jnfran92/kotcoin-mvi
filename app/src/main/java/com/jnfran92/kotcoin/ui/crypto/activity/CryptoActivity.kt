@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.view.activity
+package com.jnfran92.kotcoin.ui.crypto.activity
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.di.component.CryptoComponent
 import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
-import com.jnfran92.kotcoin.view.fragment.CryptoListFragment
+import com.jnfran92.kotcoin.ui.crypto.fragment.CryptoListFragment
 import kotlinx.android.synthetic.main.activity_crypto.*
 import timber.log.Timber
 

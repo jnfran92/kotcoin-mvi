@@ -1,8 +1,8 @@
-package com.jnfran92.kotcoin.controller
+package com.jnfran92.kotcoin.presentation.crypto.controller
 
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
-import com.jnfran92.kotcoin.view.ViewListener
+import com.jnfran92.kotcoin.ui.ViewListener
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
