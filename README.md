@@ -13,14 +13,16 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 - Adding DataBinding
 - Migrating to MVI
-- Using ViewModel instead of Controllers
+- Adding ViewModel instead of Controllers
+- Adding Navigation JetPack
 - Using Material Elements: Cards mainly!
 - Using CLEAN structure modules: data + domain + presentation(app)
 - Adding Use Cases
-- Migrating to Hilt
+- Migrating to Hilt from Dagger
 - Adding Workers for saving daily price
 - Adding Room for local storage
-
+- Adding Dynamic Modules
+- Adding Compose()
 
 ## Requirements
 
