@@ -8,6 +8,17 @@ Crypto matters!
 Android Application MVC-based and written all in Kotlin for retrieving 10 most capitalized 
 Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note: a free API Key is needed).
 
+
+## Current work
+
+- Adding DataBinding
+- Migrating to MVI
+- Adding Use Cases
+- Migrating to Hilt
+- Adding Workers for saving daily price
+- Adding Room for local storage
+
+
 ## Requirements
 
 - Dagger
