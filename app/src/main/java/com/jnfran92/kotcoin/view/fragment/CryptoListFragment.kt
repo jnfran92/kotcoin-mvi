@@ -12,7 +12,7 @@ import com.jnfran92.kotcoin.controller.CryptoController
 import com.jnfran92.kotcoin.view.ViewListener
 import com.jnfran92.kotcoin.view.activity.CryptoActivity
 import com.jnfran92.kotcoin.view.adapter.CryptoListAdapter
-import com.jnfran92.model.data.crypto.Crypto
+import com.jnfran92.data.data.crypto.Crypto
 import kotlinx.android.synthetic.main.frament_crypto_list.*
 import kotlinx.android.synthetic.main.view_loading.*
 import timber.log.Timber

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
-import com.jnfran92.model.data.crypto.Crypto
+import com.jnfran92.data.data.crypto.Crypto
 import kotlinx.android.synthetic.main.view_crypto_item.view.*
 import javax.inject.Inject
 

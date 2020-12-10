@@ -2,8 +2,8 @@ package com.jnfran92.kotcoin.controller
 
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
-import com.jnfran92.model.CryptoModel
-import com.jnfran92.model.data.crypto.Crypto
+import com.jnfran92.data.CryptoModel
+import com.jnfran92.data.data.crypto.Crypto
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber

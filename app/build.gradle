@@ -57,7 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Model dependency
-    implementation project(':model')
+    implementation project(':data')
 
     // Gson
     implementation "com.github.salomonbrys.kotson:kotson:${gsonVersion}"

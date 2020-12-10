@@ -4,7 +4,7 @@ import android.content.Context
 import com.jnfran92.kotcoin.di.module.ApplicationModule
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
-import com.jnfran92.model.CryptoModel
+import com.jnfran92.data.CryptoModel
 import dagger.Component
 import javax.inject.Singleton
 

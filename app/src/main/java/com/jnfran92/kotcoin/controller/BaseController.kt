@@ -1,14 +1,10 @@
 package com.jnfran92.kotcoin.controller
 
-import android.database.Observable
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
 import com.jnfran92.kotcoin.view.ViewListener
-import com.jnfran92.model.CryptoModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
-import timber.log.Timber
 
 /**
  * Base class for all view controllers. Note that  a [ViewListener] is needed to work.
