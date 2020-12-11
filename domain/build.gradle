@@ -32,6 +32,11 @@ android {
     }
 }
 
+def gsonVersion = "2.5.0"
+def rxJavaVersion = "2.0.2"
+def rxAndroidVersion = "2.0.1"
+def nav_version = "2.3.2"
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -41,4 +46,18 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    // JavaRx
+    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    // Java Annotation and Inject
+    compileOnly "javax.annotation:jsr250-api:1.0"
+    implementation "javax.inject:javax.inject:1"
+
+    // Timber logs
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 }

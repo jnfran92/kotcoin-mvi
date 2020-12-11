@@ -45,9 +45,9 @@ dependencies {
     implementation "com.github.salomonbrys.kotson:kotson:${gsonVersion}"
 
     // JavaRx
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'
-    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     // Java Annotation and Inject
     compileOnly "javax.annotation:jsr250-api:1.0"
@@ -65,5 +65,10 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.8.9'
     testImplementation 'org.mockito:mockito-inline:2.13.0'
 
+    // Timber logs
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // module dependency data -> domain
+    implementation project(':domain')
 
 }

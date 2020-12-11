@@ -37,8 +37,6 @@ android {
 }
 
 def gsonVersion = "2.5.0"
-def rxJavaVersion = "2.0.2"
-def rxAndroidVersion = "2.0.1"
 def nav_version = "2.3.2"
 
 dependencies {
@@ -58,16 +56,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // Model dependency
-    implementation project(':data')
-
     // Gson
     implementation "com.github.salomonbrys.kotson:kotson:${gsonVersion}"
 
     // JavaRx
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.2'
-    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     // Java Annotation and Inject
     compileOnly "javax.annotation:jsr250-api:1.0"
@@ -105,6 +100,11 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha03"
+
+
+    // module dependency presentation(app) -> domain
+    implementation project(':domain')
+    implementation project(':data')
 
 }
 

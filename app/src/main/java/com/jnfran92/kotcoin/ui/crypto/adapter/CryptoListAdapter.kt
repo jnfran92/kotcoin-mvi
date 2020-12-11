@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
-import com.jnfran92.data.data.crypto.Crypto
+import com.jnfran92.kotcoin.databinding.ViewCryptoItemBinding
+import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import kotlinx.android.synthetic.main.view_crypto_item.view.*
 import javax.inject.Inject
 
@@ -18,13 +19,13 @@ class CryptoListAdapter @Inject constructor(private val context: Context)
     :RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
 
 
-    private var cryptoList: ArrayList<Crypto> = ArrayList()
-    private val layoutInflater: LayoutInflater =
-        this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private var cryptoList: ArrayList<UICrypto> = ArrayList()
 
+    lateinit var binding: ViewCryptoItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
-        val view = this.layoutInflater.inflate(R.layout.view_crypto_item, parent, false)
+        binding = ViewCryptoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = binding.root
         return CryptoViewHolder(view)
     }
 
@@ -38,22 +39,23 @@ class CryptoListAdapter @Inject constructor(private val context: Context)
         holder.itemSymbol.text = crypto.symbol
 
         val price:String = context.getText(R.string.money_symbol).toString() +
-                "%,.3f".format(crypto.quoteEntity.usd.price)
+                "%,.3f".format(crypto.price)
         holder.itemPrice.text = price
 
         val marketCap =  context.getText(R.string.money_symbol).toString() +
-                "%,.2f".format(crypto.quoteEntity.usd.marketCap/10e9) +
+                "%,.2f".format(crypto.marketCap/10e9) +
                 "MM"
         holder.itemMarketCap.text = marketCap
 
         val lastUpdate:String = context.getString(R.string.updated_at) + " " +
-                crypto.quoteEntity.usd.lastUpdated
+                crypto.lastUpdated
         holder.itemLastUpdate.text = lastUpdate
 
     }
 
-    fun setData(data: ArrayList<Crypto>){
-        this.cryptoList = data
+    fun setData(data: List<UICrypto>){
+        this.cryptoList.clear()
+        this.cryptoList.addAll(data)
         this.notifyDataSetChanged()
     }
 

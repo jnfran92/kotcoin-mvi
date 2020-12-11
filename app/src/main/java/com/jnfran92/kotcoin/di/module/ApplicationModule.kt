@@ -3,19 +3,22 @@ package com.jnfran92.kotcoin.di.module
 import android.app.Application
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.jnfran92.data.crypto.CryptoRepositoryImp
+import com.jnfran92.data.crypto.supplier.cache.CryptoCache
+import com.jnfran92.data.crypto.supplier.cache.CryptoCacheImpl
+import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
+import com.jnfran92.data.crypto.supplier.cloud.CryptoApiImpl
 import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
 import com.jnfran92.kotcoin.rx.ObserverThread
 import com.jnfran92.kotcoin.rx.SubscriberExecutor
 import com.jnfran92.kotcoin.rx.UIThread
-import com.jnfran92.data.CryptoModel
-import com.jnfran92.data.CryptoModelImp
-import com.jnfran92.data.supplier.cache.CryptoCache
-import com.jnfran92.data.supplier.cache.CryptoCacheImpl
-import com.jnfran92.data.supplier.cloud.CryptoApi
-import com.jnfran92.data.supplier.cloud.CryptoApiImpl
+import com.jnfran92.domain.crypto.CryptoRepository
+import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import dagger.Module
 import dagger.Provides
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -36,17 +39,17 @@ class ApplicationModule(private val application: Application) {
     }
 
     @Provides @Singleton
-    fun cryptoModel(cryptoModel: CryptoModelImp): CryptoModel{
-        return cryptoModel
+    fun cryptoRepository(cryptoRepository: CryptoRepositoryImp): CryptoRepository {
+        return cryptoRepository
     }
 
     @Provides @Singleton
-    fun cryptoApi(cryptoApi: CryptoApiImpl): CryptoApi{
+    fun cryptoApi(cryptoApi: CryptoApiImpl): CryptoApi {
         return cryptoApi
     }
 
     @Provides @Singleton
-    fun cryptoCache(cryptoCache: CryptoCacheImpl): CryptoCache{
+    fun cryptoCache(cryptoCache: CryptoCacheImpl): CryptoCache {
         return cryptoCache
     }
 
@@ -87,4 +90,9 @@ class ApplicationModule(private val application: Application) {
         return uiThread
     }
 
+    //TODO("Remove this, wrong scope")
+    @Provides @Singleton
+    fun getCryptoListUseCase(cryptoRepository: CryptoRepository): GetCryptoListUseCase {
+        return GetCryptoListUseCase(cryptoRepository, Schedulers.io(), AndroidSchedulers.mainThread())
+    }
 }

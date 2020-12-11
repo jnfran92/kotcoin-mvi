@@ -4,69 +4,49 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
-import com.jnfran92.kotcoin.R
-import com.jnfran92.kotcoin.presentation.crypto.controller.CryptoController
-import com.jnfran92.kotcoin.ui.ViewListener
+import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
+import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
 import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
-import com.jnfran92.data.data.crypto.Crypto
-import kotlinx.android.synthetic.main.frament_crypto_list.*
-import kotlinx.android.synthetic.main.view_loading.*
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Fragment for display
+ * Fragment for displaying Crypto List
  */
-class CryptoListFragment : Fragment(), ViewListener<Crypto> {
-
-    @Inject
-    lateinit var cryptoController: CryptoController
+class CryptoListFragment : Fragment() {
 
     @Inject
     lateinit var cryptoListAdapter: CryptoListAdapter
-
     @Inject
     lateinit var cryptoLayoutManager: RecyclerView.LayoutManager
 
+    /**
+     * view binding
+     */
+    lateinit var binding: FragmentCryptoListBinding
+
+    /**
+     * view model
+     */
+    val viewModel: CryptoListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frament_crypto_list, container, false)
+        Timber.d("onCreateView: ")
+        this.binding = FragmentCryptoListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.initInjection()
         this.initViewElements()
-
-        this.displayCryptoList()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        this.cryptoController.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        this.cryptoController.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.d("onDestroy")
-        this.cryptoController.dispose()
-        this.cryptoController.onDestroy()
-    }
-
-
-    fun displayCryptoList(){
-        this.cryptoListAdapter.setData(ArrayList())
-        this.cryptoController.displayCryptoList()
+        this.initViewModel()
     }
 
     private fun initInjection(){
@@ -75,48 +55,14 @@ class CryptoListFragment : Fragment(), ViewListener<Crypto> {
     }
 
     private fun initViewElements(){
-        this.cryptoController.viewListener = this
-        rv_cryptoFragment_cryptoList.adapter = this.cryptoListAdapter
-        rv_cryptoFragment_cryptoList.layoutManager = this.cryptoLayoutManager
+        this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter
+        this.binding.rvCryptoFragmentCryptoList.layoutManager = this.cryptoLayoutManager
     }
 
-    private fun showToastMessage(message: String){
-        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showLoading() {
-        Timber.d("showLoading")
-        pb_viewLoading_loading.visibility = View.VISIBLE
-        pb_viewLoading_loading.isIndeterminate = true
-    }
-
-    override fun hideLoading() {
-        Timber.d("hideLoading")
-        pb_viewLoading_loading.visibility = View.GONE
-    }
-
-    override fun showErrorMessage(message: String) {
-        Timber.d("showErrorMessage: %s", message)
-        this.showToastMessage(message)
-    }
-
-    override fun showRetry() {
-        Timber.d("showRetry")
-
-    }
-
-    override fun hideRetry() {
-        Timber.d("hideRetry")
-
-    }
-
-    override fun showData(t: Crypto) {
-        Timber.d("showData")
-
-    }
-
-    override fun showDataList(t: List<Crypto>) {
-        Timber.d("showDataList")
-        this.cryptoListAdapter.setData(t as ArrayList<Crypto>)
+    private fun initViewModel() {
+        Timber.d("initViewModel")
+        this.viewModel.cryptoList.observe(viewLifecycleOwner) {
+            this.cryptoListAdapter.setData(it)
+        }
     }
 }

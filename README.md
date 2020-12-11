@@ -23,6 +23,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Adding Room for local storage
 - Adding Dynamic Modules
 - Adding Compose()
+- Adding Kotlin Flow!
 
 ## Requirements
 

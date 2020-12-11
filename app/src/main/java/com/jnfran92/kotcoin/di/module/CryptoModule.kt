@@ -2,14 +2,11 @@ package com.jnfran92.kotcoin.di.module
 
 import android.content.Context
 import android.content.res.Configuration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.di.PerActivity
 import dagger.Module
 import dagger.Provides
-import androidx.recyclerview.widget.GridLayoutManager
-
-
 
 @Module
 class CryptoModule {
