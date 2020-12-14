@@ -61,11 +61,12 @@ objects, so data flows to an `Observer` when it is subscribed.
 
 ## Basic Guide
 
-**IMPORTANT:** Add in `gradle.properties` your API KEY:
+**IMPORTANT:** Add API key as `env` variable named: `KOTCOIN_API_TOKEN`, in macOS:
 
-    kotcoinApiKey="xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxx"
+    launchctl setenv KOTCOIN_API_TOKEN "\"your_api_key\""
 
-Now, compile the project!
+List variables with: `printenv`
+
 
 
 ## Bugs
