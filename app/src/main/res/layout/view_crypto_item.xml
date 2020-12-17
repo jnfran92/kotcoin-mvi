@@ -1,104 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    android:background="@drawable/rounded_item"
-    android:orientation="horizontal"
-    android:padding="6dp">
-
-    <TextView
-        android:id="@+id/tv_cryptoItem_symbol"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:text="BTC"
-        android:textAlignment="gravity"
-        android:textColor="#FFC107"
-        android:textSize="18sp" />
+    android:clickable="true"
+    android:elevation="4dp"
+    android:focusable="true"
+    android:padding="6dp"
+    app:cardBackgroundColor="@android:color/black"
+    app:cardCornerRadius="10dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_cryptoItem_name"
+            android:id="@+id/tv_cryptoItem_symbol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Bitcoin"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_cryptoItem_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView40"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="12sp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_cryptoItem_price"
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_cryptoItem_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="14sp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView44"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/market_cap"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_cryptoItem_markertCap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_cryptoItem_lastUpdate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView44"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/market_cap"
-                    android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tv_cryptoItem_markertCap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="$1000"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_cryptoItem_lastUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Last update on: 12/12/12"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="10sp" />
-
     </LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
