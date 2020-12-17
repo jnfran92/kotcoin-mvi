@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.rxkotlin.plusAssign
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,6 +26,7 @@ class GetCryptoListUseCase(private val repository: CryptoRepository,
         return this.repository.getCryptoList()
             .subscribeOn(subscribeOnThread)
             .observeOn(observeOnThread)
+            .delay(3000, TimeUnit.MILLISECONDS)
     }
 
     fun execute(disposableSingleObserver: DisposableSingleObserver<List<DomainCrypto>>){

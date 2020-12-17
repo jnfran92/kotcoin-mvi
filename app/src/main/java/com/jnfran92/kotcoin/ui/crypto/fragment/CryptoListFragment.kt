@@ -10,6 +10,9 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
+import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
+import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
+import com.jnfran92.kotcoin.presentation.crypto.uistates.CryptoListUIState
 import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import timber.log.Timber
@@ -61,8 +64,40 @@ class CryptoListFragment : Fragment() {
 
     private fun initViewModel() {
         Timber.d("initViewModel")
-        this.viewModel.cryptoList.observe(viewLifecycleOwner) {
-            this.cryptoListAdapter.setData(it)
+//        this.viewModel.cryptoList.observe(viewLifecycleOwner) {
+//            this.cryptoListAdapter.setData(it)
+//        }
+
+        this.viewModel.tx.observe(viewLifecycleOwner){
+            Timber.d("initViewModel: $it")
+            it.forEach { cryptoListUIState ->
+                Timber.d("initViewModel: forEach $cryptoListUIState")
+                when(cryptoListUIState){
+                    CryptoListUIState.ShowDefaultView -> {this.cryptoListAdapter.setData(arrayListOf(
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                        UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    ))}
+                    CryptoListUIState.HideDefaultView -> {}
+                    CryptoListUIState.ShowLoadingView -> {binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.VISIBLE}
+                    CryptoListUIState.HideLoadingView -> {binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.INVISIBLE}
+                    CryptoListUIState.ShowErrorRetryView -> {}
+                    CryptoListUIState.HideErrorRetryView -> {}
+                    is CryptoListUIState.ShowDataView -> {this.cryptoListAdapter.setData(cryptoListUIState.data)}
+                    CryptoListUIState.HideDataView -> {}
+                    is CryptoListUIState.OnShowToastMessage -> {}
+                }
+            }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        Timber.d("onResume: ")
+        viewModel.rx(CryptoListIntent.getCryptoListIntent)
     }
 }
