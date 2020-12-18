@@ -20,7 +20,8 @@ class GetCryptoListUseCase(private val repository: CryptoRepository,
                                        private val observeOnThread: Scheduler) {
 
 
-    private val compositeDisposable = CompositeDisposable()
+    val useCase =  buildUseCase()
+//    private val compositeDisposable = CompositeDisposable()
 
     private fun buildUseCase(): Single<List<DomainCrypto>>{
         return this.repository.getCryptoList()
@@ -29,12 +30,12 @@ class GetCryptoListUseCase(private val repository: CryptoRepository,
             .delay(3000, TimeUnit.MILLISECONDS)
     }
 
-    fun execute(disposableSingleObserver: DisposableSingleObserver<List<DomainCrypto>>){
-        Timber.d("execute: ")
-        compositeDisposable += buildUseCase().subscribeWith(disposableSingleObserver)
-    }
+//    fun execute(disposableSingleObserver: DisposableSingleObserver<List<DomainCrypto>>){
+//        Timber.d("execute: ")
+//        compositeDisposable += buildUseCase().subscribeWith(disposableSingleObserver)
+//    }
 
-    fun dispose(){
-        this.compositeDisposable.dispose()
-    }
+//    fun dispose(){
+//        this.compositeDisposable.dispose()
+//    }
 }

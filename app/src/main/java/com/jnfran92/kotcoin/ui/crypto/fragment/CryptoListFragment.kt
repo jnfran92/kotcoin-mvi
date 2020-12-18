@@ -12,7 +12,7 @@ import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
 import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
-import com.jnfran92.kotcoin.presentation.crypto.uistates.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import timber.log.Timber

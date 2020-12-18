@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.presentation.crypto.uistates
+package com.jnfran92.kotcoin.presentation.crypto.uistate
 
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 
