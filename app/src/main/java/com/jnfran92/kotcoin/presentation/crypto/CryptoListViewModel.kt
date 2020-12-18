@@ -2,6 +2,7 @@ package com.jnfran92.kotcoin.presentation.crypto
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.KotcoinApp
 import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
@@ -26,6 +27,9 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
 
     private val compositeDisposable = CompositeDisposable()
 
+    val tx: MutableLiveData<CryptoListUIState> by lazy {
+        MutableLiveData<CryptoListUIState>()
+    }
 
     lateinit var publishSubject: PublishSubject<CryptoListIntent>
     lateinit var interpreter: Observable<CryptoListAction>
@@ -68,18 +72,20 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
 
         this.compositeDisposable += interpreter
             .subscribeWith(processor.rx)
+
+        this.compositeDisposable += reducer.subscribe(tx::postValue){}
     }
 
     fun processIntent(intent: CryptoListIntent){
         publishSubject.onNext(intent)
     }
 
-    fun observeUIStates(observer: DisposableObserver<CryptoListUIState>){
-        this.compositeDisposable += reducer
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(observer)
-    }
+//    fun observeUIStates(observer: DisposableObserver<CryptoListUIState>){
+//        this.compositeDisposable += reducer
+//            .subscribeOn(AndroidSchedulers.mainThread())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeWith(observer)
+//    }
 
 
     override fun onCleared() {
