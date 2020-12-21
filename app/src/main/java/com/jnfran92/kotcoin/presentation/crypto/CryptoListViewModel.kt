@@ -20,24 +20,29 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     @Inject lateinit var useCase: GetCryptoListUseCase
     @Inject lateinit var mapper: DomainCryptoToUIMapper
 
+    lateinit var processor: CryptoListProcessor
+    lateinit var interpreter: CryptoListInterpreter
+    lateinit var reducer: CryptoListReducer
+
     private val compositeDisposable = CompositeDisposable()
-
-    private val interpreter = CryptoListInterpreter()
-    private val processor = CryptoListProcessor(useCase, mapper)
-    private val reducer = CryptoListReducer()
-
-    /**
-     * TX: transmit UI events
-     */
-    val tx: MutableLiveData<CryptoListUIState> = MutableLiveData()
 
 
     init {
         initInjection()
-        initDataFlow()
+        initMviFlow()
     }
 
-    private fun initDataFlow() {
+    private fun initInjection() {
+        Timber.d("initInjection")
+        val appComponent = (getApplication() as KotcoinApp).applicationComponent
+        appComponent.inject(this)
+
+        processor = CryptoListProcessor(useCase, mapper)
+        interpreter = CryptoListInterpreter()
+        reducer = CryptoListReducer()
+    }
+
+    private fun initMviFlow() {
         Timber.d("initFlow")
         compositeDisposable.add(
             interpreter
@@ -48,11 +53,10 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
         )
     }
 
-    private fun initInjection() {
-        Timber.d("initInjection")
-        val appComponent = (getApplication() as KotcoinApp).applicationComponent
-        appComponent.inject(this)
-    }
+    /**
+     * TX: transmit UI events
+     */
+    val tx: MutableLiveData<CryptoListUIState> = MutableLiveData<CryptoListUIState>()
 
     /**
      * RX: receive User intents
@@ -60,6 +64,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     fun rx(intent: CryptoListIntent){
         interpreter.processIntent(intent)
     }
+
 
     override fun onCleared() {
         super.onCleared()
