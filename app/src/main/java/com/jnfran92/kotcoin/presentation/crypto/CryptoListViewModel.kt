@@ -12,9 +12,7 @@ import com.jnfran92.kotcoin.presentation.crypto.processor.CryptoListProcessor
 import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -48,14 +46,38 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
             Observable.create<CryptoListAction> { emitter ->
                 Timber.d("interpreter: intent $it")
                 when(it){
-                    CryptoListIntent.getCryptoListIntent -> {emitter.onNext(CryptoListAction.getCryptoList)}
-                    is CryptoListIntent.reloadCryptoList -> {}
-                    is CryptoListIntent.updateCryptoItemIntent -> {}
-                    is CryptoListIntent.getCryptoItemDetailsIntent -> {}
+                    CryptoListIntent.getCryptoListIntent -> {
+                        Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
+                        emitter.onNext(CryptoListAction.getCryptoList)
+                    }
+                    is CryptoListIntent.reloadCryptoList -> {
+                        Timber.d("interpreter: CryptoListIntent.reloadCryptoList ")
+                    }
+                    is CryptoListIntent.updateCryptoItemIntent -> {
+                        Timber.d("interpreter: CryptoListIntent.updateCryptoItemIntent ")
+                    }
+                    is CryptoListIntent.getCryptoItemDetailsIntent -> {
+                        Timber.d("interpreter: CryptoListIntent.getCryptoItemDetailsIntent ")
+                    }
                 }
             }
         }
+
+
         processor = CryptoListProcessor(getCryptoListUseCase, mapper)
+
+
+//        val processor = interpreter.map {
+//            when(it){
+//                CryptoListAction.getCryptoList -> {
+//                    getCryptoListUseCase.useCase.blockingGet()
+//                }
+//                is CryptoListAction.getCryptoItemDetails -> {
+//
+//                }
+//            }
+//        }
+
 
         reducer = processor.tx.flatMap { result ->
             Observable.create<CryptoListUIState> { emitter ->

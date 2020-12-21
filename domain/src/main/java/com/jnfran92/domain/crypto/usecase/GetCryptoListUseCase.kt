@@ -20,7 +20,7 @@ class GetCryptoListUseCase(private val repository: CryptoRepository,
                                        private val observeOnThread: Scheduler) {
 
     private val compositeDisposable = CompositeDisposable()
-//    val useCase = this.buildUseCase()
+    val useCase = this.buildUseCase()
 
     private fun buildUseCase(): Single<List<DomainCrypto>>{
         return this.repository.getCryptoList()

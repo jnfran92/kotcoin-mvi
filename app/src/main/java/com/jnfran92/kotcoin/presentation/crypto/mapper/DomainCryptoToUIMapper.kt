@@ -8,18 +8,17 @@ import javax.inject.Singleton
 @Singleton
 class DomainCryptoToUIMapper @Inject constructor() {
 
-    fun DomainCrypto.toUIModel(): UICrypto{
+    fun transform(item: DomainCrypto): UICrypto{
         return UICrypto(
-            cryptoId = this.cryptoId,
-            price =  this.price,
-            lastUpdated = this.lastUpdated,
-            marketCap = this.marketCap,
-            slug = this.slug,
-            symbol = this.symbol,
-            name = this.name
+            cryptoId = item.cryptoId,
+            price =  item.price,
+            lastUpdated = item.lastUpdated,
+            marketCap = item.marketCap,
+            slug = item.slug,
+            symbol = item.symbol,
+            name = item.name
         )
     }
 
-    fun List<DomainCrypto>.toUIModel(): List<UICrypto> = this.map { it.toUIModel() }
-
+    fun transform(items: List<DomainCrypto>) : List<UICrypto> = items.map(::transform)
 }
