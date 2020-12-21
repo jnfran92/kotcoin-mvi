@@ -4,12 +4,14 @@ import com.jnfran92.domain.crypto.model.DomainCrypto
 import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
 import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
+import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.PublishSubject
 import org.junit.After
 import org.junit.Before
@@ -33,7 +35,8 @@ class CryptoListViewModelTest{
     /**
      * reducer
      */
-    lateinit var reducer: ObservableTransformer<CryptoListResult, CryptoListUIState>
+//    lateinit var reducer: ObservableTransformer<CryptoListResult, CryptoListUIState>
+    lateinit var reducer: BiFunction<CryptoListResult, CryptoListUIState, CryptoListUIState>
 
 
     val compositeDisposable = CompositeDisposable()
@@ -106,22 +109,24 @@ class CryptoListViewModelTest{
         }
 
 
-        reducer = ObservableTransformer { results ->
-            results.flatMap { result ->
-                when(result){
-                    CryptoListResult.GetCryptoListResult.InProgress -> TODO()
-                    is CryptoListResult.GetCryptoListResult.OnError -> TODO()
-                    is CryptoListResult.GetCryptoListResult.OnSuccess -> TODO()
+//        reducer = ObservableTransformer { results ->
+//            results.flatMap { result ->
+//                when(result){
+//                    CryptoListResult.GetCryptoListResult.InProgress -> TODO()
+//                    is CryptoListResult.GetCryptoListResult.OnError -> TODO()
+//                    is CryptoListResult.GetCryptoListResult.OnSuccess -> TODO()
+//
+//                    CryptoListResult.GetCryptoItemResult.InProgress -> TODO()
+//                    is CryptoListResult.GetCryptoItemResult.OnError -> TODO()
+//                    is CryptoListResult.GetCryptoItemResult.OnSuccess -> TODO()
+//                }
+//
+//                Observable.just(CryptoListUIState.ShowLoadingView)
+//            }
+//        }
+//
 
-                    CryptoListResult.GetCryptoItemResult.InProgress -> TODO()
-                    is CryptoListResult.GetCryptoItemResult.OnError -> TODO()
-                    is CryptoListResult.GetCryptoItemResult.OnSuccess -> TODO()
-                }
-
-
-                Observable.just(CryptoListUIState.ShowLoadingView)
-            }
-        }
+//        reducer = BiFunction { t, u ->  }
 
 
     }
@@ -152,14 +157,47 @@ class CryptoListViewModelTest{
     fun testProcessor(){
         println("testProcessor")
 
+        compositeDisposable.add(
+            Observable.just<CryptoListAction>(
+                CryptoListAction.getCryptoList,
+                CryptoListAction.getCryptoItemDetails(-1),
+                CryptoListAction.getCryptoList,)
+                .compose(processor)
+                .subscribe(
+                    { println("processor: onSuccess $it")},
+                    { println("processor: onError $it")},
+                    { println("processor: onComplete")}
+                )
+        )
+    }
 
 
+    @Test
+    fun testReducer(){
+        println("testReducer")
+//        val fakeUICrypto = UICrypto(1, "1", "1", "1", 1.0, 1.0, "1")
+//
+//        Observable.just<CryptoListResult>(
+//            CryptoListResult.GetCryptoItemResult.InProgress,
+//            CryptoListResult.GetCryptoItemResult.OnSuccess(fakeUICrypto),
+//            CryptoListResult.GetCryptoItemResult.InProgress,
+//        ).scan()
 
+
+        val bf = BiFunction<Int, Int, Int> { t, u ->  t + u}
+
+        Observable.just(1,2,3,4,5)
+            .scan(bf)
+            .subscribe(
+                { println("onNext: $it")},
+                { println("onError: $it")},
+                { println("onComplete:")})
     }
 
 
     @After
     fun thisIsTheEnd(){
-        println("thisIsTheEnd")
+        println("thisIsTheEnd my only friend")
+        compositeDisposable.dispose()
     }
 }

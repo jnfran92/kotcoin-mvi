@@ -48,7 +48,7 @@ class CryptoListProcessor @Inject constructor(
         getCryptoListUseCase.execute(object : DisposableSingleObserver<List<DomainCrypto>>(){
             override fun onSuccess(t: List<DomainCrypto>) {
                 Timber.d("onSuccess")
-                tx.onNext(CryptoListResult.GetCryptoListResult.OnSuccess( with(mapper){t.toUIModel()}))
+                tx.onNext(CryptoListResult.GetCryptoListResult.OnSuccess( mapper.transform(t)))
             }
 
             override fun onError(e: Throwable) {
