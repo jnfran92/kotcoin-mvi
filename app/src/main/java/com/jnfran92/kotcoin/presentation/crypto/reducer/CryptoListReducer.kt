@@ -3,11 +3,15 @@ package com.jnfran92.kotcoin.presentation.crypto.reducer
 import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import io.reactivex.functions.BiFunction
+import timber.log.Timber
 import javax.inject.Inject
 
-class CryptoListReducer @Inject constructor() {
+class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState>{
 
-    val reducer = BiFunction(::resolveNextState)
+    override fun apply(t1: CryptoListUIState, t2: CryptoListResult): CryptoListUIState {
+        Timber.d("apply")
+        return resolveNextState(t1, t2)
+    }
 
     private fun resolveNextState(previousState: CryptoListUIState, currentResult: CryptoListResult): CryptoListUIState {
         return when(previousState){
@@ -49,5 +53,4 @@ class CryptoListReducer @Inject constructor() {
             is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid path")
         }
     }
-
 }
