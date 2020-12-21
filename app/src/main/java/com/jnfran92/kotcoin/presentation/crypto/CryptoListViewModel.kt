@@ -46,9 +46,9 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
             Observable.create<CryptoListAction> { emitter ->
                 Timber.d("interpreter: intent $it")
                 when(it){
-                    CryptoListIntent.getCryptoListIntent -> {
+                    CryptoListIntent.GetCryptoListIntent -> {
                         Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
-                        emitter.onNext(CryptoListAction.getCryptoList)
+                        emitter.onNext(CryptoListAction.GetCryptoList)
                     }
                     is CryptoListIntent.reloadCryptoList -> {
                         Timber.d("interpreter: CryptoListIntent.reloadCryptoList ")

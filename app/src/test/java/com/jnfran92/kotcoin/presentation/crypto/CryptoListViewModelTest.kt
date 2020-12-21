@@ -65,18 +65,9 @@ class CryptoListViewModelTest{
             Observable.create<CryptoListAction> { emitter ->
                 Timber.d("interpreter: intent $it")
                 when(it){
-                    CryptoListIntent.getCryptoListIntent -> {
+                    CryptoListIntent.GetCryptoListIntent -> {
                         Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
-                        emitter.onNext(CryptoListAction.getCryptoList)
-                    }
-                    is CryptoListIntent.reloadCryptoList -> {
-                        Timber.d("interpreter: CryptoListIntent.reloadCryptoList ")
-                    }
-                    is CryptoListIntent.updateCryptoItemIntent -> {
-                        Timber.d("interpreter: CryptoListIntent.updateCryptoItemIntent ")
-                    }
-                    is CryptoListIntent.getCryptoItemDetailsIntent -> {
-                        Timber.d("interpreter: CryptoListIntent.getCryptoItemDetailsIntent ")
+                        emitter.onNext(CryptoListAction.GetCryptoList)
                     }
                 }
             }
@@ -86,7 +77,7 @@ class CryptoListViewModelTest{
         processor = ObservableTransformer { actions ->
             actions.flatMap { action ->
                 when(action){
-                    CryptoListAction.getCryptoList -> {
+                    CryptoListAction.GetCryptoList -> {
                         useCaseOne
                             .map (domainCryptoToUIMapper::transform)
                             .toObservable()
@@ -95,39 +86,9 @@ class CryptoListViewModelTest{
                             .startWith(CryptoListResult.GetCryptoListResult.InProgress)
                             .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
                     }
-                    is CryptoListAction.getCryptoItemDetails -> {
-                        useCaseTwo
-                            .map (domainCryptoToUIMapper::transform)
-                            .toObservable()
-                            .map(CryptoListResult.GetCryptoItemResult::OnSuccess)
-                            .cast(CryptoListResult::class.java)
-                            .startWith(CryptoListResult.GetCryptoItemResult.InProgress)
-                            .onErrorReturn(CryptoListResult.GetCryptoItemResult::OnError)
-                    }
                 }
             }
         }
-
-
-//        reducer = ObservableTransformer { results ->
-//            results.flatMap { result ->
-//                when(result){
-//                    CryptoListResult.GetCryptoListResult.InProgress -> TODO()
-//                    is CryptoListResult.GetCryptoListResult.OnError -> TODO()
-//                    is CryptoListResult.GetCryptoListResult.OnSuccess -> TODO()
-//
-//                    CryptoListResult.GetCryptoItemResult.InProgress -> TODO()
-//                    is CryptoListResult.GetCryptoItemResult.OnError -> TODO()
-//                    is CryptoListResult.GetCryptoItemResult.OnSuccess -> TODO()
-//                }
-//
-//                Observable.just(CryptoListUIState.ShowLoadingView)
-//            }
-//        }
-//
-
-//        reducer = BiFunction { t, u ->  }
-
 
     }
 
@@ -146,10 +107,7 @@ class CryptoListViewModelTest{
             )
         )
 
-        publishSubject.onNext(CryptoListIntent.getCryptoListIntent)
-        publishSubject.onNext(CryptoListIntent.getCryptoItemDetailsIntent(-1))
-        publishSubject.onNext(CryptoListIntent.reloadCryptoList)
-        publishSubject.onNext(CryptoListIntent.updateCryptoItemIntent(-1))
+        publishSubject.onNext(CryptoListIntent.GetCryptoListIntent)
     }
 
 
@@ -159,9 +117,8 @@ class CryptoListViewModelTest{
 
         compositeDisposable.add(
             Observable.just<CryptoListAction>(
-                CryptoListAction.getCryptoList,
-                CryptoListAction.getCryptoItemDetails(-1),
-                CryptoListAction.getCryptoList,)
+                CryptoListAction.GetCryptoList,
+                CryptoListAction.GetCryptoList,)
                 .compose(processor)
                 .subscribe(
                     { println("processor: onSuccess $it")},
@@ -175,25 +132,77 @@ class CryptoListViewModelTest{
     @Test
     fun testReducer(){
         println("testReducer")
-//        val fakeUICrypto = UICrypto(1, "1", "1", "1", 1.0, 1.0, "1")
-//
-//        Observable.just<CryptoListResult>(
-//            CryptoListResult.GetCryptoItemResult.InProgress,
-//            CryptoListResult.GetCryptoItemResult.OnSuccess(fakeUICrypto),
-//            CryptoListResult.GetCryptoItemResult.InProgress,
-//        ).scan()
+        val fakeUICrypto = UICrypto(1, "1", "1", "1", 1.0, 1.0, "1")
 
+//        val bf = BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState> { prevState, result ->
+//            println("bf")
+//            println(prevState)
+//            println(result)
+//            resolveNextState(prevState, result)
+//        }
 
-        val bf = BiFunction<Int, Int, Int> { t, u ->  t + u}
+        val reducer = BiFunction(::resolveNextState)
 
-        Observable.just(1,2,3,4,5)
-            .scan(bf)
+        Observable.just<CryptoListResult>(
+            CryptoListResult.GetCryptoListResult.InProgress,
+            CryptoListResult.GetCryptoListResult.OnSuccess(listOf(fakeUICrypto))
+        ).scan(CryptoListUIState.ShowDefaultView, reducer)
             .subscribe(
                 { println("onNext: $it")},
                 { println("onError: $it")},
                 { println("onComplete:")})
+
     }
 
+    fun resolveNextState(previousState: CryptoListUIState, currentResult: CryptoListResult): CryptoListUIState{
+        return when(previousState){
+            is CryptoListUIState.ShowDefaultView -> previousState resolveWith currentResult
+            is CryptoListUIState.ShowLoadingView -> previousState resolveWith currentResult
+            is CryptoListUIState.ShowErrorRetryView -> previousState resolveWith currentResult
+            is CryptoListUIState.ShowDataView -> previousState resolveWith currentResult
+            is CryptoListUIState.ShowMessageView -> previousState resolveWith currentResult
+        }
+    }
+
+    infix fun CryptoListUIState.ShowDefaultView.resolveWith(result: CryptoListResult): CryptoListUIState{
+        return when(result){
+            CryptoListResult.GetCryptoListResult.InProgress -> {}
+            is CryptoListResult.GetCryptoListResult.OnError -> {}
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+        }
+    }
+
+    infix fun CryptoListUIState.ShowLoadingView.resolveWith(result: CryptoListResult): CryptoListUIState{
+        return when(result){
+            CryptoListResult.GetCryptoListResult.InProgress -> {}
+            is CryptoListResult.GetCryptoListResult.OnError -> {}
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+        }
+    }
+
+    infix fun CryptoListUIState.ShowErrorRetryView.resolveWith(result: CryptoListResult): CryptoListUIState{
+        return when(result){
+            CryptoListResult.GetCryptoListResult.InProgress -> {}
+            is CryptoListResult.GetCryptoListResult.OnError -> {}
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+        }
+    }
+
+    infix fun CryptoListUIState.ShowDataView.resolveWith(result: CryptoListResult): CryptoListUIState{
+        return when(result){
+            CryptoListResult.GetCryptoListResult.InProgress -> {}
+            is CryptoListResult.GetCryptoListResult.OnError -> {}
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+        }
+    }
+
+    infix fun CryptoListUIState.ShowMessageView.resolveWith(result: CryptoListResult): CryptoListUIState{
+        return  when(result){
+            CryptoListResult.GetCryptoListResult.InProgress -> {}
+            is CryptoListResult.GetCryptoListResult.OnError -> {}
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+        }
+    }
 
     @After
     fun thisIsTheEnd(){

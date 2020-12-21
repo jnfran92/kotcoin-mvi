@@ -15,7 +15,6 @@ import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
-import io.reactivex.observers.DisposableObserver
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -89,7 +88,7 @@ class CryptoListFragment : Fragment() {
 //                    CryptoListUIState.HideErrorRetryView -> {}
                     is CryptoListUIState.ShowDataView -> {this.cryptoListAdapter.setData(it.data)}
 //                    CryptoListUIState.HideDataView -> {}
-                    is CryptoListUIState.OnShowToastMessage -> {}
+                    is CryptoListUIState.ShowMessageView -> {}
                 }
 //            }
         }
@@ -147,6 +146,6 @@ class CryptoListFragment : Fragment() {
         super.onResume()
         Timber.d("onResume: ")
 //        viewModel.rx(CryptoListIntent.getCryptoListIntent)
-        viewModel.processIntent(CryptoListIntent.getCryptoListIntent)
+        viewModel.processIntent(CryptoListIntent.GetCryptoListIntent)
     }
 }

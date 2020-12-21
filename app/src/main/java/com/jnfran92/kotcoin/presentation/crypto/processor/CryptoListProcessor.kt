@@ -27,7 +27,7 @@ class CryptoListProcessor @Inject constructor(
         override fun onNext(t: CryptoListAction) {
             Timber.d("onNext")
             when(t){
-                CryptoListAction.getCryptoList -> { executeGetCryptoListUseCase()}
+                CryptoListAction.GetCryptoList -> { executeGetCryptoListUseCase()}
                 is CryptoListAction.getCryptoItemDetails -> {}
             }
         }
