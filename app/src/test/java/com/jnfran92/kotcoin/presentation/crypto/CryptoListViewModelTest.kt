@@ -166,41 +166,41 @@ class CryptoListViewModelTest{
 
     infix fun CryptoListUIState.ShowDefaultView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> {}
-            is CryptoListResult.GetCryptoListResult.OnError -> {}
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+            CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
         }
     }
 
     infix fun CryptoListUIState.ShowLoadingView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> {}
-            is CryptoListResult.GetCryptoListResult.OnError -> {}
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> CryptoListUIState.ShowDataView(result.data)
         }
     }
 
     infix fun CryptoListUIState.ShowErrorRetryView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> {}
-            is CryptoListResult.GetCryptoListResult.OnError -> {}
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
         }
     }
 
     infix fun CryptoListUIState.ShowDataView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> {}
-            is CryptoListResult.GetCryptoListResult.OnError -> {}
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
         }
     }
 
     infix fun CryptoListUIState.ShowMessageView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return  when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> {}
-            is CryptoListResult.GetCryptoListResult.OnError -> {}
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> {}
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
         }
     }
 
