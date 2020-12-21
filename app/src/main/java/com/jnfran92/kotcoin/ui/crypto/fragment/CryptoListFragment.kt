@@ -83,12 +83,12 @@ class CryptoListFragment : Fragment() {
                     ))}
 //                    CryptoListUIState.HideDefaultView -> {}
                     CryptoListUIState.ShowLoadingView -> {binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.VISIBLE}
-                    CryptoListUIState.HideLoadingView -> {binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.INVISIBLE}
+//                    CryptoListUIState.HideLoadingView -> {binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.INVISIBLE}
                     CryptoListUIState.ShowErrorRetryView -> {}
 //                    CryptoListUIState.HideErrorRetryView -> {}
                     is CryptoListUIState.ShowDataView -> {this.cryptoListAdapter.setData(it.data)}
 //                    CryptoListUIState.HideDataView -> {}
-                    is CryptoListUIState.ShowMessageView -> {}
+//                    is CryptoListUIState.ShowMessageView -> {}
                 }
 //            }
         }

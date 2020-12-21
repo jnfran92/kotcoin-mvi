@@ -11,6 +11,4 @@ sealed class CryptoListUIState{
     object ShowErrorRetryView: CryptoListUIState()
 
     class ShowDataView(val data: List<UICrypto>): CryptoListUIState()
-
-    class ShowMessageView(val message: String): CryptoListUIState()
 }

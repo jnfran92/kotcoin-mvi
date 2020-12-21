@@ -134,13 +134,6 @@ class CryptoListViewModelTest{
         println("testReducer")
         val fakeUICrypto = UICrypto(1, "1", "1", "1", 1.0, 1.0, "1")
 
-//        val bf = BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState> { prevState, result ->
-//            println("bf")
-//            println(prevState)
-//            println(result)
-//            resolveNextState(prevState, result)
-//        }
-
         val reducer = BiFunction(::resolveNextState)
 
         Observable.just<CryptoListResult>(
@@ -160,21 +153,20 @@ class CryptoListViewModelTest{
             is CryptoListUIState.ShowLoadingView -> previousState resolveWith currentResult
             is CryptoListUIState.ShowErrorRetryView -> previousState resolveWith currentResult
             is CryptoListUIState.ShowDataView -> previousState resolveWith currentResult
-            is CryptoListUIState.ShowMessageView -> previousState resolveWith currentResult
         }
     }
 
     infix fun CryptoListUIState.ShowDefaultView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
             CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
-            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid path")
         }
     }
 
     infix fun CryptoListUIState.ShowLoadingView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid path")
             is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView
             is CryptoListResult.GetCryptoListResult.OnSuccess -> CryptoListUIState.ShowDataView(result.data)
         }
@@ -182,25 +174,17 @@ class CryptoListViewModelTest{
 
     infix fun CryptoListUIState.ShowErrorRetryView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid path")
         }
     }
 
     infix fun CryptoListUIState.ShowDataView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
-        }
-    }
-
-    infix fun CryptoListUIState.ShowMessageView.resolveWith(result: CryptoListResult): CryptoListUIState{
-        return  when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid state path")
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid state path")
+            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid path")
+            is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid path")
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid path")
         }
     }
 

@@ -1,65 +1,30 @@
 package com.jnfran92.kotcoin.presentation.crypto.processor
 
-import com.jnfran92.domain.crypto.model.DomainCrypto
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.subjects.PublishSubject
-import timber.log.Timber
+import io.reactivex.ObservableTransformer
 import javax.inject.Inject
 
 class CryptoListProcessor @Inject constructor(
     private val getCryptoListUseCase: GetCryptoListUseCase,
-    private val mapper: DomainCryptoToUIMapper) {
+    private val domainCryptoToUIMapper: DomainCryptoToUIMapper) {
 
-    /**
-     * tx
-     */
-    val tx: PublishSubject<CryptoListResult> = PublishSubject.create()
-
-    /**
-     * rx
-     */
-    val rx = object : DisposableObserver<CryptoListAction>(){
-        override fun onNext(t: CryptoListAction) {
-            Timber.d("onNext")
-            when(t){
-                CryptoListAction.GetCryptoList -> { executeGetCryptoListUseCase()}
-                is CryptoListAction.getCryptoItemDetails -> {}
+    private val processor = ObservableTransformer<CryptoListAction, CryptoListResult> { actions ->
+        actions.flatMap { action ->
+            when(action){
+                CryptoListAction.GetCryptoList -> {
+                    getCryptoListUseCase.useCase
+                        .map (domainCryptoToUIMapper::transform)
+                        .toObservable()
+                        .map(CryptoListResult.GetCryptoListResult::OnSuccess)
+                        .cast(CryptoListResult::class.java)
+                        .startWith(CryptoListResult.GetCryptoListResult.InProgress)
+                        .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
+                }
             }
-        }
-
-        override fun onError(e: Throwable) {
-            Timber.d("onError")
-        }
-
-        override fun onComplete() {
-            Timber.d("onComplete")
         }
     }
 
-
-    fun executeGetCryptoListUseCase(){
-        Timber.d("executeGetCryptoListUseCase: ")
-        tx.onNext(CryptoListResult.GetCryptoListResult.InProgress)
-        getCryptoListUseCase.execute(object : DisposableSingleObserver<List<DomainCrypto>>(){
-            override fun onSuccess(t: List<DomainCrypto>) {
-                Timber.d("onSuccess")
-                tx.onNext(CryptoListResult.GetCryptoListResult.OnSuccess( mapper.transform(t)))
-            }
-
-            override fun onError(e: Throwable) {
-                Timber.d("onError")
-                tx.onNext(CryptoListResult.GetCryptoListResult.OnError(e))
-            }
-        })
-    }
-
-
-    fun dispose(){
-        getCryptoListUseCase.dispose()
-    }
 }

@@ -11,17 +11,18 @@ import javax.inject.Inject
 
 class CryptoListInterpreter @Inject constructor(){
 
-//    private val publisherI: PublishSubject<CryptoListIntent> = PublishSubject.create()
-//    private val interpreter = publisherI.flatMap {
-//        Observable.create<CryptoListAction> { emitter ->
-//            when(it){
-//                CryptoListIntent.getCryptoListIntent -> {emitter.onNext(CryptoListAction.getCryptoList)}
-//                is CryptoListIntent.reloadCryptoList -> {}
-//                is CryptoListIntent.updateCryptoItemIntent -> {}
-//                is CryptoListIntent.getCryptoItemDetailsIntent -> {}
-//            }
-//        }
-//    }
+    private val publishSubject: PublishSubject<CryptoListIntent> = PublishSubject.create()
+    private val interpreter = publishSubject.flatMap {
+        Observable.create<CryptoListAction> { emitter ->
+            Timber.d("interpreter: intent $it")
+            when(it){
+                CryptoListIntent.GetCryptoListIntent -> {
+                    Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
+                    emitter.onNext(CryptoListAction.GetCryptoList)
+                }
+            }
+        }
+    }
 
 
 }
