@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.presentation.crypto.action
+package com.jnfran92.kotcoin.presentation.crypto.mvi.action
 
 sealed class CryptoListAction {
     object GetCryptoList : CryptoListAction()

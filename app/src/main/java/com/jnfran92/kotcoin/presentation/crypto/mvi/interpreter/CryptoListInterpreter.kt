@@ -1,7 +1,7 @@
-package com.jnfran92.kotcoin.presentation.crypto.interpreter
+package com.jnfran92.kotcoin.presentation.crypto.mvi.interpreter
 
-import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
-import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
+import com.jnfran92.kotcoin.presentation.crypto.mvi.action.CryptoListAction
+import com.jnfran92.kotcoin.presentation.crypto.mvi.intent.CryptoListIntent
 import io.reactivex.Observable
 import io.reactivex.subjects.ReplaySubject
 import timber.log.Timber

@@ -1,7 +1,7 @@
-package com.jnfran92.kotcoin.presentation.crypto.reducer
+package com.jnfran92.kotcoin.presentation.crypto.mvi.reducer
 
-import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
-import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.mvi.result.CryptoListResult
+import com.jnfran92.kotcoin.presentation.crypto.mvi.uistate.CryptoListUIState
 import io.reactivex.functions.BiFunction
 import timber.log.Timber
 import javax.inject.Inject

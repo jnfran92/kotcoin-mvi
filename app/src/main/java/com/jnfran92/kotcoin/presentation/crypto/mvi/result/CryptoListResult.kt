@@ -1,4 +1,4 @@
-package com.jnfran92.kotcoin.presentation.crypto.result
+package com.jnfran92.kotcoin.presentation.crypto.mvi.result
 
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 

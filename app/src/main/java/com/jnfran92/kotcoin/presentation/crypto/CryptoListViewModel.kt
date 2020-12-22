@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.KotcoinApp
-import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
-import com.jnfran92.kotcoin.presentation.crypto.interpreter.CryptoListInterpreter
+import com.jnfran92.kotcoin.presentation.crypto.mvi.intent.CryptoListIntent
+import com.jnfran92.kotcoin.presentation.crypto.mvi.interpreter.CryptoListInterpreter
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
-import com.jnfran92.kotcoin.presentation.crypto.processor.CryptoListProcessor
-import com.jnfran92.kotcoin.presentation.crypto.reducer.CryptoListReducer
-import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.mvi.processor.CryptoListProcessor
+import com.jnfran92.kotcoin.presentation.crypto.mvi.reducer.CryptoListReducer
+import com.jnfran92.kotcoin.presentation.crypto.mvi.uistate.CryptoListUIState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber

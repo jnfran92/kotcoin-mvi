@@ -1,9 +1,9 @@
-package com.jnfran92.kotcoin.presentation.crypto.processor
+package com.jnfran92.kotcoin.presentation.crypto.mvi.processor
 
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
-import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
+import com.jnfran92.kotcoin.presentation.crypto.mvi.action.CryptoListAction
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
-import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
+import com.jnfran92.kotcoin.presentation.crypto.mvi.result.CryptoListResult
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer

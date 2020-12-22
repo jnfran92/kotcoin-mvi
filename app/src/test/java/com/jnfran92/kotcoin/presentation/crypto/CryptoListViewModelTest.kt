@@ -1,12 +1,12 @@
 package com.jnfran92.kotcoin.presentation.crypto
 
 import com.jnfran92.domain.crypto.model.DomainCrypto
-import com.jnfran92.kotcoin.presentation.crypto.action.CryptoListAction
-import com.jnfran92.kotcoin.presentation.crypto.intent.CryptoListIntent
+import com.jnfran92.kotcoin.presentation.crypto.mvi.action.CryptoListAction
+import com.jnfran92.kotcoin.presentation.crypto.mvi.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
-import com.jnfran92.kotcoin.presentation.crypto.result.CryptoListResult
-import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.mvi.result.CryptoListResult
+import com.jnfran92.kotcoin.presentation.crypto.mvi.uistate.CryptoListUIState
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
