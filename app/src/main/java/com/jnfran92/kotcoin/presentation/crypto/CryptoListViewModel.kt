@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.KotcoinApp
-import com.jnfran92.kotcoin.presentation.crypto.mvi.intent.CryptoListIntent
-import com.jnfran92.kotcoin.presentation.crypto.mvi.interpreter.CryptoListInterpreter
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoListInterpreter
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
-import com.jnfran92.kotcoin.presentation.crypto.mvi.processor.CryptoListProcessor
-import com.jnfran92.kotcoin.presentation.crypto.mvi.reducer.CryptoListReducer
-import com.jnfran92.kotcoin.presentation.crypto.mvi.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoListProcessor
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReducer
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -42,7 +42,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
 
     init {
         initInjection()
-        initMviFlow()
+        initDataFlow()
     }
 
     private fun initInjection() {
@@ -55,7 +55,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
         reducer = CryptoListReducer()
     }
 
-    private fun initMviFlow() {
+    private fun initDataFlow() {
         Timber.d("initMviFlow: ")
         compositeDisposable.add(
             interpreter

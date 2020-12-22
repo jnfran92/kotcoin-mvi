@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
-import com.jnfran92.kotcoin.presentation.crypto.mvi.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import timber.log.Timber
