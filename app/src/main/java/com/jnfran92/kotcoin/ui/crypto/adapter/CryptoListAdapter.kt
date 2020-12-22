@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.ViewCryptoItemBinding
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.android.synthetic.main.view_crypto_item.view.*
 import javax.inject.Inject
 
 /**
  * Adapter for Crypto data and RecyclerView UI Element
  */
-class CryptoListAdapter @Inject constructor(private val context: Context)
+@FragmentScoped
+class CryptoListAdapter @Inject constructor(
+    @ActivityContext private val context: Context)
     :RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
 
 

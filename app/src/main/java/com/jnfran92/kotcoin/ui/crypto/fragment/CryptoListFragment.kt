@@ -10,16 +10,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
-import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
-import com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity
+import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * Fragment for displaying Crypto List
  */
+@AndroidEntryPoint
 class CryptoListFragment : Fragment() {
 
     @Inject
@@ -30,12 +31,12 @@ class CryptoListFragment : Fragment() {
     /**
      * view binding
      */
-    lateinit var binding: FragmentCryptoListBinding
+    private lateinit var binding: FragmentCryptoListBinding
 
     /**
      * view model
      */
-    val viewModel: CryptoListViewModel by viewModels()
+    private val viewModel: CryptoListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -46,15 +47,15 @@ class CryptoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.initInjection()
+//        this.initInjection()
         this.initViewElements()
         this.initViewModel()
     }
 
-    private fun initInjection(){
-        val cryptoComponent = (activity as CryptoActivity).getCryptoComponent()
-        cryptoComponent.inject(this)
-    }
+//    private fun initInjection(){
+//        val cryptoComponent = (activity as CryptoActivity).getCryptoComponent()
+//        cryptoComponent.inject(this)
+//    }
 
     private fun initViewElements(){
         this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter
@@ -63,7 +64,6 @@ class CryptoListFragment : Fragment() {
 
     private fun initViewModel() {
         Timber.d("initViewModel")
-//        viewModel.rx(CryptoListIntent.GetCryptoListIntent)
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
     }
 
@@ -95,6 +95,5 @@ class CryptoListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Timber.d("onResume: ")
-//        viewModel.rx(CryptoListIntent.GetCryptoListIntent)
     }
 }

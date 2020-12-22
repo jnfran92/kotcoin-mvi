@@ -1,7 +1,10 @@
 package com.jnfran92.data.crypto.supplier.cache
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class CryptoCacheImpl @Inject constructor(private val context: Context):CryptoCache {
+class CryptoCacheImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+    ):CryptoCache {
 }

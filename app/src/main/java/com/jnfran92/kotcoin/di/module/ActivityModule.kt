@@ -1,16 +1,11 @@
 package com.jnfran92.kotcoin.di.module
 
-import android.app.Activity
-import com.jnfran92.kotcoin.di.PerActivity
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 
 @Module
-class ActivityModule(private val activity: Activity){
+@InstallIn(ActivityComponent::class)
+object ActivityModule{
 
-    @Provides
-    @PerActivity
-    fun activity(): Activity{
-        return this.activity
-    }
 }

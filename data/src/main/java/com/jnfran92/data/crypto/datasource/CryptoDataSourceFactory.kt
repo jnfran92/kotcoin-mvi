@@ -6,6 +6,7 @@ import com.jnfran92.data.crypto.datasource.crypto.CloudCryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.CryptoDataSource
 import com.jnfran92.data.crypto.supplier.cache.CryptoCache
 import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,7 +15,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class CryptoDataSourceFactory @Inject constructor(
-    private val context: Context,
+    @ApplicationContext private val context: Context,
     private val cryptoApi: CryptoApi,
     private val cryptoCache: CryptoCache){
 

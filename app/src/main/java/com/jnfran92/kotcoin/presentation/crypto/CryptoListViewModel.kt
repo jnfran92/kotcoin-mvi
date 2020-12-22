@@ -1,30 +1,25 @@
 package com.jnfran92.kotcoin.presentation.crypto
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
-import com.jnfran92.kotcoin.KotcoinApp
+import androidx.lifecycle.ViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoListInterpreter
-import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoListProcessor
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReducer
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import javax.inject.Inject
 
-class CryptoListViewModel(application: Application): AndroidViewModel(application) {
+class CryptoListViewModel @ViewModelInject constructor(
+    private val processor: CryptoListProcessor,
+    private val interpreter: CryptoListInterpreter,
+    private val reducer: CryptoListReducer): ViewModel() {
 
-    @Inject lateinit var useCase: GetCryptoListUseCase
-    @Inject lateinit var mapper: DomainCryptoToUIMapper
-
-    lateinit var processor: CryptoListProcessor
-    lateinit var interpreter: CryptoListInterpreter
-    lateinit var reducer: CryptoListReducer
-
+    /**
+     * RxJava Disposable
+     */
     private val compositeDisposable = CompositeDisposable()
 
     /**
@@ -41,18 +36,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     init {
-        initInjection()
         initDataFlow()
-    }
-
-    private fun initInjection() {
-        Timber.d("initInjection")
-        val appComponent = (getApplication() as KotcoinApp).applicationComponent
-        appComponent.inject(this)
-
-        processor = CryptoListProcessor(useCase, mapper)
-        interpreter = CryptoListInterpreter()
-        reducer = CryptoListReducer()
     }
 
     private fun initDataFlow() {
@@ -72,6 +56,6 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
 
     override fun onCleared() {
         super.onCleared()
-        this.compositeDisposable.dispose()
+        compositeDisposable.dispose()
     }
 }

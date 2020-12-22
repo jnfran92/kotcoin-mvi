@@ -2,10 +2,12 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer
 
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import io.reactivex.functions.BiFunction
 import timber.log.Timber
 import javax.inject.Inject
 
+@ActivityRetainedScoped
 class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState>{
 
     override fun apply(t1: CryptoListUIState, t2: CryptoListResult): CryptoListUIState {

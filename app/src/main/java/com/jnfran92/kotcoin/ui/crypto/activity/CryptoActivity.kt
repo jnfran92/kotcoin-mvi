@@ -2,18 +2,14 @@ package com.jnfran92.kotcoin.ui.crypto.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jnfran92.kotcoin.KotcoinApp
-import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.ActivityCryptoBinding
-import com.jnfran92.kotcoin.di.component.CryptoComponent
-import com.jnfran92.kotcoin.di.component.DaggerCryptoComponent
-import com.jnfran92.kotcoin.di.module.ActivityModule
-
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 /**
  * View for display a list of [Crypto] objects.
  */
+@AndroidEntryPoint
 class CryptoActivity : AppCompatActivity(){
 
     /**
@@ -38,12 +34,12 @@ class CryptoActivity : AppCompatActivity(){
     }
 
 
-    fun getCryptoComponent(): CryptoComponent{
-        val appComponent = (application as KotcoinApp).applicationComponent
-        return DaggerCryptoComponent
-            .builder()
-            .activityModule(ActivityModule(this))
-            .applicationComponent(appComponent)
-            .build()
-    }
+//    fun getCryptoComponent(): CryptoComponent{
+//        val appComponent = (application as KotcoinApp).applicationComponent
+//        return DaggerCryptoComponent
+//            .builder()
+//            .activityModule(ActivityModule(this))
+//            .applicationComponent(appComponent)
+//            .build()
+//    }
 }

@@ -4,12 +4,14 @@ import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoListAction
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
 import timber.log.Timber
 import javax.inject.Inject
 
+@ActivityRetainedScoped
 class CryptoListProcessor @Inject constructor(
     private val getCryptoListUseCase: GetCryptoListUseCase,
     private val domainCryptoToUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {
