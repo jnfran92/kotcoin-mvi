@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class CryptoListProcessor @Inject constructor(
-    private val getCryptoListUseCase: GetCryptoListUseCase,
-    private val domainCryptoToUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {
+    private val useCase: GetCryptoListUseCase,
+    private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {
 
     override fun apply(upstream: Observable<CryptoListAction>): ObservableSource<CryptoListResult> {
         Timber.d("apply")
@@ -22,9 +22,9 @@ class CryptoListProcessor @Inject constructor(
             Timber.d("apply: action $action")
             when(action){
                 CryptoListAction.GetCryptoList -> {
-                    getCryptoListUseCase
+                    useCase
                         .toSingle()
-                        .map (domainCryptoToUIMapper::transform)
+                        .map (toUIMapper::transform)
                         .toObservable()
                         .map(CryptoListResult.GetCryptoListResult::OnSuccess)
                         .cast(CryptoListResult::class.java)

@@ -85,9 +85,9 @@ object ApplicationModule {
         return uiThread
     }
 
-    //TODO("Remove this, wrong scope")
-    @Provides @Singleton
-    fun getCryptoListUseCase(cryptoRepository: CryptoRepository): GetCryptoListUseCase {
-        return GetCryptoListUseCase(cryptoRepository, Schedulers.io(), AndroidSchedulers.mainThread())
-    }
+//    //TODO("Remove this, wrong scope")
+//    @Provides @Singleton
+//    fun getCryptoListUseCase(cryptoRepository: CryptoRepository): GetCryptoListUseCase {
+//        return GetCryptoListUseCase(cryptoRepository, Schedulers.io(), AndroidSchedulers.mainThread())
+//    }
 }

@@ -39,7 +39,7 @@ class CryptoListFragment : Fragment() {
     private val viewModel: CryptoListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         Timber.d("onCreateView: ")
         this.binding = FragmentCryptoListBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,15 +47,9 @@ class CryptoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        this.initInjection()
         this.initViewElements()
         this.initViewModel()
     }
-
-//    private fun initInjection(){
-//        val cryptoComponent = (activity as CryptoActivity).getCryptoComponent()
-//        cryptoComponent.inject(this)
-//    }
 
     private fun initViewElements(){
         this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter

@@ -17,18 +17,19 @@ import javax.inject.Singleton
  * Get data
  */
 @ActivityRetainedScoped
-class GetCryptoListUseCase @Inject constructor (private val repository: CryptoRepository,
-                                       private val subscribeOnThread: Scheduler,
-                                       private val observeOnThread: Scheduler) {
+class GetCryptoDetailsUseCase @Inject constructor(private val repository: CryptoRepository,
+                              private val subscribeOnThread: Scheduler,
+                              private val observeOnThread: Scheduler) {
 
-    private fun buildUseCase(): Single<List<DomainCrypto>>{
-        return this.repository.getCryptoList()
+    private fun buildUseCase(itemId: Int): Single<DomainCrypto>{
+        Timber.d("buildUseCase: $itemId")
+        return Single.just(DomainCrypto(-1,"Luka", "LK", "luka", 1.1, 5123123.21, "today bitches!"))
             .subscribeOn(subscribeOnThread)
             .observeOn(observeOnThread)
-//            .delay(3000, TimeUnit.MILLISECONDS)
+            .delay(3000, TimeUnit.MILLISECONDS)
     }
 
-    fun toSingle(): Single<List<DomainCrypto>>{
-        return buildUseCase()
+    fun toSingle(itemId: Int): Single<DomainCrypto>{
+        return buildUseCase(itemId)
     }
 }
