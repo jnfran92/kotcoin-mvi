@@ -8,6 +8,7 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -17,14 +18,13 @@ import javax.inject.Singleton
  * Get data
  */
 @ActivityRetainedScoped
-class GetCryptoListUseCase @Inject constructor (private val repository: CryptoRepository,
-                                       private val subscribeOnThread: Scheduler,
-                                       private val observeOnThread: Scheduler) {
+class GetCryptoListUseCase @Inject constructor (
+    private val repository: CryptoRepository) {
 
     private fun buildUseCase(): Single<List<DomainCrypto>>{
         return this.repository.getCryptoList()
-            .subscribeOn(subscribeOnThread)
-            .observeOn(observeOnThread)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
 //            .delay(3000, TimeUnit.MILLISECONDS)
     }
 

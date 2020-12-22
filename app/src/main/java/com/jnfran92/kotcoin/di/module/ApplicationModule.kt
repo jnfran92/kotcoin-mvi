@@ -7,7 +7,6 @@ import com.jnfran92.data.crypto.supplier.cache.CryptoCacheImpl
 import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
 import com.jnfran92.data.crypto.supplier.cloud.CryptoApiImpl
 import com.jnfran92.domain.crypto.CryptoRepository
-import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
 import com.jnfran92.kotcoin.rx.ObserverThread
@@ -17,7 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -84,10 +83,4 @@ object ApplicationModule {
     fun observerThread(uiThread: UIThread): ObserverThread {
         return uiThread
     }
-
-//    //TODO("Remove this, wrong scope")
-//    @Provides @Singleton
-//    fun getCryptoListUseCase(cryptoRepository: CryptoRepository): GetCryptoListUseCase {
-//        return GetCryptoListUseCase(cryptoRepository, Schedulers.io(), AndroidSchedulers.mainThread())
-//    }
 }
