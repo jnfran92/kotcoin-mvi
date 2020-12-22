@@ -56,7 +56,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     private fun initDataFlow() {
-        Timber.d("initMviFlow: ")
+        Timber.d("initDataFlow: ")
         compositeDisposable.add(
             interpreter
                 .toObservable()
@@ -64,7 +64,7 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
                 .scan(CryptoListUIState.ShowDefaultView, reducer)
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .subscribe(tx::postValue) { Timber.d("initMviFlow: error $it") }
+                .subscribe(tx::postValue) { Timber.d("initDataFlow:  error $it") }
         )
         //lazy init
         rx(CryptoListIntent.GetCryptoListIntent)
