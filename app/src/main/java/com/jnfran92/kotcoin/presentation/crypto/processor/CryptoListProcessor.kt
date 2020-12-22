@@ -17,9 +17,11 @@ class CryptoListProcessor @Inject constructor(
     override fun apply(upstream: Observable<CryptoListAction>): ObservableSource<CryptoListResult> {
         Timber.d("apply")
         return upstream.flatMap { action ->
+            Timber.d("apply: action $action")
             when(action){
                 CryptoListAction.GetCryptoList -> {
-                    getCryptoListUseCase.useCase
+                    getCryptoListUseCase
+                        .toSingle()
                         .map (domainCryptoToUIMapper::transform)
                         .toObservable()
                         .map(CryptoListResult.GetCryptoListResult::OnSuccess)

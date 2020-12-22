@@ -64,10 +64,8 @@ class CryptoListFragment : Fragment() {
 
     private fun initViewModel() {
         Timber.d("initViewModel")
-        this.viewModel.tx.observe(viewLifecycleOwner, Observer<CryptoListUIState> {
-            Timber.d("initViewModel: $it")
-            render(it)
-        })
+//        viewModel.rx(CryptoListIntent.GetCryptoListIntent)
+        this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
     }
 
 
@@ -98,6 +96,6 @@ class CryptoListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Timber.d("onResume: ")
-        viewModel.rx(CryptoListIntent.GetCryptoListIntent)
+//        viewModel.rx(CryptoListIntent.GetCryptoListIntent)
     }
 }

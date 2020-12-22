@@ -27,7 +27,6 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
 
     private val compositeDisposable = CompositeDisposable()
 
-
     /**
      * TX: transmit UI events
      */
@@ -40,7 +39,6 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
         Timber.d("rx: $intent")
         interpreter.processIntent(intent)
     }
-
 
     init {
         initInjection()
@@ -68,6 +66,8 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
                 .subscribeOn(Schedulers.io())
                 .subscribe(tx::postValue) { Timber.d("initMviFlow: error $it") }
         )
+        //lazy init
+        rx(CryptoListIntent.GetCryptoListIntent)
     }
 
     override fun onCleared() {
