@@ -11,19 +11,19 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 ## Current work
 
-- Adding DataBinding
-- Migrating to MVI
-- Adding ViewModel instead of Controllers
-- Adding Navigation JetPack
-- Using Material Elements: Cards mainly!
-- Using CLEAN structure modules: data + domain + presentation(app)
-- Adding Use Cases
-- Migrating to Hilt from Dagger
+- Adding DataBinding ✅
+- Migrating to MVI ✅
+- Adding ViewModel instead of Controllers ✅
+- Adding Navigation JetPack ✅
+- Using Material Elements: Cards mainly! ✅
+- Using CLEAN structure modules: data + domain + presentation(app) ✅
+- Adding Use Cases ✅
+- Migrating to Hilt from Dagger ✅
 - Adding Workers for saving daily price
 - Adding Room for local storage
 - Adding Dynamic Modules
 - Adding Compose()
-- Adding Kotlin Flow!
+- Adding Kotlin Flow! 🤔
 
 ## Requirements
 
@@ -38,26 +38,8 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 <img src="./app/src/main/res/drawable/backkotcoin.png" alt="kotcoin-background" width="250">
 
-Kotcoin is based on Model View Controller Arch. This means that there is a controller which manages the 
-data for every action coming from the view. Ideally, `Model` is separated from the view and 
-the controller, since it is better for Unit Testing. 
-
-
-The main model entity is `Crypto`, which represents a crypto-currency. This is based in JSON API info
-provided by `CoinMarketCap` documentation.
-
-
-`View` and `Controller` has dependencies of `Model`. `Model` has a FactoryClass to manage data sources.
-`Controller` has a `ViewListener` Interface which have to be implemented by the `View` for handling
-actions and requests.
-
-
-Dependency Injection is performed at `App`, `Activity` and `Model` entity level by using `Dagger`. 
-Lastly, API service is consumed by using `Retrofit`.
-
-Data flow is managed by `reactive` Libraries. In such regard, all actions are managed by `Observable` 
-objects, so data flows to an `Observer` when it is subscribed.
-
+Kotcoin is based on Model-View-Intent MVI Arch. DI handled by Dagger and Reactive data flow handled by
+RXJava. SOLID and CLEAN based project!
 
 ## Basic Guide
 
