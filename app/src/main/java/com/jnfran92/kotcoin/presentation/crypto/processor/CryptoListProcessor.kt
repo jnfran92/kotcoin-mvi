@@ -14,22 +14,6 @@ class CryptoListProcessor @Inject constructor(
     private val getCryptoListUseCase: GetCryptoListUseCase,
     private val domainCryptoToUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {
 
-//    val observableTransformer = ObservableTransformer<CryptoListAction, CryptoListResult> { actions ->
-//        actions.flatMap { action ->
-//            when(action){
-//                CryptoListAction.GetCryptoList -> {
-//                    getCryptoListUseCase.useCase
-//                        .map (domainCryptoToUIMapper::transform)
-//                        .toObservable()
-//                        .map(CryptoListResult.GetCryptoListResult::OnSuccess)
-//                        .cast(CryptoListResult::class.java)
-//                        .startWith(CryptoListResult.GetCryptoListResult.InProgress)
-//                        .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
-//                }
-//            }
-//        }
-//    }
-
     override fun apply(upstream: Observable<CryptoListAction>): ObservableSource<CryptoListResult> {
         Timber.d("apply")
         return upstream.flatMap { action ->

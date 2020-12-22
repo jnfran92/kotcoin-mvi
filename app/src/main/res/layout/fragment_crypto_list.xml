@@ -10,8 +10,7 @@
         android:id="@+id/pb_cryptoFragment_loading"
         layout="@layout/view_loading"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cryptoFragment_cryptoList"

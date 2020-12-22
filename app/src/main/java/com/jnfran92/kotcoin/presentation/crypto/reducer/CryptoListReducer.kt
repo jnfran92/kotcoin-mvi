@@ -48,7 +48,7 @@ class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, Cry
 
     private infix fun CryptoListUIState.ShowDataView.resolveWith(result: CryptoListResult): CryptoListUIState {
         return when(result){
-            CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid path")
+            CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
             is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid path")
             is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid path")
         }

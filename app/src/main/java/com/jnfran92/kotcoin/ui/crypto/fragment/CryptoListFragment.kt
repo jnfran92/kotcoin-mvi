@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
@@ -64,10 +64,10 @@ class CryptoListFragment : Fragment() {
 
     private fun initViewModel() {
         Timber.d("initViewModel")
-        this.viewModel.tx.observe(viewLifecycleOwner){
+        this.viewModel.tx.observe(viewLifecycleOwner, Observer<CryptoListUIState> {
             Timber.d("initViewModel: $it")
             render(it)
-        }
+        })
     }
 
 

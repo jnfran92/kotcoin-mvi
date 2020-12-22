@@ -26,7 +26,7 @@ class GetCryptoListUseCase(private val repository: CryptoRepository,
         return this.repository.getCryptoList()
 //            .subscribeOn(subscribeOnThread)
 //            .observeOn(observeOnThread)
-            .delay(3000, TimeUnit.MILLISECONDS)
+//            .delay(3000, TimeUnit.MILLISECONDS)
     }
 
     fun execute(disposableSingleObserver: DisposableSingleObserver<List<DomainCrypto>>){

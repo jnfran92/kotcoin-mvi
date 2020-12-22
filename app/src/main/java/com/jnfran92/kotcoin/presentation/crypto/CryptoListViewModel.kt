@@ -12,6 +12,7 @@ import com.jnfran92.kotcoin.presentation.crypto.processor.CryptoListProcessor
 import com.jnfran92.kotcoin.presentation.crypto.reducer.CryptoListReducer
 import com.jnfran92.kotcoin.presentation.crypto.uistate.CryptoListUIState
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -25,6 +26,20 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     lateinit var reducer: CryptoListReducer
 
     private val compositeDisposable = CompositeDisposable()
+
+
+    /**
+     * TX: transmit UI events
+     */
+    val tx: MutableLiveData<CryptoListUIState> = MutableLiveData()
+
+    /**
+     * RX: receive User intents
+     */
+    fun rx(intent: CryptoListIntent){
+        Timber.d("rx: $intent")
+        interpreter.processIntent(intent)
+    }
 
 
     init {
@@ -43,28 +58,17 @@ class CryptoListViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     private fun initMviFlow() {
-        Timber.d("initFlow")
+        Timber.d("initMviFlow: ")
         compositeDisposable.add(
             interpreter
                 .toObservable()
                 .compose(processor)
-                .scan(CryptoListUIState.ShowDefaultView ,reducer)
-                .subscribe(tx::setValue){}
+                .scan(CryptoListUIState.ShowDefaultView, reducer)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .subscribe(tx::postValue) { Timber.d("initMviFlow: error $it") }
         )
     }
-
-    /**
-     * TX: transmit UI events
-     */
-    val tx: MutableLiveData<CryptoListUIState> = MutableLiveData<CryptoListUIState>()
-
-    /**
-     * RX: receive User intents
-     */
-    fun rx(intent: CryptoListIntent){
-        interpreter.processIntent(intent)
-    }
-
 
     override fun onCleared() {
         super.onCleared()
