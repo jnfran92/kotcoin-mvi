@@ -27,7 +27,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 ## Requirements
 
-- Dagger
+- Hilt Dagger
 - Retrofit
 - Gson/Kotson
 - AndroidRx
@@ -48,12 +48,6 @@ RXJava. SOLID and CLEAN based project!
     launchctl setenv KOTCOIN_API_TOKEN "\"your_api_key\""
 
 List variables with: `printenv`
-
-
-
-## Bugs
-
-- When orientation change and there is no network connection, `androidRx` throws an Exception.
 
 ## What's Next!
 
