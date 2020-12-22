@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-@ActivityRetainedScoped
+
 class CryptoListProcessor @Inject constructor(
     private val useCase: GetCryptoListUseCase,
     private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {

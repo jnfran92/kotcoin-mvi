@@ -38,7 +38,7 @@ class CryptoDetailsFragment : Fragment() {
     /**
      * view model
      */
-    private val viewModel: CryptoDetailsViewModel by activityViewModels()
+    private val viewModel: CryptoDetailsViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -98,5 +98,10 @@ class CryptoDetailsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Timber.d("onResume: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.d("onDestroy: ")
     }
 }

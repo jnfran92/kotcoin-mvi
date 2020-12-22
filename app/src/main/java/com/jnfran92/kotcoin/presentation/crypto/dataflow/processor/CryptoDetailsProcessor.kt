@@ -5,6 +5,7 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoDetailsAct
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
@@ -13,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-@ActivityRetainedScoped
+
 class CryptoDetailsProcessor @Inject constructor(
     private val useCase: GetCryptoDetailsUseCase,
     private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoDetailsAction, CryptoDetailsResult> {

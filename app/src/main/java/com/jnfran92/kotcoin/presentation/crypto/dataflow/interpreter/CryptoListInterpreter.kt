@@ -8,7 +8,7 @@ import io.reactivex.subjects.ReplaySubject
 import timber.log.Timber
 import javax.inject.Inject
 
-@ActivityRetainedScoped
+
 class CryptoListInterpreter @Inject constructor(){
 
     private val subject: ReplaySubject<CryptoListIntent> = ReplaySubject.create()

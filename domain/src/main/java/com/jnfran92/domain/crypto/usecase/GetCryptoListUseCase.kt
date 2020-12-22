@@ -17,7 +17,6 @@ import javax.inject.Singleton
 /**
  * Get data
  */
-@ActivityRetainedScoped
 class GetCryptoListUseCase @Inject constructor (
     private val repository: CryptoRepository) {
 

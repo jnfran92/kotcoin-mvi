@@ -14,17 +14,4 @@ import dagger.hilt.android.scopes.FragmentScoped
 @Module
 @InstallIn(FragmentComponent::class)
 object FragmentModule {
-
-    @Provides
-    @FragmentScoped
-    fun layoutManager(@ApplicationContext context: Context): RecyclerView.LayoutManager{
-
-        val orientation = context.resources.configuration.orientation
-        var layoutManager = GridLayoutManager(context, 1)
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            layoutManager = GridLayoutManager(context, 2)
-        }
-        return layoutManager
-    }
 }

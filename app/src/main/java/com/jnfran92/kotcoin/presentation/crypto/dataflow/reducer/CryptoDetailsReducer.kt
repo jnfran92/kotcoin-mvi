@@ -7,7 +7,7 @@ import io.reactivex.functions.BiFunction
 import timber.log.Timber
 import javax.inject.Inject
 
-@ActivityRetainedScoped
+
 class CryptoDetailsReducer @Inject constructor(): BiFunction<CryptoDetailsUIState, CryptoDetailsResult, CryptoDetailsUIState>{
 
     override fun apply(t1: CryptoDetailsUIState, t2: CryptoDetailsResult): CryptoDetailsUIState {

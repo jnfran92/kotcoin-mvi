@@ -8,10 +8,12 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoDetai
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoDetailsProcessor
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoDetailsReducer
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
+import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+@FragmentScoped
 class CryptoDetailsViewModel @ViewModelInject constructor(
     private val processor: CryptoDetailsProcessor,
     private val interpreter: CryptoDetailsInterpreter,
@@ -53,6 +55,7 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
     }
 
     override fun onCleared() {
+        Timber.d("onCleared: ")
         super.onCleared()
         compositeDisposable.dispose()
     }

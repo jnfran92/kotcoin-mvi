@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+
 class CryptoListViewModel @ViewModelInject constructor(
     private val processor: CryptoListProcessor,
     private val interpreter: CryptoListInterpreter,
