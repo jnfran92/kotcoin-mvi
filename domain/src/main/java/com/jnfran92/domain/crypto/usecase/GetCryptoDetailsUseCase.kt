@@ -24,8 +24,6 @@ class GetCryptoDetailsUseCase @Inject constructor(
     private fun buildUseCase(itemId: Int): Single<DomainCrypto>{
         Timber.d("buildUseCase: $itemId")
         return Single.just(DomainCrypto(-1,"Luka", "LK", "luka", 1.1, 5123123.21, "today bitches!"))
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
             .delay(3000, TimeUnit.MILLISECONDS)
     }
 

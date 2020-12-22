@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +38,7 @@ class CryptoDetailsFragment : Fragment() {
     /**
      * view model
      */
-    private val viewModel: CryptoDetailsViewModel by viewModels()
+    private val viewModel: CryptoDetailsViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -47,14 +49,15 @@ class CryptoDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        this.initViewElements()
+        this.initViewElements()
         this.initViewModel()
     }
 
-//    private fun initViewElements(){
-//        this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter
-//        this.binding.rvCryptoFragmentCryptoList.layoutManager = this.cryptoLayoutManager
-//    }
+    private fun initViewElements(){
+        Timber.d("initViewElements: ")
+//        (requireActivity() as AppCompatActivity).supportActionBar?.title = "LUKA"
+//        (requireActivity() as AppCompatActivity).supportActionBar?.
+    }
 
     private fun initViewModel() {
         Timber.d("initViewModel")

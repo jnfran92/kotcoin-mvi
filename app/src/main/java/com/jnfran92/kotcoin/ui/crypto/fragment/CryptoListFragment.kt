@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
+import com.jnfran92.kotcoin.ui.crypto.navigator.CryptoListNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,6 +30,8 @@ class CryptoListFragment : Fragment() {
     lateinit var cryptoListAdapter: CryptoListAdapter
     @Inject
     lateinit var cryptoLayoutManager: RecyclerView.LayoutManager
+    @Inject
+    lateinit var navigator: CryptoListNavigator
 
     /**
      * view binding
@@ -36,7 +41,7 @@ class CryptoListFragment : Fragment() {
     /**
      * view model
      */
-    private val viewModel: CryptoListViewModel by viewModels()
+    private val viewModel: CryptoListViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -52,8 +57,13 @@ class CryptoListFragment : Fragment() {
     }
 
     private fun initViewElements(){
+
+
+        this.cryptoListAdapter.setListener{
+            navigator.goToCryptoDetails(requireView(), it)
+        }
         this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter
-        this.binding.rvCryptoFragmentCryptoList.layoutManager = this.cryptoLayoutManager
+        this.binding.rvCryptoFragmentCryptoList.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initViewModel() {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.ViewCryptoItemBinding
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
@@ -22,15 +23,25 @@ class CryptoListAdapter @Inject constructor(
     @ActivityContext private val context: Context)
     :RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
 
+    /**
+     * Listener
+     */
+    private var onClickItemListener: ((UICrypto)-> Unit)? = null
+    fun setListener(listener: (UICrypto)-> Unit){onClickItemListener = listener}
 
+    /**
+     * Data list
+     */
     private var cryptoList: ArrayList<UICrypto> = ArrayList()
 
+    /**
+     * DataBinding
+     */
     lateinit var binding: ViewCryptoItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
         binding = ViewCryptoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val view = binding.root
-        return CryptoViewHolder(view)
+        return CryptoViewHolder(binding.root)
     }
 
     override fun getItemCount(): Int {
@@ -55,7 +66,9 @@ class CryptoListAdapter @Inject constructor(
                 crypto.lastUpdated
         holder.itemLastUpdate.text = lastUpdate
 
+        holder.container.setOnClickListener { onClickItemListener?.invoke(crypto) }
     }
+
 
     fun setData(data: List<UICrypto>){
         this.cryptoList.clear()
@@ -69,5 +82,6 @@ class CryptoListAdapter @Inject constructor(
         val itemPrice :TextView = itemView.tv_cryptoItem_price
         val itemMarketCap :TextView = itemView.tv_cryptoItem_markertCap
         val itemLastUpdate: TextView = itemView.tv_cryptoItem_lastUpdate
+        val container: MaterialCardView = itemView.mc_cryptoItem_container
     }
 }

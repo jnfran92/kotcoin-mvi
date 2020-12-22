@@ -8,6 +8,8 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,6 +32,8 @@ class CryptoListProcessor @Inject constructor(
                         .cast(CryptoListResult::class.java)
                         .startWith(CryptoListResult.GetCryptoListResult.InProgress)
                         .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
                 }
             }
         }

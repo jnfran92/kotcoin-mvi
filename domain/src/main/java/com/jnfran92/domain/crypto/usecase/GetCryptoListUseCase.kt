@@ -23,8 +23,6 @@ class GetCryptoListUseCase @Inject constructor (
 
     private fun buildUseCase(): Single<List<DomainCrypto>>{
         return this.repository.getCryptoList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
 //            .delay(3000, TimeUnit.MILLISECONDS)
     }
 
