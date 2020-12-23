@@ -10,6 +10,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -74,13 +76,24 @@ class CryptoDetailsFragment : Fragment() {
                 binding.tvCryptoDetailsFragmentSymbol.text = "-"
             }
             CryptoDetailsUIState.ShowLoadingView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.VISIBLE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
             }
             CryptoDetailsUIState.ShowErrorRetryView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.lyDataContainer.visibility = View.GONE
+                binding.lyErrorRetryContainer.container.visibility = View.VISIBLE
+
+                binding.lyErrorRetryContainer.btErrorRetryViewGenericRetry.setOnClickListener {
+                    Timber.d("render: onClickListener")
+                    viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.cryptoId))
+                }
             }
             is CryptoDetailsUIState.ShowDataView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+
+                binding.lyDataContainer.visibility = View.VISIBLE
+                binding.lyErrorRetryContainer.container.visibility = View.GONE
+
                 binding.tvCryptoDetailsFragmentName.text = uiState.data.name
                 binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
                 binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()

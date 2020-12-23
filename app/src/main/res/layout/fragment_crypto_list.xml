@@ -7,14 +7,28 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/pb_cryptoFragment_loading"
+        android:id="@+id/pb_loading"
         layout="@layout/view_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cryptoFragment_cryptoList"
+    <LinearLayout
+        android:id="@+id/ly_data_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkBack" />
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cryptoFragment_cryptoList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/darkBack" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/ly_error_retry_container"
+        layout="@layout/view_generic_error_retry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

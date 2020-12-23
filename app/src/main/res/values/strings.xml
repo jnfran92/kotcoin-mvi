@@ -4,4 +4,6 @@
     <string name="updated_at">Updated at</string>
     <string name="price">Price:</string>
     <string name="market_cap">Market Cap:</string>
+    <string name="error_loading_data">Something has gone wrong, please retry.</string>
+    <string name="retry">Reintentar</string>
 </resources>

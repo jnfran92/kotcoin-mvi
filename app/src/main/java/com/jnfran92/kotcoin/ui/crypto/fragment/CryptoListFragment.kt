@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
@@ -75,24 +76,39 @@ class CryptoListFragment : Fragment() {
 
 
     private fun render(uiState: CryptoListUIState){
-        Timber.d("render: ")
+        Timber.d("render: $uiState")
         when(uiState){
-            CryptoListUIState.ShowDefaultView -> {this.cryptoListAdapter.setData(arrayListOf(
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-            ))}
+            CryptoListUIState.ShowDefaultView -> {
+                binding.lyDataContainer.visibility = View.VISIBLE
+                this.cryptoListAdapter.setData(arrayListOf(
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
+                ))
+            }
             CryptoListUIState.ShowLoadingView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.VISIBLE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
             }
             CryptoListUIState.ShowErrorRetryView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+
+                binding.lyDataContainer.visibility = View.GONE
+                binding.lyErrorRetryContainer.container.visibility = View.VISIBLE
+
+                binding.lyErrorRetryContainer.btErrorRetryViewGenericRetry.setOnClickListener {
+                    Timber.d("render: onClickListener")
+                    viewModel.rx(CryptoListIntent.GetCryptoListIntent)
+                }
             }
             is CryptoListUIState.ShowDataView -> {
-                binding.pbCryptoFragmentLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+
+                binding.lyDataContainer.visibility = View.VISIBLE
+                binding.lyErrorRetryContainer.container.visibility = View.GONE
+
                 this.cryptoListAdapter.setData(uiState.data)
             }
         }

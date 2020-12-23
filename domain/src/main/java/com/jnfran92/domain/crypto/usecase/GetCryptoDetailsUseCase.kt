@@ -23,7 +23,6 @@ class GetCryptoDetailsUseCase @Inject constructor(
     private fun buildUseCase(itemId: Int): Single<DomainCrypto>{
         Timber.d("buildUseCase: $itemId")
         return Single.just(DomainCrypto(-1,"Luka", "LK", "luka", 1.1, 5123123.21, "today bitches!"))
-            .delay(3000, TimeUnit.MILLISECONDS)
     }
 
     fun toSingle(itemId: Int): Single<DomainCrypto>{
