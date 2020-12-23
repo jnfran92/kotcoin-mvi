@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class CryptoListNavigator @Inject constructor(){
 
     fun goToCryptoDetails(view: View, item: UICrypto){
-        val direction = CryptoListFragmentDirections.actionCryptoListFragmentToCryptoDetailsFragment()
+        val direction = CryptoListFragmentDirections.actionCryptoListFragmentToCryptoDetailsFragment(item)
         view.findNavController().navigate(direction)
     }
 }

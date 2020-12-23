@@ -25,6 +25,11 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
     private val compositeDisposable = CompositeDisposable()
 
     /**
+     * input parameter
+     */
+    var itemId: Int? = null
+
+    /**
      * TX: transmit UI events
      */
     val tx: MutableLiveData<CryptoDetailsUIState> = MutableLiveData()
@@ -52,6 +57,9 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
                 .subscribeOn(Schedulers.io())
                 .subscribe(tx::postValue) { Timber.d("initDataFlow:  error $it") }
         )
+        // lazy init
+        val defaultParam = -1
+        rx(CryptoDetailsIntent.GetCryptoDetailsIntent(itemId ?: defaultParam))
     }
 
     override fun onCleared() {

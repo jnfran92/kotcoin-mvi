@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
@@ -40,6 +41,11 @@ class CryptoDetailsFragment : Fragment() {
      */
     private val viewModel: CryptoDetailsViewModel by viewModels()
 
+    /**
+     * input args
+     */
+    val args: CryptoDetailsFragmentArgs by navArgs()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         Timber.d("onCreateView: ")
@@ -55,14 +61,12 @@ class CryptoDetailsFragment : Fragment() {
 
     private fun initViewElements(){
         Timber.d("initViewElements: ")
-//        (requireActivity() as AppCompatActivity).supportActionBar?.title = "LUKA"
-//        (requireActivity() as AppCompatActivity).supportActionBar?.
     }
 
     private fun initViewModel() {
         Timber.d("initViewModel")
+        this.viewModel.itemId = args.CryptoItem.cryptoId
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
-        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(1))
     }
 
 

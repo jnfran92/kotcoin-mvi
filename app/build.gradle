@@ -10,6 +10,8 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
+
 android {
     compileSdkVersion 30
     defaultConfig {
@@ -44,6 +46,10 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+
+    androidExtensions {
+        experimental = true
     }
 }
 

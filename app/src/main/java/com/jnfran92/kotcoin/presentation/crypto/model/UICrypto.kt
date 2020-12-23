@@ -1,5 +1,9 @@
 package com.jnfran92.kotcoin.presentation.crypto.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UICrypto(
     val cryptoId:Int,
     val name:String,
@@ -8,4 +12,4 @@ data class UICrypto(
     val price:Double,
     val marketCap:Double,
     val lastUpdated:String
-)
+) : Parcelable
