@@ -6,23 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
-import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
-import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
-import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
-import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Fragment for displaying Crypto List
@@ -44,7 +35,7 @@ class CryptoDetailsFragment : Fragment() {
     /**
      * input args
      */
-    val args: CryptoDetailsFragmentArgs by navArgs()
+    private val args: CryptoDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -61,6 +52,7 @@ class CryptoDetailsFragment : Fragment() {
 
     private fun initViewElements(){
         Timber.d("initViewElements: ")
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = args.CryptoItem.name
     }
 
     private fun initViewModel() {
