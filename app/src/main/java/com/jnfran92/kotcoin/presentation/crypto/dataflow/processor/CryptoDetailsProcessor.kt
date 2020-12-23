@@ -2,10 +2,8 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.processor
 
 import com.jnfran92.domain.crypto.usecase.GetCryptoDetailsUseCase
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoDetailsAction
-import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
-import dagger.hilt.android.scopes.ActivityRetainedScoped
-import dagger.hilt.android.scopes.FragmentScoped
+import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer

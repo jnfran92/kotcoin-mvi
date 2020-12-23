@@ -2,9 +2,10 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.processor
 
 import com.jnfran92.domain.crypto.usecase.GetCryptoListUseCase
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoListAction
-import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReducer
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
+import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer

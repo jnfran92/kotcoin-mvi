@@ -5,10 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoDetailsInterpreter
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoListInterpreter
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoDetailsProcessor
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoListProcessor
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoDetailsReducer
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReducer
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
+import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import dagger.hilt.android.scopes.FragmentScoped
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -48,11 +55,9 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
 
     private fun initDataFlow() {
         Timber.d("initDataFlow: ")
+        val dataFlow = interpreter connectTo processor connectTo reducer
         compositeDisposable.add(
-            interpreter
-                .toObservable()
-                .compose(processor)
-                .scan(CryptoDetailsUIState.ShowDefaultView, reducer)
+            dataFlow
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(tx::postValue) { Timber.d("initDataFlow:  error $it") }
@@ -67,4 +72,20 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
         super.onCleared()
         compositeDisposable.dispose()
     }
+
+
+    /**
+     * infix helper: interpreter to processor
+     */
+    private infix fun CryptoDetailsInterpreter.connectTo(processor: CryptoDetailsProcessor): Observable<CryptoDetailsResult> {
+        return this.toObservable().compose(processor)
+    }
+
+    /**
+     * infix helper: processor to reducer
+     */
+    private infix fun Observable<CryptoDetailsResult>.connectTo(reducer: CryptoDetailsReducer): Observable<CryptoDetailsUIState> {
+        return this.scan(CryptoDetailsUIState.ShowDefaultView ,reducer)
+    }
+
 }
