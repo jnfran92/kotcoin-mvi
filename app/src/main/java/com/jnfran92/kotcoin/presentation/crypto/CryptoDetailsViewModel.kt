@@ -5,15 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoDetailsInterpreter
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter.CryptoListInterpreter
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoDetailsProcessor
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoListProcessor
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoDetailsReducer
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReducer
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

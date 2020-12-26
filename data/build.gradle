@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
 
@@ -68,6 +70,14 @@ dependencies {
 
     // Timber logs
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Room
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-ktx:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 
     // module dependency data -> domain
     implementation project(':domain')

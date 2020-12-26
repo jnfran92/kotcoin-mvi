@@ -12,6 +12,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
+
 android {
     compileSdkVersion 30
     defaultConfig {
@@ -119,7 +120,6 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha04"
-
 
     // module dependency presentation(app) -> domain
     implementation project(':domain')
