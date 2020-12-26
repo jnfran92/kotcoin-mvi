@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -30,15 +31,16 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
                     call: Call<DefaultApiRequest<Crypto>>,
                     t: Throwable
                 ) {
-                    emitter?.onError(NetworkErrorException("Failed to retrieve data."))
+                    emitter.onError(NetworkErrorException("Failed to retrieve data."))
                 }
 
                 override fun onResponse(
                     call: Call<DefaultApiRequest<Crypto>>,
-                    response: Response<DefaultApiRequest<Crypto>>
-                ) {
+                    response: Response<DefaultApiRequest<Crypto>>) {
+                    Timber.d("onResponse: response $response")
                     val cryptoEntityList: ArrayList<Crypto> =
                         response.body()?.cryptoEntityList ?: ArrayList()
+                    Timber.d("onResponse: $cryptoEntityList")
                     emitter.onSuccess(cryptoEntityList)
                 }
             })
