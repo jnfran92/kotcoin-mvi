@@ -2,10 +2,10 @@ package com.jnfran92.data.crypto.datasource
 
 import android.content.Context
 import com.jnfran92.data.crypto.datasource.crypto.CacheCryptoDataSource
-import com.jnfran92.data.crypto.datasource.crypto.CloudCryptoDataSource
+import com.jnfran92.data.crypto.datasource.crypto.RemoteCryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.CryptoDataSource
-import com.jnfran92.data.crypto.supplier.cache.CryptoCache
-import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,14 +16,14 @@ import javax.inject.Singleton
 @Singleton
 class CryptoDataSourceFactory @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val cryptoApi: CryptoApi,
+    private val cryptoRemote: CryptoRemote,
     private val cryptoCache: CryptoCache){
 
     /**
      * Create a Data source for retrieving data from the Could REST API
      */
-    fun createCloudDataSource(): CryptoDataSource{
-        return CloudCryptoDataSource(this.cryptoApi)
+    fun createRemoteDataSource(): CryptoDataSource{
+        return RemoteCryptoDataSource(this.cryptoRemote)
     }
 
     /**

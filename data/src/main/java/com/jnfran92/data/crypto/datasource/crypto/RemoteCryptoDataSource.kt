@@ -1,14 +1,13 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
 import com.jnfran92.data.crypto.model.crypto.Crypto
-import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
-import io.reactivex.Observable
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
 import io.reactivex.Single
 
 /**
- * Data source for [CryptoApi]
+ * Data source for [CryptoRemote]
  */
-class CloudCryptoDataSource(private val cryptoApi: CryptoApi):CryptoDataSource {
+class RemoteCryptoDataSource(private val cryptoRemote: CryptoRemote):CryptoDataSource {
 
     override fun getCryptoById(): Single<Crypto> {
         throw NotImplementedError("Not used for this project, " +
@@ -16,6 +15,6 @@ class CloudCryptoDataSource(private val cryptoApi: CryptoApi):CryptoDataSource {
     }
 
     override fun getCryptoList(): Single<List<Crypto>> {
-        return this.cryptoApi.getCryptoList()
+        return this.cryptoRemote.getCryptoList()
     }
 }

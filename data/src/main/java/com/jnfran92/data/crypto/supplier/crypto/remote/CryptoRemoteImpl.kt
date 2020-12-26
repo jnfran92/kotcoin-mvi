@@ -1,4 +1,4 @@
-package com.jnfran92.data.crypto.supplier.cloud
+package com.jnfran92.data.crypto.supplier.crypto.remote
 
 import android.accounts.NetworkErrorException
 import com.jnfran92.data.crypto.model.api.DefaultApiRequest
@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * REST API Implementation for request Crypto Entities from Cloud
  */
-class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoApi {
+class CryptoRemoteImpl @Inject constructor(private val retrofit: Retrofit):CryptoRemote {
 
     private val cryptoApi = this.retrofit.create(CryptoRetrofitService::class.java)
 
@@ -39,7 +39,7 @@ class CryptoApiImpl @Inject constructor(private val retrofit: Retrofit):CryptoAp
                     response: Response<DefaultApiRequest<Crypto>>) {
                     Timber.d("onResponse: response $response")
                     val cryptoEntityList: ArrayList<Crypto> =
-                        response.body()?.cryptoEntityList ?: ArrayList()
+                        response.body()?.data ?: ArrayList()
                     Timber.d("onResponse: $cryptoEntityList")
                     emitter.onSuccess(cryptoEntityList)
                 }

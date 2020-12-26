@@ -1,8 +1,7 @@
-package com.jnfran92.data.crypto.supplier.cloud
+package com.jnfran92.data.crypto.supplier.crypto.remote
 
 import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.api.DefaultApiRequest
-import com.jnfran92.data.crypto.model.crypto.Quote
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

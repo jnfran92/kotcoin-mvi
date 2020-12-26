@@ -2,8 +2,7 @@ package com.jnfran92.data.crypto.datasource.crypto
 
 import android.content.Context
 import com.jnfran92.data.crypto.model.crypto.Crypto
-import com.jnfran92.data.crypto.supplier.cache.CryptoCache
-import io.reactivex.Observable
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
 import io.reactivex.Single
 
 /**

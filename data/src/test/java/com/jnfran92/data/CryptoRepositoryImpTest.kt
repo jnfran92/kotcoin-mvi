@@ -2,7 +2,7 @@ package com.jnfran92.data
 
 import com.jnfran92.data.crypto.CryptoRepositoryImp
 import com.jnfran92.data.crypto.datasource.CryptoDataSourceFactory
-import com.jnfran92.data.crypto.datasource.crypto.CloudCryptoDataSource
+import com.jnfran92.data.crypto.datasource.crypto.RemoteCryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.CryptoDataSource
 import org.junit.Before
 import org.junit.Test
@@ -21,18 +21,18 @@ class CryptoRepositoryImpTest {
     @Before
     fun setUp() {
         mockCryptoDataSourceFactory = mock(CryptoDataSourceFactory::class.java)
-        mockCryptoDataSource = mock(CloudCryptoDataSource::class.java)
+        mockCryptoDataSource = mock(RemoteCryptoDataSource::class.java)
 
         cryptoRepository = CryptoRepositoryImp(
             mockCryptoDataSourceFactory
         )
 
-        given(mockCryptoDataSourceFactory.createCloudDataSource()).willReturn(mockCryptoDataSource)
+        given(mockCryptoDataSourceFactory.createRemoteDataSource()).willReturn(mockCryptoDataSource)
     }
 
     @Test
     fun getCryptoListAlwaysFromCloud() {
         cryptoRepository.getCryptoList()
-        verify(mockCryptoDataSourceFactory).createCloudDataSource()
+        verify(mockCryptoDataSourceFactory).createRemoteDataSource()
     }
 }

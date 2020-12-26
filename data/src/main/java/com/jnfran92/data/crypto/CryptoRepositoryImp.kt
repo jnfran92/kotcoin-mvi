@@ -22,7 +22,7 @@ class CryptoRepositoryImp @Inject constructor(
      * Always get Crypto data(List) from the Cloud.
      */
     override fun getCryptoList(): Single<List<DomainCrypto>> {
-        val cloudDataSource = this.cryptoDataSourceFactory.createCloudDataSource()
+        val cloudDataSource = this.cryptoDataSourceFactory.createRemoteDataSource()
         return cloudDataSource.getCryptoList().map { with(mapper){ it.toDomainModel()}}
     }
 }

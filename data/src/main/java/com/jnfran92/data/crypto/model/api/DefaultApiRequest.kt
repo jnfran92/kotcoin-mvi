@@ -8,6 +8,6 @@ import com.google.gson.annotations.SerializedName
  */
 data class DefaultApiRequest<T>(
     @SerializedName("status") var status: ApiRequestStatus,
-    @SerializedName("data") var cryptoEntityList: ArrayList<T>
+    @SerializedName("data") var data: ArrayList<T>
 )
 

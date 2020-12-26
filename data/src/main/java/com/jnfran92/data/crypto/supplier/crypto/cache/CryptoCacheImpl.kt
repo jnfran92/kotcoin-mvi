@@ -1,4 +1,4 @@
-package com.jnfran92.data.crypto.supplier.cache
+package com.jnfran92.data.crypto.supplier.crypto.cache
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

@@ -2,10 +2,10 @@ package com.jnfran92.kotcoin.di.module
 
 import com.google.gson.GsonBuilder
 import com.jnfran92.data.crypto.CryptoRepositoryImp
-import com.jnfran92.data.crypto.supplier.cache.CryptoCache
-import com.jnfran92.data.crypto.supplier.cache.CryptoCacheImpl
-import com.jnfran92.data.crypto.supplier.cloud.CryptoApi
-import com.jnfran92.data.crypto.supplier.cloud.CryptoApiImpl
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheImpl
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteImpl
 import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
@@ -16,8 +16,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -38,7 +36,7 @@ object ApplicationModule {
     }
 
     @Provides @Singleton
-    fun cryptoApi(cryptoApi: CryptoApiImpl): CryptoApi {
+    fun cryptoApi(cryptoApi: CryptoRemoteImpl): CryptoRemote {
         return cryptoApi
     }
 
