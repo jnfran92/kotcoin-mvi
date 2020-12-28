@@ -25,7 +25,7 @@ class CryptoRemoteImpl @Inject constructor(private val retrofit: Retrofit):Crypt
     override fun getCryptoList(): Single<List<Crypto>> {
         return Single.create { emitter ->
 
-            val call: Call<DefaultApiRequest<Crypto>> = cryptoApi.requestCryptoList(10)
+            val call: Call<DefaultApiRequest<Crypto>> = cryptoApi.requestCryptoList(30)
             call.enqueue(object : Callback<DefaultApiRequest<Crypto>> {
                 override fun onFailure(
                     call: Call<DefaultApiRequest<Crypto>>,

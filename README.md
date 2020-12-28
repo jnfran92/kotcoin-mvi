@@ -5,7 +5,7 @@ Crypto matters!
 <img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
 
 
-Android Application MVC-based and written all in Kotlin for retrieving 10 most capitalized 
+Android Application MVI-based and written all in Kotlin for retrieving 10 most capitalized 
 Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note: a free API Key is needed).
 
 
