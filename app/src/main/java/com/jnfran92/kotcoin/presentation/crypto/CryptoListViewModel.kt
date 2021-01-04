@@ -13,6 +13,7 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxkotlin.plusAssign
 import timber.log.Timber
 
 
@@ -47,7 +48,7 @@ class CryptoListViewModel @ViewModelInject constructor(
         Timber.d("initDataFlow: ")
         val dataFlow = interpreter flowTo processor flowTo reducer flowOn Schedulers.io()
         compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
-        rx(CryptoListIntent.GetCryptoListIntent)  //lazy init
+        rx(CryptoListIntent.GetCryptoListIntent)  //live init
     }
 
     override fun onCleared() {
