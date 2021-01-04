@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 class CryptoDetailsProcessor @Inject constructor(
-    private val useCase: GetCryptoDetailsUseCase,
+    private val getCryptoDetailsUseCase: GetCryptoDetailsUseCase,
     private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoDetailsAction, CryptoDetailsResult> {
 
     override fun apply(upstream: Observable<CryptoDetailsAction>): ObservableSource<CryptoDetailsResult> {
@@ -22,19 +22,22 @@ class CryptoDetailsProcessor @Inject constructor(
         return upstream.flatMap { action ->
             Timber.d("apply: action $action")
             when(action){
-                is CryptoDetailsAction.GetCryptoDetails -> {
-                    useCase
-                        .toSingle(action.itemId)
-                        .map (toUIMapper::transform)
-                        .toObservable()
-                        .map(CryptoDetailsResult.GetCryptoDetailsResult::OnSuccess)
-                        .cast(CryptoDetailsResult::class.java)
-                        .startWith(CryptoDetailsResult.GetCryptoDetailsResult.InProgress)
-                        .onErrorReturn(CryptoDetailsResult.GetCryptoDetailsResult::OnError)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                }
+                is CryptoDetailsAction.GetCryptoDetails -> buildGetCryptoDetailsUseCase(action.itemId)
             }
         }
+    }
+
+
+    private fun buildGetCryptoDetailsUseCase(itemId: Int): Observable<CryptoDetailsResult>? {
+        return getCryptoDetailsUseCase
+            .toSingle(itemId)
+            .map(toUIMapper::transform)
+            .toObservable()
+            .map(CryptoDetailsResult.GetCryptoDetailsResult::OnSuccess)
+            .cast(CryptoDetailsResult::class.java)
+            .startWith(CryptoDetailsResult.GetCryptoDetailsResult.InProgress)
+            .onErrorReturn(CryptoDetailsResult.GetCryptoDetailsResult::OnError)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

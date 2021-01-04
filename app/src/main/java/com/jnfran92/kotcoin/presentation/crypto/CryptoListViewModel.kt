@@ -26,12 +26,12 @@ class CryptoListViewModel @ViewModelInject constructor(
     private val compositeDisposable = CompositeDisposable()
 
     /**
-     * TX: transmit UI events
+     * TX: transmit UI events to View
      */
     val tx: MutableLiveData<CryptoListUIState> = MutableLiveData()
 
     /**
-     * RX: receive User intents
+     * RX: receive User intents from View
      */
     fun rx(intent: CryptoListIntent){
         Timber.d("rx: $intent")
