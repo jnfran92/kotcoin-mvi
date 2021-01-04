@@ -10,6 +10,7 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.reducer.CryptoListReduc
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -44,15 +45,9 @@ class CryptoListViewModel @ViewModelInject constructor(
 
     private fun initDataFlow() {
         Timber.d("initDataFlow: ")
-        val dataFlow = interpreter connectTo processor connectTo reducer
-        compositeDisposable.add(
-            dataFlow
-                .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-                .subscribe(tx::postValue) { Timber.d("initDataFlow:  error $it") }
-        )
-        //lazy init
-        rx(CryptoListIntent.GetCryptoListIntent)
+        val dataFlow = interpreter flowTo processor flowTo reducer flowOn Schedulers.io()
+        compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
+        rx(CryptoListIntent.GetCryptoListIntent)  //lazy init
     }
 
     override fun onCleared() {
@@ -63,14 +58,24 @@ class CryptoListViewModel @ViewModelInject constructor(
     /**
      * infix helper: interpreter to processor
      */
-    private infix fun CryptoListInterpreter.connectTo(processor: CryptoListProcessor): Observable<CryptoListResult> {
+    private infix fun CryptoListInterpreter.flowTo(processor: CryptoListProcessor):
+            Observable<CryptoListResult> {
         return this.toObservable().compose(processor)
     }
 
     /**
      * infix helper: processor to reducer
      */
-    private infix fun Observable<CryptoListResult>.connectTo(reducer: CryptoListReducer): Observable<CryptoListUIState>{
+    private infix fun Observable<CryptoListResult>.flowTo(reducer: CryptoListReducer):
+            Observable<CryptoListUIState>{
         return this.scan(CryptoListUIState.ShowDefaultView ,reducer)
+    }
+
+    /**
+     * infix helper: processor to reducer
+     */
+    private infix fun Observable<CryptoListUIState>.flowOn(scheduler: Scheduler):
+            Observable<CryptoListUIState>{
+        return this.observeOn(scheduler).subscribeOn(scheduler)
     }
 }
