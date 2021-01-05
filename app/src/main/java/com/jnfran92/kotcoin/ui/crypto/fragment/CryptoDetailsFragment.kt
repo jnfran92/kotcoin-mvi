@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

@@ -48,7 +48,7 @@ class CryptoListViewModel @ViewModelInject constructor(
         Timber.d("initDataFlow: ")
         val dataFlow = interpreter flowTo processor flowTo reducer flowOn Schedulers.io()
         compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
-        rx(CryptoListIntent.GetCryptoListIntent)  //live init
+        rx(CryptoListIntent.GetCryptoListIntent)  // lively init
     }
 
     override fun onCleared() {
