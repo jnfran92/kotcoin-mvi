@@ -19,7 +19,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Using CLEAN structure modules: data + domain + presentation(app) ✅
 - Adding Use Cases ✅
 - Migrating to Hilt from Dagger ✅
-- Adding Workers for saving daily price
+- Adding Workers for saving daily price ✅
 - Adding Room for local storage
 - Adding Dynamic Modules
 - Adding Compose()
