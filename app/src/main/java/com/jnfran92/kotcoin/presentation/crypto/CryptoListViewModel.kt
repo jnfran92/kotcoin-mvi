@@ -18,7 +18,8 @@ import timber.log.Timber
 
 
 /**
- * WRONG DATA
+ * View Model for handling UI interactions and present data of Crypto objects
+ * MVI formatted! data flow
  */
 class CryptoListViewModel @ViewModelInject constructor(
     private val processor: CryptoListProcessor,
