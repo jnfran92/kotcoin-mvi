@@ -19,7 +19,7 @@ import timber.log.Timber
 
 /**
  * View Model for handling UI interactions and present data of Crypto detail object.
- * MVI formatted!
+ * MVI formatted! data flow
  */
 @FragmentScoped
 class CryptoDetailsViewModel @ViewModelInject constructor(
