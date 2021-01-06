@@ -17,6 +17,9 @@ import io.reactivex.rxkotlin.plusAssign
 import timber.log.Timber
 
 
+/**
+ * View Model for showing Crypto objects
+ */
 class CryptoListViewModel @ViewModelInject constructor(
     private val processor: CryptoListProcessor,
     private val interpreter: CryptoListInterpreter,
