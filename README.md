@@ -31,7 +31,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 ## Requirements
 
 - Hilt Dagger 🤔
-- Retrofit
+- Retrofit 🤔
 - Gson/Kotson
 - AndroidRx
 - Mockito (Just few tests)
