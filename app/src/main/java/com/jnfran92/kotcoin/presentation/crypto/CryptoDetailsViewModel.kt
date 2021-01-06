@@ -18,7 +18,8 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 /**
- * WRONG DATA
+ * View Model for handling UI interactions and present data of Crypto detail object.
+ * MVI formatted!
  */
 @FragmentScoped
 class CryptoDetailsViewModel @ViewModelInject constructor(
