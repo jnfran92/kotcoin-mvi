@@ -11,7 +11,9 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsRes
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
 import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -50,13 +52,8 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
 
     private fun initDataFlow() {
         Timber.d("initDataFlow: ")
-        val dataFlow = interpreter connectTo processor connectTo reducer
-        compositeDisposable.add(
-            dataFlow
-                .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-                .subscribe(tx::postValue) { Timber.d("initDataFlow:  error $it") }
-        )
+        val dataFlow = interpreter connectTo processor connectTo reducer flowOn Schedulers.io()
+        compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
         // lazy init
         val defaultParam = -1
         rx(CryptoDetailsIntent.GetCryptoDetailsIntent(itemId ?: defaultParam))
@@ -81,6 +78,14 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
      */
     private infix fun Observable<CryptoDetailsResult>.connectTo(reducer: CryptoDetailsReducer): Observable<CryptoDetailsUIState> {
         return this.scan(CryptoDetailsUIState.ShowDefaultView ,reducer)
+    }
+
+    /**
+     * infix helper: processor to reducer
+     */
+    private infix fun Observable<CryptoDetailsUIState>.flowOn(scheduler: Scheduler):
+            Observable<CryptoDetailsUIState>{
+        return this.observeOn(scheduler).subscribeOn(scheduler)
     }
 
 }
