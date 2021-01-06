@@ -19,22 +19,22 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Using CLEAN structure modules: data + domain + presentation(app) ✅
 - Adding Use Cases ✅
 - Migrating to Hilt from Dagger ✅
-- Adding Workers for saving daily price ✅
-- Adding Room for local storage ✅
-- Adding Dynamic Modules ✅
-- Adding Compose() ✅
+- Adding Workers for saving daily price 
+- Adding Room for local storage 
+- Adding Dynamic Modules 
+- Adding Compose() 
 - Adding Kotlin Flow! 🤔
-- Adding Tensorflow Lite! ✅
-- Adding Lottie for animations ✅ ✅
-- Adding MotionLayout for on-boardings ✅ ✅
+- Adding Tensorflow Lite! 
+- Adding Lottie for animations 
+- Adding MotionLayout for on-boardings 
 
 ## Requirements
 
-- Hilt Dagger 🤔
-- Retrofit 🤔
-- Gson/Kotson 🤔
-- AndroidRx 🤔
-- Mockito (Just few tests) 🤔
+- Hilt Dagger 
+- Retrofit 
+- Gson/Kotson 
+- AndroidRx 
+- Mockito (Just few tests) 
 
 
 ## About Kotcoin
