@@ -18,7 +18,7 @@ import timber.log.Timber
 
 
 /**
- * View Model for showing Crypto objects
+ * View Model for handling UI interactions and present data of Crypto objects
  */
 class CryptoListViewModel @ViewModelInject constructor(
     private val processor: CryptoListProcessor,
