@@ -33,8 +33,8 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Hilt Dagger 🤔
 - Retrofit 🤔
 - Gson/Kotson 🤔
-- AndroidRx 
-- Mockito (Just few tests)
+- AndroidRx 🤔
+- Mockito (Just few tests) 🤔
 
 
 ## About Kotcoin
