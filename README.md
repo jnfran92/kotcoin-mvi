@@ -30,7 +30,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 
 ## Requirements
 
-- Hilt Dagger
+- Hilt Dagger 🤔
 - Retrofit
 - Gson/Kotson
 - AndroidRx
