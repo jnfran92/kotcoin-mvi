@@ -38,6 +38,6 @@ class CryptoDetailsProcessor @Inject constructor(
             .startWith(CryptoDetailsResult.GetCryptoDetailsResult.InProgress)
             .onErrorReturn(CryptoDetailsResult.GetCryptoDetailsResult::OnError)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(Schedulers.io())
     }
 }

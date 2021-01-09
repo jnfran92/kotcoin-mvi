@@ -1,11 +1,15 @@
 package com.jnfran92.kotcoin.di.module
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.jnfran92.data.crypto.CryptoRepositoryImp
 import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
 import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheImpl
+import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteImpl
+import com.jnfran92.data.crypto.supplier.db.AppDatabase
 import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
@@ -16,6 +20,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -80,5 +85,18 @@ object ApplicationModule {
     @Provides @Singleton
     fun observerThread(uiThread: UIThread): ObserverThread {
         return uiThread
+    }
+
+    @Provides @Singleton
+    fun appDatabase(@ApplicationContext context: Context):AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "app-database"
+        ).build()
+    }
+
+    @Provides @Singleton
+    fun cryptoDao(appDatabase: AppDatabase): CryptoDao{
+        return appDatabase.cryptoDao()
     }
 }

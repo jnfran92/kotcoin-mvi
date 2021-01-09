@@ -34,7 +34,7 @@ class CryptoListProcessor @Inject constructor(
                         .startWith(CryptoListResult.GetCryptoListResult.InProgress)
                         .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
                         .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .observeOn(Schedulers.io())
                 }
             }
         }

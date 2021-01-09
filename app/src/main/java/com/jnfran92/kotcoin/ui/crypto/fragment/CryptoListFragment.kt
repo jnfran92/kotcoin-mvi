@@ -92,7 +92,8 @@ class CryptoListFragment : Fragment() {
             CryptoListUIState.ShowLoadingView -> {
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
             }
-            CryptoListUIState.ShowErrorRetryView -> {
+            is CryptoListUIState.ShowErrorRetryView -> {
+                Timber.d("render: on Error: ${uiState.t}")
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
 
                 binding.lyDataContainer.visibility = View.GONE

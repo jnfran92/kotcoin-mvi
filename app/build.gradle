@@ -32,7 +32,7 @@ android {
 
     println("API TOKEN:" + System.getenv('KOTCOIN_API_TOKEN'))
     buildTypes.each {
-        it.buildConfigField 'String', 'API_TOKEN', System.getenv('KOTCOIN_API_TOKEN') ?: "\"deafult_key\""
+        it.buildConfigField 'String', 'API_TOKEN', System.getenv('KOTCOIN_API_TOKEN') ?: ""
     }
 
     kotlinOptions {
@@ -121,10 +121,18 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha04"
 
+    // Room
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-ktx:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+
     // module dependency presentation(app) -> domain
     implementation project(':domain')
     implementation project(':data')
-
 }
 
 kapt {

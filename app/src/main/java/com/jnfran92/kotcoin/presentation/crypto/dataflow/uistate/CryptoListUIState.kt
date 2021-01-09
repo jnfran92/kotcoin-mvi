@@ -8,7 +8,7 @@ sealed class CryptoListUIState{
 
     object ShowLoadingView: CryptoListUIState()
 
-    object ShowErrorRetryView: CryptoListUIState()
+    class ShowErrorRetryView(val t: Throwable): CryptoListUIState()
 
     class ShowDataView(val data: List<UICrypto>): CryptoListUIState()
 }

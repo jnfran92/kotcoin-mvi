@@ -8,15 +8,17 @@ import javax.inject.Singleton
 @Singleton
 class CryptoToDomainMapper @Inject constructor(){
 
-    fun Crypto.toDomainModel(): DomainCrypto{
-        return DomainCrypto(cryptoId = this.cryptoId,
-            name = this.name,
-            symbol = this.symbol,
-            slug = this.slug,
-            marketCap = this.quoteEntity.usd.marketCap,
-            lastUpdated = this.quoteEntity.usd.lastUpdated,
-            price = this.quoteEntity.usd.price)
+    private fun transform(item: Crypto): DomainCrypto{
+        return DomainCrypto(
+            cryptoId = item.cryptoId,
+            name = item.name,
+            symbol = item.symbol,
+            slug = item.slug,
+            marketCap = item.quoteEntity.usd.marketCap,
+            lastUpdated = item.quoteEntity.usd.lastUpdated,
+            price = item.quoteEntity.usd.price
+        )
     }
 
-    fun List<Crypto>.toDomainModel(): List<DomainCrypto> = this.map{it.toDomainModel()}
+    fun transform(items: List<Crypto>): List<DomainCrypto> = items.map(::transform)
 }
