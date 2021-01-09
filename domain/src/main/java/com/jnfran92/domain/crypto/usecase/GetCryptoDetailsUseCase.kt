@@ -20,12 +20,12 @@ import javax.inject.Singleton
 class GetCryptoDetailsUseCase @Inject constructor(
     private val repository: CryptoRepository) {
 
-    private fun buildUseCase(itemId: Int): Single<DomainCrypto>{
+    private fun buildUseCase(itemId: Long): Single<DomainCrypto>{
         Timber.d("buildUseCase: $itemId")
         return Single.just(DomainCrypto(-1,"Luka", "LK", "luka", 1.1, 5123123.21, "today bitches!"))
     }
 
-    fun toSingle(itemId: Int): Single<DomainCrypto>{
+    fun toSingle(itemId: Long): Single<DomainCrypto>{
         return buildUseCase(itemId)
     }
 }

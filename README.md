@@ -27,6 +27,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Adding Tensorflow Lite! 
 - Adding Lottie for animations 
 - Adding MotionLayout for on-boardings 
+- Adding a MockServer!
 
 ## Requirements
 

@@ -28,7 +28,7 @@ class CryptoDetailsProcessor @Inject constructor(
     }
 
 
-    private fun buildGetCryptoDetailsUseCase(itemId: Int): Observable<CryptoDetailsResult>? {
+    private fun buildGetCryptoDetailsUseCase(itemId: Long): Observable<CryptoDetailsResult>? {
         return getCryptoDetailsUseCase
             .toSingle(itemId)
             .map(toUIMapper::transform)
