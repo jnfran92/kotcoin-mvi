@@ -35,7 +35,7 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
     /**
      * input parameter
      */
-    var itemId: Int? = null
+    var itemId: Long? = null
 
     /**
      * TX: transmit UI events
@@ -59,7 +59,7 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
         val dataFlow = interpreter connectTo processor connectTo reducer flowOn Schedulers.io()
         compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
         // lazy init
-        val defaultParam = -1
+        val defaultParam = -1L
         rx(CryptoDetailsIntent.GetCryptoDetailsIntent(itemId ?: defaultParam))
     }
 

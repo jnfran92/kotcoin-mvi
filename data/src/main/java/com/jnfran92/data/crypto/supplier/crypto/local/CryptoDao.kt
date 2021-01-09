@@ -3,13 +3,14 @@ package com.jnfran92.data.crypto.supplier.crypto.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.jnfran92.data.crypto.model.crypto.Crypto
+import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
 
 @Dao
 interface CryptoDao {
-    @Query("SELECT * FROM crypto")
-    fun getAll(): List<Crypto>
+
+    @Query("SELECT * FROM cryptos")
+    fun getAll(): List<CryptoLocal>
 
     @Insert
-    fun add(vararg crypto: Crypto)
+    fun add(vararg crypto: CryptoLocal)
 }

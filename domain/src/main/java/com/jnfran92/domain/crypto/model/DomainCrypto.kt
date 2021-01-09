@@ -1,7 +1,7 @@
 package com.jnfran92.domain.crypto.model
 
 data class DomainCrypto (
-    val cryptoId:Int,
+    val cryptoId:Long,
     val name:String,
     val symbol:String,
     val slug:String,

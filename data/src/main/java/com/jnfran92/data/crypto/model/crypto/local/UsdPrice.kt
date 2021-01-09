@@ -1,7 +1,8 @@
-package com.jnfran92.data.crypto.model.crypto
+package com.jnfran92.data.crypto.model.crypto.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 import java.util.*
 
 @Entity

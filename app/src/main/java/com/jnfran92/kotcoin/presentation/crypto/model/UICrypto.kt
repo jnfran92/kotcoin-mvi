@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UICrypto(
-    val cryptoId:Int,
+    val cryptoId:Long,
     val name:String,
     val symbol:String,
     val slug:String,
