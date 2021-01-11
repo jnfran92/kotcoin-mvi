@@ -56,7 +56,7 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
 
     private fun initDataFlow() {
         Timber.d("initDataFlow: ")
-        val dataFlow = interpreter connectTo processor connectTo reducer flowOn Schedulers.io()
+        val dataFlow = interpreter flowTo processor flowTo reducer flowOn Schedulers.io()
         compositeDisposable += dataFlow.subscribe(tx::postValue) { Timber.d("initDataFlow: error $it") }
         // lazy init
         val defaultParam = -1L
@@ -73,14 +73,14 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
     /**
      * infix helper: interpreter to processor
      */
-    private infix fun CryptoDetailsInterpreter.connectTo(processor: CryptoDetailsProcessor): Observable<CryptoDetailsResult> {
+    private infix fun CryptoDetailsInterpreter.flowTo(processor: CryptoDetailsProcessor): Observable<CryptoDetailsResult> {
         return this.toObservable().compose(processor)
     }
 
     /**
      * infix helper: processor to reducer
      */
-    private infix fun Observable<CryptoDetailsResult>.connectTo(reducer: CryptoDetailsReducer): Observable<CryptoDetailsUIState> {
+    private infix fun Observable<CryptoDetailsResult>.flowTo(reducer: CryptoDetailsReducer): Observable<CryptoDetailsUIState> {
         return this.scan(CryptoDetailsUIState.ShowDefaultView ,reducer)
     }
 
