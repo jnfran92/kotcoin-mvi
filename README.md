@@ -63,6 +63,8 @@ List variables with: `printenv`
 - Add more languages
 - Improve UI/UX
 
+## Other stuff
+
 ## License
 - added 00!
 - new line 1
