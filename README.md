@@ -64,6 +64,7 @@ List variables with: `printenv`
 - Improve UI/UX
 
 ## Other stuff
+Some info added!
 
 ## License
 - added 00!
