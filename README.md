@@ -67,6 +67,4 @@ List variables with: `printenv`
 Some info added!
 
 ## License
-- added 00!
-- new line 1
-- new line 2
+- working on it: this is a example file of license: example 1, example 2
