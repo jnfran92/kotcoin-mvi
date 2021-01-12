@@ -72,4 +72,3 @@ List variables with: `printenv`
 - new line 5
 - new line 6
 - new line 7
-- new line 8
