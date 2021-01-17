@@ -4,6 +4,8 @@ import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.Currency
 import com.jnfran92.data.crypto.model.crypto.Quote
 import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
+import com.jnfran92.data.crypto.model.crypto.local.CryptoWithHistoricUsdPrice
+import com.jnfran92.data.crypto.model.crypto.local.UsdPrice
 import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -38,20 +40,31 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
                 cryptoId = crypto.cryptoId,
                 symbol = crypto.symbol,
                 slug = crypto.slug,
-                name = crypto.name
+                name = crypto.name,
+                currentUsdPrice = crypto.quoteEntity.usd.price,
+                lastUpdate = crypto.quoteEntity.usd.lastUpdated
             )
         )
     }
 
     override fun saveCryptoList(cryptoList: List<Crypto>): Completable {
         Timber.d("saveCrypto")
-        return this.cryptoDao.addList(cryptoList.map { crypto ->
+        val cryptoListMapped = cryptoList.map {crypto ->
             CryptoLocal(
                 cryptoId = crypto.cryptoId,
                 symbol = crypto.symbol,
                 slug = crypto.slug,
-                name = crypto.name
+                name = crypto.name,
+                currentUsdPrice = crypto.quoteEntity.usd.price,
+                lastUpdate = crypto.quoteEntity.usd.lastUpdated
             )
-        })
+        }
+        return this.cryptoDao.addList(cryptoListMapped).also {
+            cryptoDao.addCryptoListWithHistoricUsdPrice(
+                cryptoListMapped.map {
+                    CryptoWithHistoricUsdPrice(it, UsdPrice(null, it.currentUsdPrice, it.lastUpdate))
+                }
+            )
+        }
     }
 }

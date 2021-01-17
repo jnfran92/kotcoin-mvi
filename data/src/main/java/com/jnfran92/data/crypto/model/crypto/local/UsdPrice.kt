@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class UsdPrice(
-    @PrimaryKey val usdPriceId: Long,
+    @PrimaryKey val usdPriceId: Long?,
     val value: Double,
-    val date: Date
+    val date: String
 )

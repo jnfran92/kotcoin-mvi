@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.jnfran92.data.crypto.model.crypto.Quote
 
 /**
  * Crypto-currency data
@@ -18,5 +19,9 @@ data class CryptoLocal(
 
     @ColumnInfo(name = "symbol") var symbol: String,
 
-    @ColumnInfo(name = "slug") var slug: String
+    @ColumnInfo(name = "slug") var slug: String,
+
+    @ColumnInfo(name = "current_usd_price") var currentUsdPrice: Double,
+
+    @ColumnInfo(name = "last_update") var lastUpdate: String
     )

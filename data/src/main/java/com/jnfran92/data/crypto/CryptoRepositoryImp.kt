@@ -7,6 +7,7 @@ import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,22 +36,28 @@ class CryptoRepositoryImp @Inject constructor(
 //            }
 //        }
 
-//        val a = cloudDataSource.getCryptoList().doOnSuccess {
-//            Timber.d("getCryptoList: cloud request successful: requested ${it.size} items")
-//            localDataSource.saveCryptoList(it) }
-//            .doOnError { Timber.d("getCryptoList: error on saving data in local : $it") }
-//            .flatMap {
-//                Timber.d("getCryptoList: getting from Local")
-//                localDataSource.getCryptoList().observeOn(Schedulers.io())
-//            }
-
-        val a = cloudDataSource.getCryptoList().flatMap {
-            localDataSource.getCryptoList()
+        val data = cloudDataSource.getCryptoList().doOnSuccess {
+            Timber.d("getCryptoList: cloud request successful: requested ${it.size} items")
+            localDataSource.saveCryptoList(it)
                 .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-        }
+                .subscribeOn(Schedulers.io()) }
+
+            .doOnError { Timber.d("getCryptoList: error on saving data in local : $it") }
+            .flatMap {
+                Timber.d("getCryptoList: getting from Local")
+                localDataSource.getCryptoList()
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+            }
+
+//        val value = cloudDataSource.getCryptoList().flatMap {
+//            localDataSource.saveCryptoList(it)
+//            localDataSource.getCryptoList()
+//                .observeOn(Schedulers.io())
+//                .subscribeOn(Schedulers.io())
+//        }
 
 
-        return a.map(mapper::transform)
+        return data.map(mapper::transform)
     }
 }
