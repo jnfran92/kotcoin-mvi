@@ -32,7 +32,7 @@ android {
 
     println("API TOKEN:" + System.getenv('KOTCOIN_API_TOKEN'))
     buildTypes.each {
-        it.buildConfigField 'String', 'API_TOKEN', System.getenv('KOTCOIN_API_TOKEN') ?: ""
+        it.buildConfigField 'String', 'API_TOKEN', System.getenv('KOTCOIN_API_TOKEN') ?: "\"default\""
     }
 
     kotlinOptions {

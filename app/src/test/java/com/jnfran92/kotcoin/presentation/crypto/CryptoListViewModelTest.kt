@@ -167,7 +167,7 @@ class CryptoListViewModelTest{
     infix fun CryptoListUIState.ShowLoadingView.resolveWith(result: CryptoListResult): CryptoListUIState{
         return when(result){
             CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid path")
-            is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView
+            is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView(result.t)
             is CryptoListResult.GetCryptoListResult.OnSuccess -> CryptoListUIState.ShowDataView(result.data)
         }
     }
