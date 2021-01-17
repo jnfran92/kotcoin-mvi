@@ -1,5 +1,6 @@
 # Kotcoin  [![Build Status](https://travis-ci.org/jnfran92/kotcoin.svg?branch=master)](https://travis-ci.org/jnfran92/kotcoin)
 
+
 Crypto matters!
 
 <img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
@@ -28,6 +29,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Adding Lottie for animations 
 - Adding MotionLayout for on-boardings 
 - Adding a MockServer!
+- Adding security wrapper API
 
 ## Requirements
 
@@ -61,4 +63,5 @@ List variables with: `printenv`
 - Errors handling
 - Add more languages
 - Improve UI/UX
+
 
