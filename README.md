@@ -24,7 +24,7 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 - Adding Room for local storage 
 - Adding Dynamic Modules 
 - Adding Compose() 
-- Adding Kotlin Flow! 🤔
+- Adding Kotlin Flow! 🤔 _instead of rx java_ 
 - Adding Tensorflow Lite! 
 - Adding Lottie for animations 
 - Adding MotionLayout for on-boardings 

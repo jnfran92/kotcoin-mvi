@@ -7,7 +7,6 @@ import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -47,6 +46,8 @@ class CryptoRepositoryImp @Inject constructor(
 
         val a = cloudDataSource.getCryptoList().flatMap {
             localDataSource.getCryptoList()
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
         }
 
 
