@@ -12,7 +12,7 @@ import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
     CryptoLocal::class,
     UsdPrice::class
 ],
-    version = 2)
+    version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cryptoDao(): CryptoDao

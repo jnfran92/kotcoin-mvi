@@ -33,37 +33,68 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         }
     }
 
-    override fun saveCrypto(crypto: Crypto): Single<Long> {
+    override fun saveCrypto(crypto: Crypto): Completable {
         Timber.d("saveCrypto")
-        return Single.create{
-            val id = cryptoDao.addCrypto(
+        return cryptoDao.addCrypto(
+            CryptoLocal(
+                cryptoId = crypto.cryptoId,
+                symbol = crypto.symbol,
+                slug = crypto.slug,
+                name = crypto.name
+            )
+        )
+//        return Single.create{
+//            try {
+//                Timber.d("saveCrypto: saving")
+//                val id = cryptoDao.addCrypto(
+//                    CryptoLocal(
+//                        cryptoId = crypto.cryptoId,
+//                        symbol = crypto.symbol,
+//                        slug = crypto.slug,
+//                        name = crypto.name
+//                    )
+//                )
+//                Timber.d("saveCrypto: created id $id")
+//                it.onSuccess(id)
+//            }catch (e: Exception){
+//                Timber.d("saveCrypto: on error $e")
+//                it.onError(e)
+//            }
+//        }
+    }
+
+    override fun saveCryptoList(cryptoList: List<Crypto>): Completable {
+        Timber.d("saveCrypto")
+        return cryptoDao.addCryptoList(
+            cryptoList.map { crypto ->
                 CryptoLocal(
-                    cryptoId = null,
+                    cryptoId = crypto.cryptoId,
                     symbol = crypto.symbol,
                     slug = crypto.slug,
                     name = crypto.name
                 )
-            )
-            Timber.d("saveCrypto: created id $id")
-            it.onSuccess(id)
-        }
+            }
+        )
     }
-
-    override fun saveCryptoList(cryptoList: List<Crypto>): Single<List<Long>> {
-        Timber.d("saveCrypto")
-        return Single.create{
-            val ids = cryptoDao.addCryptoList(
-                cryptoList.map { crypto ->
-                    CryptoLocal(
-                        cryptoId = crypto.cryptoId,
-                        symbol = crypto.symbol,
-                        slug = crypto.slug,
-                        name = crypto.name
-                    )
-                }
-            )
-            Timber.d("saveCryptoList: created ids $ids")
-            it.onSuccess(ids)
-        }
-    }
+//            .create{
+//            try {
+//                Timber.d("saveCrypto: saving")
+//            val ids = cryptoDao.addCryptoList(
+//                cryptoList.map { crypto ->
+//                    CryptoLocal(
+//                        cryptoId = crypto.cryptoId,
+//                        symbol = crypto.symbol,
+//                        slug = crypto.slug,
+//                        name = crypto.name
+//                    )
+//                }
+//            )
+//            Timber.d("saveCryptoList: created ids $ids")
+//            it.onSuccess(ids)
+//            }catch (e: Exception){
+//                Timber.d("saveCrypto: on error $e")
+//                it.onError(e)
+//            }
+//        }
+//    }
 }

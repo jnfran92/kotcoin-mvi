@@ -20,12 +20,12 @@ class RemoteCryptoDataSource(private val cryptoRemote: CryptoRemote):CryptoDataS
         return this.cryptoRemote.getCryptoList()
     }
 
-    override fun saveCrypto(crypto: Crypto): Single<Long> {
+    override fun saveCrypto(crypto: Crypto): Completable {
         Timber.d("saveCrypto")
         throw NotImplementedError()
     }
 
-    override fun saveCryptoList(cryptoList: List<Crypto>): Single<List<Long>> {
+    override fun saveCryptoList(cryptoList: List<Crypto>): Completable {
         Timber.d("saveCryptoList")
         throw NotImplementedError()
     }

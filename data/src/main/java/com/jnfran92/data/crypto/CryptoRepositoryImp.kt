@@ -40,15 +40,15 @@ class CryptoRepositoryImp @Inject constructor(
             Timber.d("getCryptoList: cloud request successful: requested ${it.size} items")
             localDataSource.saveCryptoList(it)
                 .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io()) }
-
-            .doOnError { Timber.d("getCryptoList: error on saving data in local : $it") }
-            .flatMap {
-                Timber.d("getCryptoList: getting from Local")
-                localDataSource.getCryptoList()
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(Schedulers.io())
-            }
+                .subscribeOn(Schedulers.io())
+        }
+//            .doOnError { Timber.d("getCryptoList: error on saving data in local : $it") }
+//            .flatMap {
+//                Timber.d("getCryptoList: getting from Local size ${it.size}")
+//                localDataSource.getCryptoList()
+//                    .observeOn(Schedulers.io())
+//                    .subscribeOn(Schedulers.io())
+//            }
 
 //        val value = cloudDataSource.getCryptoList().flatMap {
 //            localDataSource.saveCryptoList(it)
@@ -56,6 +56,9 @@ class CryptoRepositoryImp @Inject constructor(
 //                .observeOn(Schedulers.io())
 //                .subscribeOn(Schedulers.io())
 //        }
+
+
+//        val value = cloudDataSource.getCryptoList()
 
 
         return data.map(mapper::transform)

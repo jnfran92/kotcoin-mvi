@@ -11,6 +11,6 @@ import io.reactivex.Single
 interface CryptoDataSource {
     fun getCryptoById(cryptoId: Long): Single<Crypto>
     fun getCryptoList(): Single<List<Crypto>>
-    fun saveCrypto(crypto: Crypto): Single<Long>
-    fun saveCryptoList(cryptoList: List<Crypto>): Single<List<Long>>
+    fun saveCrypto(crypto: Crypto): Completable
+    fun saveCryptoList(cryptoList: List<Crypto>): Completable
 }
