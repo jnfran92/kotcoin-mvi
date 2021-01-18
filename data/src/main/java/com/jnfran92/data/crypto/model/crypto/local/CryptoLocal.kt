@@ -13,15 +13,11 @@ import com.jnfran92.data.crypto.model.crypto.Quote
 @Entity(tableName = "cryptos")
 data class CryptoLocal(
 
-    @PrimaryKey val cryptoId: Long,
+    @PrimaryKey val cryptoId: Long?,
 
     @ColumnInfo(name = "name") var name: String,
 
     @ColumnInfo(name = "symbol") var symbol: String,
 
-    @ColumnInfo(name = "slug") var slug: String,
-
-    @ColumnInfo(name = "current_usd_price") var currentUsdPrice: Double,
-
-    @ColumnInfo(name = "last_update") var lastUpdate: String
+    @ColumnInfo(name = "slug") var slug: String
     )

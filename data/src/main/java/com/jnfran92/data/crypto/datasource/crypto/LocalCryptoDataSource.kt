@@ -21,10 +21,10 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
     override fun getCryptoList(): Single<List<Crypto>> {
         Timber.d("getCryptoList")
-        return this.cryptoDao.getAll().map {
+        return this.cryptoDao.getAllCrypto().map {
             it.map{ cryptoLocal ->
                 Crypto(
-                cryptoId = cryptoLocal.cryptoId,
+                cryptoId = cryptoLocal.cryptoId!!,
                 name = cryptoLocal.name,
                 quoteEntity = Quote(Currency(12.0,12.0,"asdas")),
                 slug = cryptoLocal.slug,
@@ -33,38 +33,37 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         }
     }
 
-    override fun saveCrypto(crypto: Crypto): Completable {
+    override fun saveCrypto(crypto: Crypto): Single<Long> {
         Timber.d("saveCrypto")
-        return this.cryptoDao.add(
-            CryptoLocal(
-                cryptoId = crypto.cryptoId,
-                symbol = crypto.symbol,
-                slug = crypto.slug,
-                name = crypto.name,
-                currentUsdPrice = crypto.quoteEntity.usd.price,
-                lastUpdate = crypto.quoteEntity.usd.lastUpdated
+        return Single.create{
+            val id = cryptoDao.addCrypto(
+                CryptoLocal(
+                    cryptoId = null,
+                    symbol = crypto.symbol,
+                    slug = crypto.slug,
+                    name = crypto.name
+                )
             )
-        )
+            Timber.d("saveCrypto: created id $id")
+            it.onSuccess(id)
+        }
     }
 
-    override fun saveCryptoList(cryptoList: List<Crypto>): Completable {
+    override fun saveCryptoList(cryptoList: List<Crypto>): Single<List<Long>> {
         Timber.d("saveCrypto")
-        val cryptoListMapped = cryptoList.map {crypto ->
-            CryptoLocal(
-                cryptoId = crypto.cryptoId,
-                symbol = crypto.symbol,
-                slug = crypto.slug,
-                name = crypto.name,
-                currentUsdPrice = crypto.quoteEntity.usd.price,
-                lastUpdate = crypto.quoteEntity.usd.lastUpdated
-            )
-        }
-        return this.cryptoDao.addList(cryptoListMapped).also {
-            cryptoDao.addCryptoListWithHistoricUsdPrice(
-                cryptoListMapped.map {
-                    CryptoWithHistoricUsdPrice(it, UsdPrice(null, it.currentUsdPrice, it.lastUpdate))
+        return Single.create{
+            val ids = cryptoDao.addCryptoList(
+                cryptoList.map { crypto ->
+                    CryptoLocal(
+                        cryptoId = crypto.cryptoId,
+                        symbol = crypto.symbol,
+                        slug = crypto.slug,
+                        name = crypto.name
+                    )
                 }
             )
+            Timber.d("saveCryptoList: created ids $ids")
+            it.onSuccess(ids)
         }
     }
 }

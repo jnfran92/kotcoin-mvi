@@ -3,9 +3,8 @@ package com.jnfran92.data.crypto.supplier.crypto.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
 import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
-import com.jnfran92.data.crypto.model.crypto.local.CryptoWithHistoricUsdPrice
+import com.jnfran92.data.crypto.model.crypto.local.UsdPrice
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -13,19 +12,20 @@ import io.reactivex.Single
 interface CryptoDao {
 
     @Query("SELECT * FROM cryptos")
-    fun getAll(): Single<List<CryptoLocal>>
+    fun getAllCrypto(): Single<List<CryptoLocal>>
+
+    @Query("SELECT * FROM usd_prices")
+    fun getAllUsdPrice(): Single<List<UsdPrice>>
 
     @Insert
-    fun add(vararg crypto: CryptoLocal): Completable
+    fun addCrypto(crypto: CryptoLocal): Long
 
     @Insert
-    fun addList(crypto: List<CryptoLocal>): Completable
+    fun addCryptoList(crypto: List<CryptoLocal>): List<Long>
 
-    @Transaction
     @Insert
-    fun addCryptoWithHistoricUsdPrice(vararg item: CryptoWithHistoricUsdPrice): Completable
+    fun addUsdPrice(usdPrice: UsdPrice): Long
 
-    @Transaction
     @Insert
-    fun addCryptoListWithHistoricUsdPrice(itemList: List<CryptoWithHistoricUsdPrice>): Completable
+    fun addUsdPriceList(usdPriceList: List<UsdPrice>): List<Long>
 }
