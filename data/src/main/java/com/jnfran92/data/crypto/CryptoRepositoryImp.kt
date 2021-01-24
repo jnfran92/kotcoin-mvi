@@ -6,6 +6,7 @@ import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
+import io.reactivex.SingleSource
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,43 +25,20 @@ class CryptoRepositoryImp @Inject constructor(
      * Always get Crypto data(List) from the Cloud.
      */
     override fun getCryptoList(): Single<List<DomainCrypto>> {
-        val cloudDataSource = this.cryptoDataSourceFactory.createRemoteDataSource()
+        Timber.d("getCryptoList: ")
+        val remoteDataSource = this.cryptoDataSourceFactory.createRemoteDataSource()
         val localDataSource = this.cryptoDataSourceFactory.createLocalDataSource()
 
-//        val cloudResult = cloudDataSource.getCryptoList().doOnSuccess {
-//            Timber.d("getCryptoList: Saving Crypto in Local")
-//            it.forEach { crypto ->
-//                val id = localDataSource.saveCrypto(crypto).subscribeOn(Schedulers.io()).subscribe({ Timber.d("getCryptoList: saving onComplete") },
-//                    { Timber.d("getCryptoList: saving on Error $it") })
-//                Timber.d("getCryptoList: object saved $id")
-//            }
-//        }
-
-        val data = cloudDataSource.getCryptoList().doOnSuccess {
-            Timber.d("getCryptoList: cloud request successful: requested ${it.size} items")
-            localDataSource.saveCryptoList(it)
-                .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-        }
-//            .doOnError { Timber.d("getCryptoList: error on saving data in local : $it") }
-//            .flatMap {
-//                Timber.d("getCryptoList: getting from Local size ${it.size}")
-//                localDataSource.getCryptoList()
-//                    .observeOn(Schedulers.io())
-//                    .subscribeOn(Schedulers.io())
-//            }
-
-//        val value = cloudDataSource.getCryptoList().flatMap {
-//            localDataSource.saveCryptoList(it)
-//            localDataSource.getCryptoList()
-//                .observeOn(Schedulers.io())
-//                .subscribeOn(Schedulers.io())
-//        }
-
-
-//        val value = cloudDataSource.getCryptoList()
-
-
-        return data.map(mapper::transform)
+        return remoteDataSource.getCryptoList()
+            .flatMapCompletable {
+                localDataSource.saveCryptoList(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+            }
+            .andThen ( SingleSource<List<Crypto>> {
+                localDataSource.getCryptoList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io()) })
+            .map(mapper::transform)
     }
 }

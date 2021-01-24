@@ -67,6 +67,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         Timber.d("saveCrypto")
         return cryptoDao.addCryptoList(
             cryptoList.map { crypto ->
+                Timber.d("saveCryptoList: saving $crypto")
                 CryptoLocal(
                     cryptoId = crypto.cryptoId,
                     symbol = crypto.symbol,
