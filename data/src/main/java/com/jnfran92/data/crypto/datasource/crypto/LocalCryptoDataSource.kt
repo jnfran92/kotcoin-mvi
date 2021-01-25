@@ -45,14 +45,6 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
     override fun saveCrypto(crypto: Crypto): Completable {
         Timber.d("saveCrypto")
-//        return cryptoDao.addCrypto(
-//            CryptoLocal(
-//                cryptoId = crypto.cryptoId,
-//                symbol = crypto.symbol,
-//                slug = crypto.slug,
-//                name = crypto.name
-//            )
-//        )
         TODO()
     }
 
