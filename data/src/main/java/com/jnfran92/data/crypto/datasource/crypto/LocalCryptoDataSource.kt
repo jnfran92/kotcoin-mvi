@@ -30,12 +30,13 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
             val mappedResults = results.map{ cryptoLocal ->
                 val cryptoPrices = cryptoDao
                     .getUsdPricesByCryptoId(cryptoLocal.cryptoId)
-                    .sortedBy { it.usdPriceId }
                 Timber.d("getCryptoList: prices of crypto ${cryptoLocal.name}: $cryptoPrices")
+                val cryptoPrice = cryptoPrices.lastOrNull() ?: UsdPrice(
+                    -1,0.0,"",0.0, cryptoLocal.cryptoId)
                 Crypto(
                     cryptoId = cryptoLocal.cryptoId,
                     name = cryptoLocal.name,
-                    quoteEntity = Quote(Currency(12.0,12.0,"asdas")),
+                    quoteEntity = Quote(Currency(cryptoPrice.value,cryptoPrice.marketCap,cryptoPrice.date)),
                     slug = cryptoLocal.slug,
                     symbol = cryptoLocal.symbol)
             }
