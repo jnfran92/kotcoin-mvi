@@ -7,6 +7,7 @@ import com.jnfran92.domain.crypto.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
 import io.reactivex.SingleSource
+import io.reactivex.internal.operators.single.SingleDefer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +17,7 @@ import javax.inject.Singleton
  * Business Logic for managing [Crypto] data.
  */
 @Singleton
-class CryptoRepositoryImp @Inject constructor(
+class CryptoRepositoryImpl @Inject constructor(
     private val cryptoDataSourceFactory: CryptoDataSourceFactory,
     private val mapper: CryptoToDomainMapper): CryptoRepository {
 
@@ -31,14 +32,17 @@ class CryptoRepositoryImp @Inject constructor(
 
         return remoteDataSource.getCryptoList()
             .flatMapCompletable {
+                Timber.d("getCryptoList: flatMapCompletable saving remote  crypto ${it.size}")
                 localDataSource.saveCryptoList(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
             }
-            .andThen ( SingleSource<List<Crypto>> {
+            .andThen(SingleDefer {
+                Timber.d("getCryptoList: and Then get data from local!")
                 localDataSource.getCryptoList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io()) })
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(Schedulers.computation())
+            })
             .map(mapper::transform)
     }
 }

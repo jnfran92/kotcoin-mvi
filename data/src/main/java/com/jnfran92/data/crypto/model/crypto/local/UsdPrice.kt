@@ -8,8 +8,9 @@ import java.util.*
 
 @Entity(tableName = "usd_prices")
 data class UsdPrice(
-    @PrimaryKey val usdPriceId: Long?,
+    @PrimaryKey(autoGenerate = true) val usdPriceId: Long?,
     val value: Double,
     val date: String,
+    val marketCap:Double,
     val cryptoLocalId: Long
 )

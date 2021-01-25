@@ -13,7 +13,7 @@ import com.jnfran92.data.crypto.model.crypto.Quote
 @Entity(tableName = "cryptos")
 data class CryptoLocal(
 
-    @PrimaryKey val cryptoId: Long?,
+    @PrimaryKey val cryptoId: Long,
 
     @ColumnInfo(name = "name") var name: String,
 

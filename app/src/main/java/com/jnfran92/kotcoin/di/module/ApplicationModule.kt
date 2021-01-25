@@ -3,7 +3,7 @@ package com.jnfran92.kotcoin.di.module
 import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder
-import com.jnfran92.data.crypto.CryptoRepositoryImp
+import com.jnfran92.data.crypto.CryptoRepositoryImpl
 import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
 import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheImpl
 import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
@@ -36,7 +36,7 @@ object ApplicationModule {
 
 
     @Provides @Singleton
-    fun cryptoRepository(cryptoRepository: CryptoRepositoryImp): CryptoRepository {
+    fun cryptoRepository(cryptoRepository: CryptoRepositoryImpl): CryptoRepository {
         return cryptoRepository
     }
 

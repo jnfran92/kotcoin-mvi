@@ -13,20 +13,24 @@ import io.reactivex.Single
 interface CryptoDao {
 
     @Query("SELECT * FROM cryptos")
-    fun getAllCrypto(): Single<List<CryptoLocal>>
+    fun getAllCrypto(): List<CryptoLocal>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addCrypto(crypto: CryptoLocal): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addCryptoList(crypto: List<CryptoLocal>)
+
 
     @Query("SELECT * FROM usd_prices")
-    fun getAllUsdPrice(): Single<List<UsdPrice>>
+    fun getAllUsdPrice(): List<UsdPrice>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCrypto(vararg crypto: CryptoLocal): Completable
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCryptoList(crypto: List<CryptoLocal>): Completable
+    @Query("SELECT * FROM usd_prices WHERE cryptoLocalId = :cryptoId")
+    fun getUsdPricesByCryptoId(cryptoId: Long): List<UsdPrice>
 
     @Insert
-    fun addUsdPrice(usdPrice: UsdPrice): Completable
+    fun addUsdPrice(usdPrice: UsdPrice): Long
 
     @Insert
-    fun addUsdPriceList(usdPriceList: List<UsdPrice>): Completable
+    fun addUsdPriceList(usdPriceList: List<UsdPrice>)
 }
