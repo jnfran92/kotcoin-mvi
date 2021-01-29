@@ -19,7 +19,17 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
     override fun getCryptoById(cryptoId: Long): Single<Crypto> {
         Timber.d("getCryptoById")
-        throw NotImplementedError()
+        return Single.create { emitter ->
+            val cryptoLocal = this.cryptoDao.getCryptoById(cryptoId)
+            emitter.onSuccess(
+                Crypto(
+                    cryptoId = cryptoLocal.cryptoId,
+                    name = cryptoLocal.name,
+                    quoteEntity = Quote(Currency(0.0, 0.0, "")),
+                    slug = cryptoLocal.slug,
+                    symbol = cryptoLocal.symbol)
+            )
+        }
     }
 
     override fun getCryptoList(): Single<List<Crypto>> {
@@ -46,7 +56,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
     override fun saveCrypto(crypto: Crypto): Completable {
         Timber.d("saveCrypto")
-        TODO()
+        throw NotImplementedError()
     }
 
     override fun saveCryptoList(cryptoList: List<Crypto>): Completable {

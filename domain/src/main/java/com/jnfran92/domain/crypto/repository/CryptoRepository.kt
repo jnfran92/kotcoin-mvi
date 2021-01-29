@@ -1,4 +1,4 @@
-package com.jnfran92.domain.crypto
+package com.jnfran92.domain.crypto.repository
 
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
@@ -14,4 +14,10 @@ interface CryptoRepository {
      * Get List of DomainCrypto objects.
      */
     fun getCryptoList(): Single<List<DomainCrypto>>
+
+    /**
+     * Get DomainCrypto by Id
+     */
+    fun getCryptoById(cryptoId: Long): Single<DomainCrypto>
+
 }

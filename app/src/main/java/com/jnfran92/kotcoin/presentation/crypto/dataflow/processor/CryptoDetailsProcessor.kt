@@ -1,13 +1,12 @@
 package com.jnfran92.kotcoin.presentation.crypto.dataflow.processor
 
-import com.jnfran92.domain.crypto.usecase.GetCryptoDetailsUseCase
+import com.jnfran92.domain.crypto.GetCryptoDetailsUseCase
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoDetailsAction
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject

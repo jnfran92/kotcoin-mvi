@@ -3,10 +3,9 @@ package com.jnfran92.data.crypto
 import com.jnfran92.data.crypto.datasource.CryptoDataSourceFactory
 import com.jnfran92.data.crypto.mapper.CryptoToDomainMapper
 import com.jnfran92.data.crypto.model.crypto.Crypto
-import com.jnfran92.domain.crypto.CryptoRepository
+import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
-import io.reactivex.SingleSource
 import io.reactivex.internal.operators.single.SingleDefer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -44,5 +43,12 @@ class CryptoRepositoryImpl @Inject constructor(
                     .observeOn(Schedulers.computation())
             })
             .map(mapper::transform)
+    }
+
+    override fun getCryptoById(cryptoId: Long): Single<DomainCrypto> {
+        Timber.d("getCryptoById")
+        val localDataSource = this.cryptoDataSourceFactory.createLocalDataSource()
+
+        return localDataSource.getCryptoById(cryptoId).map(mapper::transform)
     }
 }

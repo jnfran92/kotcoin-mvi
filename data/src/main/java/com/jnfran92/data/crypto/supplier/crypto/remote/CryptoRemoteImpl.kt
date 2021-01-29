@@ -19,7 +19,7 @@ class CryptoRemoteImpl @Inject constructor(private val retrofit: Retrofit):Crypt
     private val cryptoApi = this.retrofit.create(CryptoRetrofitService::class.java)
 
     override fun getCryptoById(cryptoId: Int): Single<Crypto> {
-        throw NotImplementedError()
+        throw NotImplementedError("Just from local")
     }
 
     override fun getCryptoList(): Single<List<Crypto>> {

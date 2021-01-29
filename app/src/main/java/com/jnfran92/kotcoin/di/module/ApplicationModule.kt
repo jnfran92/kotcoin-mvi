@@ -10,7 +10,7 @@ import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteImpl
 import com.jnfran92.data.crypto.supplier.db.AppDatabase
-import com.jnfran92.domain.crypto.CryptoRepository
+import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.kotcoin.BuildConfig
 import com.jnfran92.kotcoin.rx.JobExecutor
 import com.jnfran92.kotcoin.rx.ObserverThread

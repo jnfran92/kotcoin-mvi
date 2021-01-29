@@ -15,6 +15,9 @@ interface CryptoDao {
     @Query("SELECT * FROM cryptos")
     fun getAllCrypto(): List<CryptoLocal>
 
+    @Query("SELECT * FROM cryptos WHERE cryptoId = :cryptoId")
+    fun getCryptoById(cryptoId: Long): CryptoLocal
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCrypto(crypto: CryptoLocal): Long
 

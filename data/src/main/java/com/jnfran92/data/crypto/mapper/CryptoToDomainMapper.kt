@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class CryptoToDomainMapper @Inject constructor(){
 
-    private fun transform(item: Crypto): DomainCrypto{
+    fun transform(item: Crypto): DomainCrypto{
         return DomainCrypto(
             cryptoId = item.cryptoId,
             name = item.name,
