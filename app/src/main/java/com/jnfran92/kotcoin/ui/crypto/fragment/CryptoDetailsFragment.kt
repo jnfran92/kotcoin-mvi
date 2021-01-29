@@ -9,12 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import kotlin.math.PI
+import kotlin.math.pow
+import kotlin.math.sin
 
 /**
  * Fragment for displaying Crypto List
@@ -54,6 +62,44 @@ class CryptoDetailsFragment : Fragment() {
     private fun initViewElements(){
         Timber.d("initViewElements: ")
         (requireActivity() as AppCompatActivity).supportActionBar?.title = args.CryptoItem.name
+
+
+        val entries = arrayListOf<Entry>()
+
+        for (i in 0..30){
+            entries.add(Entry(i.toFloat(), sin(i.toDouble() * (4*PI/100.0)).pow(2).toFloat()))
+        }
+
+        val dataSet = LineDataSet(entries, null)
+        dataSet.valueTextColor = R.color.colorAccent
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataSet.setDrawFilled(true)
+        dataSet.setDrawCircles(false)
+        dataSet.lineWidth = 3.0f
+        dataSet.valueTextSize = 0.0f
+        dataSet.setDrawValues(false)
+
+        val lineData = LineData(dataSet)
+        binding.chart.data = lineData
+        binding.chart.legend.isEnabled = false
+        binding.chart.description = null
+        binding.chart.xAxis.setDrawGridLines(false)
+        binding.chart.axisLeft.setDrawGridLines(false)
+        binding.chart.axisRight.setDrawGridLines(false)
+
+        binding.chart.xAxis.setDrawAxisLine(false)
+        binding.chart.axisLeft.setDrawAxisLine(false)
+        binding.chart.axisRight.setDrawAxisLine(false)
+
+//        binding.chart.setTouchEnabled(true)
+//        binding.chart.setClickable(false)
+//        binding.chart.setDoubleTapToZoomEnabled(false)
+        binding.chart.setDrawBorders(false)
+        binding.chart.setDrawGridBackground(false)
+        binding.chart.animateY(2000 , Easing.EaseInOutBack )
+//        binding.chart.
+
+        binding.chart.invalidate()
     }
 
     private fun initViewModel() {
@@ -61,7 +107,6 @@ class CryptoDetailsFragment : Fragment() {
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
         this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.cryptoId))
     }
-
 
     private fun render(uiState: CryptoDetailsUIState){
         Timber.d("render: ")
@@ -102,15 +147,5 @@ class CryptoDetailsFragment : Fragment() {
                 binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Timber.d("onResume: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.d("onDestroy: ")
     }
 }
