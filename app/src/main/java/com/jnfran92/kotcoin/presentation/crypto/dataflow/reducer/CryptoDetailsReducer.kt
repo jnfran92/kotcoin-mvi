@@ -33,7 +33,7 @@ class CryptoDetailsReducer @Inject constructor(): BiFunction<CryptoDetailsUIStat
     private infix fun CryptoDetailsUIState.ShowLoadingView.resolveWith(result: CryptoDetailsResult): CryptoDetailsUIState {
         return when(result){
             CryptoDetailsResult.GetCryptoDetailsResult.InProgress -> throw Exception("invalid reduction")
-            is CryptoDetailsResult.GetCryptoDetailsResult.OnError -> CryptoDetailsUIState.ShowErrorRetryView
+            is CryptoDetailsResult.GetCryptoDetailsResult.OnError -> CryptoDetailsUIState.ShowErrorRetryView(result.t)
             is CryptoDetailsResult.GetCryptoDetailsResult.OnSuccess -> CryptoDetailsUIState.ShowDataView(result.data)
         }
     }

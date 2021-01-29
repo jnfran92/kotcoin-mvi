@@ -8,16 +8,8 @@ import javax.inject.Inject
 /**
  * Get data
  */
-class GetCryptoListUseCase @Inject constructor (
-    private val repository: CryptoRepository
-) {
-
-    private fun buildUseCase(): Single<List<DomainCrypto>>{
+class GetCryptoListUseCase @Inject constructor (private val repository: CryptoRepository) {
+    operator fun invoke(): Single<List<DomainCrypto>>{
         return this.repository.getCryptoList()
-//            .delay(3000, TimeUnit.MILLISECONDS)
-    }
-
-    fun toSingle(): Single<List<DomainCrypto>>{
-        return buildUseCase()
     }
 }

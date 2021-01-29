@@ -57,9 +57,9 @@ class CryptoDetailsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        Timber.d("initViewModel")
-        this.viewModel.itemId = args.CryptoItem.cryptoId
+        Timber.d("initViewModel: get crypto details by id: ${args.CryptoItem.cryptoId}")
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
+        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.cryptoId))
     }
 
 
@@ -77,7 +77,8 @@ class CryptoDetailsFragment : Fragment() {
             CryptoDetailsUIState.ShowLoadingView -> {
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
             }
-            CryptoDetailsUIState.ShowErrorRetryView -> {
+            is CryptoDetailsUIState.ShowErrorRetryView -> {
+                Timber.d("render: uiState error ${uiState.t}")
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
                 binding.lyDataContainer.visibility = View.GONE
                 binding.lyErrorRetryContainer.container.visibility = View.VISIBLE

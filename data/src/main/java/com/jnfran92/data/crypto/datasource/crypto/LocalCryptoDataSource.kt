@@ -18,7 +18,7 @@ import timber.log.Timber
 class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource {
 
     override fun getCryptoById(cryptoId: Long): Single<Crypto> {
-        Timber.d("getCryptoById")
+        Timber.d("getCryptoById: $cryptoId")
         return Single.create { emitter ->
             val cryptoLocal = this.cryptoDao.getCryptoById(cryptoId)
             emitter.onSuccess(

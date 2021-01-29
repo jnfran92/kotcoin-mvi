@@ -7,18 +7,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Get data
+ * Get crypto details by id
  */
-class GetCryptoDetailsUseCase @Inject constructor(
-    private val repository: CryptoRepository
-) {
-
-    private fun buildUseCase(itemId: Long): Single<DomainCrypto>{
-        Timber.d("buildUseCase: $itemId")
-        return Single.just(DomainCrypto(-1,"Luka", "LK", "luka", 1.1, 5123123.21, "today bitches!"))
-    }
-
-    fun toSingle(itemId: Long): Single<DomainCrypto>{
-        return buildUseCase(itemId)
+class GetCryptoDetailsUseCase @Inject constructor(private val repository: CryptoRepository) {
+    operator fun invoke(cryptoId: Long): Single<DomainCrypto>{
+        Timber.d("invoke: id $cryptoId")
+        return this.repository.getCryptoById(cryptoId)
     }
 }

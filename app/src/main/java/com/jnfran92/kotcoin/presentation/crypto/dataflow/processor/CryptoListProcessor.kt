@@ -22,8 +22,7 @@ class CryptoListProcessor @Inject constructor(
             Timber.d("apply: action $action")
             when(action){
                 CryptoListAction.GetCryptoList -> {
-                    useCase
-                        .toSingle()
+                    useCase()
                         .map (toUIMapper::transform)
                         .toObservable()
                         .map(CryptoListResult.GetCryptoListResult::OnSuccess)
