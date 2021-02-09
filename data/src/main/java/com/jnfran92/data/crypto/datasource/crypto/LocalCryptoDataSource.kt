@@ -1,5 +1,6 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
+import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.model.crypto.remote.CurrencyRemote
 import com.jnfran92.data.crypto.model.crypto.remote.QuoteRemote
@@ -13,17 +14,18 @@ import timber.log.Timber
 
 class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource {
 
-    override fun getCryptoById(cryptoId: Long): Single<CryptoRemote> {
+    override fun getCryptoById(cryptoId: Long): Single<CryptoDetails> {
         Timber.d("getCryptoById: $cryptoId")
         return Single.create { emitter ->
             val cryptoLocal = this.cryptoDao.getCryptoById(cryptoId)
+            val prices = this.cryptoDao.getUsdPricesByCryptoId(cryptoId)
             emitter.onSuccess(
-                CryptoRemote(
-                    cryptoId = cryptoLocal.cryptoId,
+                CryptoDetails(
                     name = cryptoLocal.name,
-                    quoteRemoteEntity = QuoteRemote(CurrencyRemote(0.0, 0.0, "")),
-                    slug = cryptoLocal.slug,
-                    symbol = cryptoLocal.symbol)
+                    symbol = cryptoLocal.symbol,
+                    id = cryptoLocal.cryptoId,
+                    historicUsdPriceLocal = prices.map { it.value }
+                )
             )
         }
     }

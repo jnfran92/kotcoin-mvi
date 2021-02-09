@@ -1,5 +1,6 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
+import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplier
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -10,7 +11,7 @@ import timber.log.Timber
  */
 class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSupplier):CryptoDataSource {
 
-    override fun getCryptoById(cryptoId: Long): Single<com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote> {
+    override fun getCryptoById(cryptoId: Long): Single<CryptoDetails> {
         throw NotImplementedError("Not used for this project, " +
                 "since only a list crypto-currency data will be shown.")
     }

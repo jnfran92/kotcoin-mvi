@@ -62,13 +62,6 @@ class CryptoRepositoryImpl @Inject constructor(
     override fun getCryptoById(cryptoId: Long): Single<DomainCryptoDetails> {
         Timber.d("getCryptoById $cryptoId")
         val localDataSource = this.cryptoDataSourceFactory.createLocalDataSource()
-        return localDataSource.getCryptoById(cryptoId).map {
-            CryptoDetails(
-                id = it.cryptoId,
-                symbol = it.symbol,
-                name = it.name,
-                historicUsdPriceLocal = listOf()
-            )
-        }.map(cryptoDetailsToDomainMapper::transform)
+        return localDataSource.getCryptoById(cryptoId).map(cryptoDetailsToDomainMapper::transform)
     }
 }

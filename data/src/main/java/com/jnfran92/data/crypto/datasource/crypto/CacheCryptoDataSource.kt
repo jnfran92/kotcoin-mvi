@@ -1,6 +1,7 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
 import android.content.Context
+import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheSupplier
 import io.reactivex.Completable
@@ -13,7 +14,7 @@ import timber.log.Timber
 class CacheCryptoDataSource(private val context: Context,
                             private val cryptoCacheSupplier: CryptoCacheSupplier): CryptoDataSource{
 
-    override fun getCryptoById(cryptoId: Long): Single<CryptoRemote> {
+    override fun getCryptoById(cryptoId: Long): Single<CryptoDetails> {
         throw NotImplementedError()
     }
 
