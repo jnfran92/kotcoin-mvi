@@ -6,12 +6,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Keep
-data class UICrypto(
+data class UICryptoDetails(
     val cryptoId: Long,
     val name: String,
     val symbol: String,
     val slug: String,
-    val price: Double,
-    val marketCap: Double,
-    val lastUpdated: String
+    val price: List<Double>,
 ) : Parcelable
