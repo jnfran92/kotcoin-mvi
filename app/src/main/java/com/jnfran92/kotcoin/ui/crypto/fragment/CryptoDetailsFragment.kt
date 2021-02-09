@@ -134,6 +134,9 @@ class CryptoDetailsFragment : Fragment() {
                 }
             }
             is CryptoDetailsUIState.ShowDataView -> {
+                Timber.d("render: show data details: ${uiState.data}")
+                Timber.d("render: show data details price list: ${uiState.data.price}")
+
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
 
                 binding.lyDataContainer.visibility = View.VISIBLE

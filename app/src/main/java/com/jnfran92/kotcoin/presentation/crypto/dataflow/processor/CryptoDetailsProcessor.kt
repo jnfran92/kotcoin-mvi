@@ -3,6 +3,7 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.processor
 import com.jnfran92.domain.crypto.GetCryptoDetailsUseCase
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoDetailsAction
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoDetailsResult
+import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoDetailsToUIMapper
 import com.jnfran92.kotcoin.presentation.crypto.mapper.DomainCryptoToUIMapper
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 class CryptoDetailsProcessor @Inject constructor(
     private val getCryptoDetailsUseCase: GetCryptoDetailsUseCase,
-    private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoDetailsAction, CryptoDetailsResult> {
+    private val toUIMapper: DomainCryptoDetailsToUIMapper): ObservableTransformer<CryptoDetailsAction, CryptoDetailsResult> {
 
     override fun apply(upstream: Observable<CryptoDetailsAction>): ObservableSource<CryptoDetailsResult> {
         Timber.d("apply")
