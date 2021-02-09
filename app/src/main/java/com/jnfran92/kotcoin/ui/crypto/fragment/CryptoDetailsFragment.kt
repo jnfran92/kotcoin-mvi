@@ -62,44 +62,6 @@ class CryptoDetailsFragment : Fragment() {
     private fun initViewElements(){
         Timber.d("initViewElements: ")
         (requireActivity() as AppCompatActivity).supportActionBar?.title = args.CryptoItem.name
-
-
-        val entries = arrayListOf<Entry>()
-
-        for (i in 0..30){
-            entries.add(Entry(i.toFloat(), sin(i.toDouble() * (4*PI/100.0)).pow(2).toFloat()))
-        }
-
-        val dataSet = LineDataSet(entries, null)
-        dataSet.valueTextColor = R.color.colorAccent
-        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-        dataSet.setDrawFilled(true)
-        dataSet.setDrawCircles(false)
-        dataSet.lineWidth = 3.0f
-        dataSet.valueTextSize = 0.0f
-        dataSet.setDrawValues(false)
-
-        val lineData = LineData(dataSet)
-        binding.chart.data = lineData
-        binding.chart.legend.isEnabled = false
-        binding.chart.description = null
-        binding.chart.xAxis.setDrawGridLines(false)
-        binding.chart.axisLeft.setDrawGridLines(false)
-        binding.chart.axisRight.setDrawGridLines(false)
-
-        binding.chart.xAxis.setDrawAxisLine(false)
-        binding.chart.axisLeft.setDrawAxisLine(false)
-        binding.chart.axisRight.setDrawAxisLine(false)
-
-//        binding.chart.setTouchEnabled(true)
-//        binding.chart.setClickable(false)
-//        binding.chart.setDoubleTapToZoomEnabled(false)
-        binding.chart.setDrawBorders(false)
-        binding.chart.setDrawGridBackground(false)
-        binding.chart.animateY(2000 , Easing.EaseInOutBack )
-//        binding.chart.
-
-        binding.chart.invalidate()
     }
 
     private fun initViewModel() {
@@ -136,6 +98,7 @@ class CryptoDetailsFragment : Fragment() {
             is CryptoDetailsUIState.ShowDataView -> {
                 Timber.d("render: show data details: ${uiState.data}")
                 Timber.d("render: show data details price list: ${uiState.data.price}")
+                setHistoricData(uiState.data.price)
 
                 binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
 
@@ -145,10 +108,50 @@ class CryptoDetailsFragment : Fragment() {
                 binding.tvCryptoDetailsFragmentName.text = uiState.data.name
 //                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
 //                binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()
-                binding.tvCryptoDetailsFragmentPrice.text = uiState.data.price.toString()
+//                binding.tvCryptoDetailsFragmentPrice.text = uiState.data.price.toString()
                 binding.tvCryptoDetailsFragmentSlug.text = uiState.data.slug
                 binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
             }
         }
+    }
+
+
+    private fun setHistoricData(historicData: List<Double>){
+        val entries = arrayListOf<Entry>()
+
+        for (i in historicData.indices){
+            entries.add(Entry(i.toFloat(), historicData[i].toFloat()))
+        }
+
+        val dataSet = LineDataSet(entries, null)
+        dataSet.valueTextColor = R.color.colorAccent
+        dataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+        dataSet.setDrawFilled(true)
+        dataSet.setDrawCircles(false)
+        dataSet.lineWidth = 3.0f
+        dataSet.valueTextSize = 0.0f
+        dataSet.setDrawValues(false)
+
+        val lineData = LineData(dataSet)
+        binding.chart.data = lineData
+        binding.chart.legend.isEnabled = false
+        binding.chart.description = null
+        binding.chart.xAxis.setDrawGridLines(false)
+        binding.chart.axisLeft.setDrawGridLines(false)
+        binding.chart.axisRight.setDrawGridLines(false)
+
+        binding.chart.xAxis.setDrawAxisLine(false)
+        binding.chart.axisLeft.setDrawAxisLine(false)
+        binding.chart.axisRight.setDrawAxisLine(false)
+
+//        binding.chart.setTouchEnabled(true)
+//        binding.chart.setClickable(false)
+//        binding.chart.setDoubleTapToZoomEnabled(false)
+        binding.chart.setDrawBorders(false)
+        binding.chart.setDrawGridBackground(false)
+//        binding.chart.animateY(1000 , Easing.EaseInBack )
+//        binding.chart.
+
+        binding.chart.invalidate()
     }
 }
