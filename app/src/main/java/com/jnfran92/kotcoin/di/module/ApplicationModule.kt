@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.jnfran92.data.crypto.CryptoRepositoryImpl
-import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCache
-import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheImpl
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheSupplier
+import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheSupplierImpl
 import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
-import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemote
-import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteImpl
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplier
+import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplierImpl
 import com.jnfran92.data.crypto.supplier.db.AppDatabase
 import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.kotcoin.BuildConfig
@@ -41,12 +41,12 @@ object ApplicationModule {
     }
 
     @Provides @Singleton
-    fun cryptoApi(cryptoApi: CryptoRemoteImpl): CryptoRemote {
+    fun cryptoApi(cryptoApi: CryptoRemoteSupplierImpl): CryptoRemoteSupplier {
         return cryptoApi
     }
 
     @Provides @Singleton
-    fun cryptoCache(cryptoCache: CryptoCacheImpl): CryptoCache {
+    fun cryptoCache(cryptoCache: CryptoCacheSupplierImpl): CryptoCacheSupplier {
         return cryptoCache
     }
 

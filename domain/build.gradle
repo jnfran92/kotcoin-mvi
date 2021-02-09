@@ -32,11 +32,6 @@ android {
     }
 }
 
-def gsonVersion = "2.5.0"
-def rxJavaVersion = "2.0.2"
-def rxAndroidVersion = "2.0.1"
-def nav_version = "2.3.2"
-
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

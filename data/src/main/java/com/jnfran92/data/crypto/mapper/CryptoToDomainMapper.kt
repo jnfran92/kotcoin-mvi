@@ -10,13 +10,13 @@ class CryptoToDomainMapper @Inject constructor(){
 
     fun transform(item: Crypto): DomainCrypto{
         return DomainCrypto(
-            cryptoId = item.cryptoId,
+            cryptoId = item.id,
             name = item.name,
             symbol = item.symbol,
-            slug = item.slug,
-            marketCap = item.quoteEntity.usd.marketCap,
-            lastUpdated = item.quoteEntity.usd.lastUpdated,
-            price = item.quoteEntity.usd.price
+            slug = "",
+            marketCap = 0.0,
+            lastUpdated = "",
+            price = item.currentPriceLocal
         )
     }
 

@@ -2,10 +2,7 @@ package com.jnfran92.data.crypto.model.crypto.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-import com.jnfran92.data.crypto.model.crypto.Quote
 
 /**
  * Crypto-currency data

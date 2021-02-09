@@ -1,4 +1,4 @@
-package com.jnfran92.data.crypto.model.api
+package com.jnfran92.data.crypto.model.crypto.remote.api
 
 import com.google.gson.annotations.SerializedName
 

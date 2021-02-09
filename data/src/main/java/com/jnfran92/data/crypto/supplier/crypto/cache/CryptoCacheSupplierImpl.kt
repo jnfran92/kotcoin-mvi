@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class CryptoCacheImpl @Inject constructor(
+class CryptoCacheSupplierImpl @Inject constructor(
     @ApplicationContext private val context: Context
-    ):CryptoCache {
+    ):CryptoCacheSupplier {
 }

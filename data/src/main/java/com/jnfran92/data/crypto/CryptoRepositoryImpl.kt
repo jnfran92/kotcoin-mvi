@@ -1,10 +1,14 @@
 package com.jnfran92.data.crypto
 
 import com.jnfran92.data.crypto.datasource.CryptoDataSourceFactory
+import com.jnfran92.data.crypto.mapper.CryptoDetailsToDomainMapper
 import com.jnfran92.data.crypto.mapper.CryptoToDomainMapper
 import com.jnfran92.data.crypto.model.crypto.Crypto
+import com.jnfran92.data.crypto.model.crypto.CryptoDetails
+import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
 import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
+import com.jnfran92.domain.crypto.model.DomainCryptoDetails
 import io.reactivex.Single
 import io.reactivex.internal.operators.single.SingleDefer
 import io.reactivex.schedulers.Schedulers
@@ -13,12 +17,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Business Logic for managing [Crypto] data.
+ * Business Logic for managing [CryptoRemote] data.
  */
 @Singleton
 class CryptoRepositoryImpl @Inject constructor(
     private val cryptoDataSourceFactory: CryptoDataSourceFactory,
-    private val mapper: CryptoToDomainMapper): CryptoRepository {
+    private val cryptoToDomainMapper: CryptoToDomainMapper,
+    private val cryptoDetailsToDomainMapper: CryptoDetailsToDomainMapper): CryptoRepository {
 
 
     /**
@@ -39,15 +44,31 @@ class CryptoRepositoryImpl @Inject constructor(
             .andThen(SingleDefer {
                 Timber.d("getCryptoList: and Then get data from local!")
                 localDataSource.getCryptoList()
-                    .subscribeOn(Schedulers.computation())
-                    .observeOn(Schedulers.computation())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
             })
-            .map(mapper::transform)
+            .map {
+                it.map { cryptoRemote ->
+                    Crypto(
+                        id = cryptoRemote.cryptoId,
+                        name = cryptoRemote.name,
+                        symbol = cryptoRemote.symbol,
+                        currentPriceLocal = cryptoRemote.quoteRemoteEntity.usd.price
+                    )
+                }
+            }.map(cryptoToDomainMapper::transform)
     }
 
-    override fun getCryptoById(cryptoId: Long): Single<DomainCrypto> {
+    override fun getCryptoById(cryptoId: Long): Single<DomainCryptoDetails> {
         Timber.d("getCryptoById $cryptoId")
         val localDataSource = this.cryptoDataSourceFactory.createLocalDataSource()
-        return localDataSource.getCryptoById(cryptoId).map(mapper::transform)
+        return localDataSource.getCryptoById(cryptoId).map {
+            CryptoDetails(
+                id = it.cryptoId,
+                symbol = it.symbol,
+                name = it.name,
+                historicUsdPriceLocal = listOf()
+            )
+        }.map(cryptoDetailsToDomainMapper::transform)
     }
 }

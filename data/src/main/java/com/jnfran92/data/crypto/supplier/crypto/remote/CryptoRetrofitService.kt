@@ -1,7 +1,7 @@
 package com.jnfran92.data.crypto.supplier.crypto.remote
 
-import com.jnfran92.data.crypto.model.crypto.Crypto
-import com.jnfran92.data.crypto.model.api.DefaultApiRequest
+import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
+import com.jnfran92.data.crypto.model.crypto.remote.api.DefaultApiRequest
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,12 +13,12 @@ import retrofit2.http.Query
 interface CryptoRetrofitService {
 
     @GET("")
-    fun requestCrypto(@Path("id") cryptoId:Int): Call<DefaultApiRequest<Crypto>>
+    fun requestCrypto(@Path("id") cryptoId:Int): Call<DefaultApiRequest<CryptoRemote>>
 
     @GET("/v1/cryptocurrency/listings/latest")
     fun requestCryptoList(@Query("limit") limit:Int)
-            : Call<DefaultApiRequest<Crypto>>
+            : Call<DefaultApiRequest<CryptoRemote>>
 
     @GET("/v1/cryptocurrency/listings/latest")
-    fun requestCryptoList(): Call<DefaultApiRequest<Crypto>>
+    fun requestCryptoList(): Call<DefaultApiRequest<CryptoRemote>>
 }

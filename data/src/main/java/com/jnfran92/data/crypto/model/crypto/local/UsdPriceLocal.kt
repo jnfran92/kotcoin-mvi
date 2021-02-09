@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.util.*
 
 @Entity(tableName = "usd_prices")
-data class UsdPrice(
+data class UsdPriceLocal(
     @PrimaryKey(autoGenerate = true) val usdPriceId: Long?,
     val value: Double,
     val date: String,
