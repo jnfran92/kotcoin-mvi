@@ -149,7 +149,7 @@ class CryptoDetailsFragment : Fragment() {
 //        binding.chart.setDoubleTapToZoomEnabled(false)
         binding.chart.setDrawBorders(false)
         binding.chart.setDrawGridBackground(false)
-//        binding.chart.animateY(1000 , Easing.EaseInBack )
+        binding.chart.animateY(2000 , Easing.EaseInBack )
 //        binding.chart.
 
         binding.chart.invalidate()
