@@ -143,8 +143,8 @@ class CryptoDetailsFragment : Fragment() {
                 binding.lyErrorRetryContainer.container.visibility = View.GONE
 
                 binding.tvCryptoDetailsFragmentName.text = uiState.data.name
-                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
-                binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()
+//                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
+//                binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()
                 binding.tvCryptoDetailsFragmentPrice.text = uiState.data.price.toString()
                 binding.tvCryptoDetailsFragmentSlug.text = uiState.data.slug
                 binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
