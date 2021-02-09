@@ -43,14 +43,6 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note:
 Kotcoin is based on Model-View-Intent MVI Arch. DI handled by Dagger and Reactive data flow handled by
 RXJava. SOLID and CLEAN based project!
 
-## Basic Guide
-
-**IMPORTANT:** Add API key as `env` variable named: `KOTCOIN_API_TOKEN`, in macOS:
-
-    launchctl setenv KOTCOIN_API_TOKEN "\"your_api_key\""
-
-List variables with: `printenv`
-
 ## What's Next!
 
 - Add Crypto single views
