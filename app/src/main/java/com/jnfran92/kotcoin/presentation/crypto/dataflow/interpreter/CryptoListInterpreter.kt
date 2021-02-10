@@ -11,14 +11,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class CryptoListInterpreter @Inject constructor(){
+class CryptoListInterpreter @Inject constructor() {
 
     private val subject: ReplaySubject<CryptoListIntent> = ReplaySubject.create()
 
     private val observable: Observable<CryptoListAction> = subject.flatMap {
         Observable.create<CryptoListAction> { emitter ->
             Timber.d("interpreter: intent $it")
-            when(it){
+            when (it) {
                 CryptoListIntent.GetCryptoListIntent -> {
                     Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
                     emitter.onNext(CryptoListAction.GetCryptoList)
@@ -29,7 +29,7 @@ class CryptoListInterpreter @Inject constructor(){
 
     fun toObservable() = observable
 
-    fun processIntent(intent: CryptoListIntent){
+    fun processIntent(intent: CryptoListIntent) {
         Timber.d("processIntent: $intent")
         subject.onNext(intent)
     }

@@ -11,14 +11,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class CryptoDetailsInterpreter @Inject constructor(){
+class CryptoDetailsInterpreter @Inject constructor() {
 
     private val subject: ReplaySubject<CryptoDetailsIntent> = ReplaySubject.create()
 
     private val observable: Observable<CryptoDetailsAction> = subject.flatMap {
         Observable.create<CryptoDetailsAction> { emitter ->
             Timber.d("interpreter: intent $it")
-            when(it){
+            when (it) {
                 is CryptoDetailsIntent.GetCryptoDetailsIntent -> {
                     Timber.d("interpreter: CryptoListIntent.getCryptoListIntent: ")
                     emitter.onNext(CryptoDetailsAction.GetCryptoDetails(it.itemId))
@@ -29,7 +29,7 @@ class CryptoDetailsInterpreter @Inject constructor(){
 
     fun toObservable() = observable
 
-    fun processIntent(intent: CryptoDetailsIntent){
+    fun processIntent(intent: CryptoDetailsIntent) {
         Timber.d("processIntent: $intent")
         subject.onNext(intent)
     }
