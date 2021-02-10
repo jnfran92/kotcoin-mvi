@@ -100,15 +100,19 @@ class CryptoDetailsFragment : Fragment() {
 
                 binding.name.label.text = "Name"
                 binding.name.textContent.text = uiState.data.name
-                binding.name.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+                binding.name.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_info_24))
 
                 binding.slug.label.text = "Slug"
                 binding.slug.textContent.text = uiState.data.slug
-                binding.slug.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+                binding.slug.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_image_aspect_ratio_24))
 
                 binding.symbol.label.text = "Symbol"
                 binding.symbol.textContent.text = uiState.data.symbol
-                binding.symbol.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+                binding.symbol.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_insert_emoticon_24))
+
+                binding.price.label.text = "Last Price"
+                binding.price.textContent.text = uiState.data.price.last().toString()
+                binding.price.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
 
 //                binding.tvCryptoDetailsFragmentName.text = uiState.data.name
 //                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
