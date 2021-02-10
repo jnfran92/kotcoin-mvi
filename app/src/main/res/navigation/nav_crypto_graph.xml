@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_crypto_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_crypto_graph"
     app:startDestination="@id/cryptoListFragment">
 
     <fragment
@@ -15,10 +16,11 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/cryptoDetailsFragment"
         android:name="com.jnfran92.kotcoin.ui.crypto.fragment.CryptoDetailsFragment"
-        android:label="CryptoDetailsFragment" >
+        android:label="CryptoDetailsFragment">
         <argument
             android:name="CryptoItem"
             app:argType="com.jnfran92.kotcoin.presentation.crypto.model.UICrypto" />

@@ -6,12 +6,6 @@
     android:background="@color/darkBack"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/pb_loading"
-        layout="@layout/view_loading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:id="@+id/ly_data_container"
         android:layout_width="match_parent"
@@ -26,9 +20,17 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/loading_view"
+        layout="@layout/view_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone" />
+
+    <include
         android:id="@+id/ly_error_retry_container"
         layout="@layout/view_generic_error_retry"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:visibility="gone" />
 
 </LinearLayout>

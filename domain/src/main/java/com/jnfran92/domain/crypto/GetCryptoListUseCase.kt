@@ -3,6 +3,7 @@ package com.jnfran92.domain.crypto
 import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**

@@ -72,20 +72,14 @@ class CryptoDetailsFragment : Fragment() {
     private fun render(uiState: CryptoDetailsUIState){
         Timber.d("render: ")
         when(uiState){
-            CryptoDetailsUIState.ShowDefaultView -> {
-                binding.tvCryptoDetailsFragmentName.text = "-"
-                binding.tvCryptoDetailsFragmentLastUpdated.text = "-"
-                binding.tvCryptoDetailsFragmentMarketCap.text = "-"
-                binding.tvCryptoDetailsFragmentPrice.text = "-"
-                binding.tvCryptoDetailsFragmentSlug.text = "-"
-                binding.tvCryptoDetailsFragmentSymbol.text = "-"
-            }
+            CryptoDetailsUIState.ShowDefaultView -> { }
             CryptoDetailsUIState.ShowLoadingView -> {
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
+                binding.loadingView.container.visibility = View.VISIBLE
+                binding.lyDataContainer.visibility = View.GONE
             }
             is CryptoDetailsUIState.ShowErrorRetryView -> {
                 Timber.d("render: uiState error ${uiState.t}")
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.loadingView.container.visibility = View.GONE
                 binding.lyDataContainer.visibility = View.GONE
                 binding.lyErrorRetryContainer.container.visibility = View.VISIBLE
 
@@ -99,7 +93,7 @@ class CryptoDetailsFragment : Fragment() {
                 Timber.d("render: show data details price list: ${uiState.data.price}")
                 setHistoricData(uiState.data.price)
 
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.loadingView.container.visibility = View.GONE
 
                 binding.lyDataContainer.visibility = View.VISIBLE
                 binding.lyErrorRetryContainer.container.visibility = View.GONE

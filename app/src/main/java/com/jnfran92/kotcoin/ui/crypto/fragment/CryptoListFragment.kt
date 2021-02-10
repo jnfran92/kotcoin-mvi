@@ -80,22 +80,14 @@ class CryptoListFragment : Fragment() {
         Timber.d("render: $uiState")
         when(uiState){
             CryptoListUIState.ShowDefaultView -> {
-                binding.lyDataContainer.visibility = View.VISIBLE
-                this.cryptoListAdapter.setData(arrayListOf(
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                    UICrypto(-1, "", "-", "", 0.0, 0.0, ""),
-                ))
             }
             CryptoListUIState.ShowLoadingView -> {
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.VISIBLE
+                binding.loadingView.container.visibility = View.VISIBLE
+                binding.lyDataContainer.visibility = View.GONE
             }
             is CryptoListUIState.ShowErrorRetryView -> {
                 Timber.d("render: on Error: ${uiState.t}")
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.INVISIBLE
+                binding.loadingView.container.visibility = View.GONE
 
                 binding.lyDataContainer.visibility = View.GONE
                 binding.lyErrorRetryContainer.container.visibility = View.VISIBLE
@@ -106,7 +98,7 @@ class CryptoListFragment : Fragment() {
                 }
             }
             is CryptoListUIState.ShowDataView -> {
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.INVISIBLE
+                binding.loadingView.container.visibility = View.GONE
 
                 binding.lyDataContainer.visibility = View.VISIBLE
                 binding.lyErrorRetryContainer.container.visibility = View.GONE
