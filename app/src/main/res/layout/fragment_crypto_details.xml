@@ -10,50 +10,26 @@
         android:id="@+id/ly_data_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_name"
+        <include
+            android:id="@+id/name"
+            layout="@layout/view_crypto_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFC107" />
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_slug"
+        <include
+            android:id="@+id/symbol"
+            layout="@layout/view_crypto_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/white" />
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_symbol"
+        <include
+            android:id="@+id/slug"
+            layout="@layout/view_crypto_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_last_updated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/tv_crypto_details_fragment_market_cap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/white" />
+            android:layout_height="wrap_content" />
 
 
         <com.github.mikephil.charting.charts.LineChart

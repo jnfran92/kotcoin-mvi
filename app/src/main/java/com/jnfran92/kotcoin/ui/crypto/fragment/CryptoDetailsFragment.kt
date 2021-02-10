@@ -98,12 +98,24 @@ class CryptoDetailsFragment : Fragment() {
                 binding.lyDataContainer.visibility = View.VISIBLE
                 binding.lyErrorRetryContainer.container.visibility = View.GONE
 
-                binding.tvCryptoDetailsFragmentName.text = uiState.data.name
+                binding.name.label.text = "Name"
+                binding.name.textContent.text = uiState.data.name
+                binding.name.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+
+                binding.slug.label.text = "Slug"
+                binding.slug.textContent.text = uiState.data.slug
+                binding.slug.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+
+                binding.symbol.label.text = "Symbol"
+                binding.symbol.textContent.text = uiState.data.symbol
+                binding.symbol.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
+
+//                binding.tvCryptoDetailsFragmentName.text = uiState.data.name
 //                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
 //                binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()
 //                binding.tvCryptoDetailsFragmentPrice.text = uiState.data.price.toString()
-                binding.tvCryptoDetailsFragmentSlug.text = uiState.data.slug
-                binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
+//                binding.tvCryptoDetailsFragmentSlug.text = uiState.data.slug
+//                binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
             }
         }
     }
