@@ -4,5 +4,6 @@ data class CryptoDetails(
     val id: Long,
     val name: String,
     val symbol: String,
+    val slug: String,
     val historicUsdPriceLocal: List<Double>
 )

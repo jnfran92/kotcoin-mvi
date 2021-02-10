@@ -24,7 +24,8 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
                     name = cryptoLocal.name,
                     symbol = cryptoLocal.symbol,
                     id = cryptoLocal.cryptoId,
-                    historicUsdPriceLocal = prices.map { it.value }
+                    historicUsdPriceLocal = prices.map { it.value },
+                    slug = cryptoLocal.slug
                 )
             )
         }

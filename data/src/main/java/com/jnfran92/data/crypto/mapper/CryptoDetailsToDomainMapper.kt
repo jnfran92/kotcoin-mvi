@@ -15,7 +15,7 @@ class CryptoDetailsToDomainMapper @Inject constructor(){
             cryptoId = item.id,
             name = item.name,
             symbol = item.symbol,
-            slug = "",
+            slug = item.slug,
             price = item.historicUsdPriceLocal
         )
     }

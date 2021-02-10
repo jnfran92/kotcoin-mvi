@@ -13,6 +13,7 @@ import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
@@ -110,16 +111,9 @@ class CryptoDetailsFragment : Fragment() {
                 binding.symbol.textContent.text = uiState.data.symbol
                 binding.symbol.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_insert_emoticon_24))
 
-                binding.price.label.text = "Last Price"
+                binding.price.label.text = "Last Price[USD]"
                 binding.price.textContent.text = uiState.data.price.last().toString()
                 binding.price.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
-
-//                binding.tvCryptoDetailsFragmentName.text = uiState.data.name
-//                binding.tvCryptoDetailsFragmentLastUpdated.text = uiState.data.lastUpdated
-//                binding.tvCryptoDetailsFragmentMarketCap.text = uiState.data.marketCap.toString()
-//                binding.tvCryptoDetailsFragmentPrice.text = uiState.data.price.toString()
-//                binding.tvCryptoDetailsFragmentSlug.text = uiState.data.slug
-//                binding.tvCryptoDetailsFragmentSymbol.text = uiState.data.symbol
             }
         }
     }
@@ -133,8 +127,7 @@ class CryptoDetailsFragment : Fragment() {
         }
 
         val dataSet = LineDataSet(entries, null)
-        dataSet.valueTextColor = R.color.colorAccent
-        dataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataSet.setDrawFilled(true)
         dataSet.setDrawCircles(false)
         dataSet.lineWidth = 3.0f
@@ -145,6 +138,7 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.data = lineData
         binding.chart.legend.isEnabled = false
         binding.chart.description = null
+
         binding.chart.xAxis.setDrawGridLines(false)
         binding.chart.axisLeft.setDrawGridLines(false)
         binding.chart.axisRight.setDrawGridLines(false)
@@ -152,6 +146,11 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.xAxis.setDrawAxisLine(false)
         binding.chart.axisLeft.setDrawAxisLine(false)
         binding.chart.axisRight.setDrawAxisLine(false)
+
+        binding.chart.axisRight.textColor = resources.getColor(R.color.white, null)
+        binding.chart.axisLeft.textColor = resources.getColor(R.color.white, null)
+        binding.chart.xAxis.textColor = resources.getColor(R.color.white, null)
+        binding.chart.legend.textColor = resources.getColor(R.color.white, null)
 
 //        binding.chart.setTouchEnabled(true)
 //        binding.chart.setClickable(false)
