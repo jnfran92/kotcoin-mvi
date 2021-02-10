@@ -20,14 +20,16 @@ import javax.inject.Inject
  */
 @FragmentScoped
 class CryptoListAdapter @Inject constructor(
-    @ActivityContext private val context: Context)
-    :RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
+    @ActivityContext private val context: Context
+) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>() {
 
     /**
      * Listener
      */
-    private var onClickItemListener: ((UICrypto)-> Unit)? = null
-    fun setListener(listener: (UICrypto)-> Unit){onClickItemListener = listener}
+    private var onClickItemListener: ((UICrypto) -> Unit)? = null
+    fun setListener(listener: (UICrypto) -> Unit) {
+        onClickItemListener = listener
+    }
 
     /**
      * Data list
@@ -53,35 +55,35 @@ class CryptoListAdapter @Inject constructor(
         holder.itemName.text = crypto.name
         holder.itemSymbol.text = crypto.symbol
 
-        val price:String = context.getText(R.string.money_symbol).toString() +
+        val price: String = context.getText(R.string.money_symbol).toString() +
                 "%,.3f".format(crypto.price)
         holder.itemPrice.text = price
 
-        val marketCap =  context.getText(R.string.money_symbol).toString() +
-                "%,.2f".format(crypto.marketCap/10e9) +
+        val marketCap = context.getText(R.string.money_symbol).toString() +
+                "%,.2f".format(crypto.marketCap / 10e9) +
                 "MM"
-        holder.itemMarketCap.text = marketCap
+//        holder.itemMarketCap.text = marketCap
 
-        val lastUpdate:String = context.getString(R.string.updated_at) + " " +
+        val lastUpdate: String = context.getString(R.string.updated_at) + " " +
                 crypto.lastUpdated
-        holder.itemLastUpdate.text = lastUpdate
+//        holder.itemLastUpdate.text = lastUpdate
 
         holder.container.setOnClickListener { onClickItemListener?.invoke(crypto) }
     }
 
 
-    fun setData(data: List<UICrypto>){
+    fun setData(data: List<UICrypto>) {
         this.cryptoList.clear()
         this.cryptoList.addAll(data)
         this.notifyDataSetChanged()
     }
 
-    class CryptoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val itemName :TextView = itemView.tv_cryptoItem_name
-        val itemSymbol :TextView = itemView.tv_cryptoItem_symbol
-        val itemPrice :TextView = itemView.tv_cryptoItem_price
-        val itemMarketCap :TextView = itemView.tv_cryptoItem_markertCap
-        val itemLastUpdate: TextView = itemView.tv_cryptoItem_lastUpdate
+    class CryptoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemName: TextView = itemView.tv_cryptoItem_name
+        val itemSymbol: TextView = itemView.tv_cryptoItem_symbol
+        val itemPrice: TextView = itemView.tv_cryptoItem_price
+//        val itemMarketCap: TextView = itemView.tv_cryptoItem_markertCap
+//        val itemLastUpdate: TextView = itemView.tv_cryptoItem_lastUpdate
         val container: MaterialCardView = itemView.mc_cryptoItem_container
     }
 }

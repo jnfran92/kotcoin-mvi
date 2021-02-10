@@ -60,9 +60,9 @@ class CryptoListFragment : Fragment() {
         }
 
         val orientation = requireContext().resources.configuration.orientation
-        var layoutManager = GridLayoutManager(context, 1)
+        var layoutManager = GridLayoutManager(context, 2)
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, 3)
         }
 
         this.binding.rvCryptoFragmentCryptoList.adapter = this.cryptoListAdapter
@@ -72,6 +72,7 @@ class CryptoListFragment : Fragment() {
     private fun initViewModel() {
         Timber.d("initViewModel")
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
+        this.viewModel.rx(CryptoListIntent.GetCryptoListIntent)
     }
 
 
@@ -94,7 +95,7 @@ class CryptoListFragment : Fragment() {
             }
             is CryptoListUIState.ShowErrorRetryView -> {
                 Timber.d("render: on Error: ${uiState.t}")
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.INVISIBLE
 
                 binding.lyDataContainer.visibility = View.GONE
                 binding.lyErrorRetryContainer.container.visibility = View.VISIBLE
@@ -105,7 +106,7 @@ class CryptoListFragment : Fragment() {
                 }
             }
             is CryptoListUIState.ShowDataView -> {
-                binding.pbLoading.pbViewLoadingLoading.visibility = View.GONE
+                binding.pbLoading.pbViewLoadingLoading.visibility = View.INVISIBLE
 
                 binding.lyDataContainer.visibility = View.VISIBLE
                 binding.lyErrorRetryContainer.container.visibility = View.GONE

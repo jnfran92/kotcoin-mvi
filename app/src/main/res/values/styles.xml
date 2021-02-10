@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/darkBack</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="fontFamily">@font/coda</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

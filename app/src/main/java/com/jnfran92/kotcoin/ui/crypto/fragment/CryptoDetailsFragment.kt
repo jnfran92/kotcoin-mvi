@@ -30,7 +30,6 @@ import kotlin.math.sin
 @AndroidEntryPoint
 class CryptoDetailsFragment : Fragment() {
 
-
     /**
      * view binding
      */
