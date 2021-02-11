@@ -1,8 +1,7 @@
 package com.jnfran92.data.crypto.supplier.crypto.remote
 
-import android.accounts.NetworkErrorException
-import com.jnfran92.data.crypto.model.crypto.remote.api.DefaultApiRequest
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
+import com.jnfran92.data.crypto.model.crypto.remote.api.DefaultApiRequest
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.Callback
