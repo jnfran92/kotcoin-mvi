@@ -6,5 +6,6 @@ import com.google.gson.annotations.SerializedName
  * Auxiliary class for [CryptoRemote]
  */
 data class QuoteRemote(
-    @SerializedName("USD") var usd: CurrencyRemote
+    @SerializedName("USD") var usd: CurrencyRemote,
+    @SerializedName("BTC") var btc: CurrencyRemote
 )

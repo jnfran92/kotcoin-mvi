@@ -1,6 +1,8 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
+import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.CryptoDetails
+import com.jnfran92.data.crypto.model.crypto.Price
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.model.crypto.remote.CurrencyRemote
 import com.jnfran92.data.crypto.model.crypto.remote.QuoteRemote
@@ -31,7 +33,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         }
     }
 
-    override fun getCryptoList(): Single<List<CryptoRemote>> {
+    override fun getCryptoList(): Single<List<Crypto>> {
         Timber.d("getCryptoList")
         return Single.create { emitter ->
             val results = this.cryptoDao.getAllCrypto()
@@ -42,29 +44,50 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
                 Timber.d("getCryptoList: prices of crypto ${cryptoLocal.name}: $cryptoPrices")
                 val cryptoPrice = cryptoPrices.lastOrNull() ?: UsdPriceLocal(
                     -1,0.0,"",0.0, cryptoLocal.cryptoId)
-                CryptoRemote(
-                    cryptoId = cryptoLocal.cryptoId,
+                Crypto(
+                    id = cryptoLocal.cryptoId,
                     name = cryptoLocal.name,
-                    quoteRemoteEntity = QuoteRemote(CurrencyRemote(cryptoPrice.value,cryptoPrice.marketCap,cryptoPrice.date)),
+                    symbol = cryptoLocal.symbol,
+                    usdPrice = Price(
+                         price = cryptoPrice.value,
+                        marketCap = cryptoPrice.marketCap,
+                        lastUpdated = cryptoPrice.date,
+                        percentChange1h = 0.0,
+                        percentChange7d = 0.0,
+                        percentChange24h = 0.0,
+                        volume24h = 0),
                     slug = cryptoLocal.slug,
-                    symbol = cryptoLocal.symbol)
+                    btcPrice = Price(
+                        price = 0.0,
+                        marketCap = 0.0,
+                        lastUpdated = "",
+                        percentChange1h = 0.0,
+                        percentChange7d = 0.0,
+                        percentChange24h = 0.0,
+                        volume24h = 0),
+                    circulatingSupply = 0,
+                    cmcRank = 0,
+                    maxSupply = 0,
+                    tags = listOf(),
+                    totalSupply = 0
+                )
             }
             emitter.onSuccess(mappedResults)
         }
     }
 
-    override fun saveCrypto(cryptoRemote: CryptoRemote): Completable {
+    override fun saveCrypto(cryptoRemote: Crypto): Completable {
         Timber.d("saveCrypto")
         throw NotImplementedError()
     }
 
-    override fun saveCryptoList(cryptoRemoteList: List<CryptoRemote>): Completable {
+    override fun saveCryptoList(cryptoRemoteList: List<Crypto>): Completable {
         Timber.d("saveCryptoList")
         return Completable.create {emitter ->
             Timber.d("saveCryptoList: saving data")
             val mappedInput = cryptoRemoteList.map {
                 CryptoLocal(
-                    cryptoId = it.cryptoId,
+                    cryptoId = it.id,
                     symbol = it.symbol,
                     slug = it.slug,
                     name = it.name
@@ -73,11 +96,11 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
             val prices = cryptoRemoteList.map {
                 UsdPriceLocal(
-                    null,
-                    it.quoteRemoteEntity.usd.price,
-                    it.quoteRemoteEntity.usd.lastUpdated,
-                    it.quoteRemoteEntity.usd.marketCap,
-                    it.cryptoId
+                    usdPriceId = null,
+                    value =  it.usdPrice.price,
+                    date = it.usdPrice.lastUpdated,
+                    marketCap =  it.usdPrice.marketCap,
+                    cryptoLocalId = it.id
                 )
             }
 

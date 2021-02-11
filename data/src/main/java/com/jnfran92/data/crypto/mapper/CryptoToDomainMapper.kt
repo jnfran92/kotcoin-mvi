@@ -16,7 +16,7 @@ class CryptoToDomainMapper @Inject constructor(){
             slug = "",
             marketCap = 0.0,
             lastUpdated = "",
-            price = item.currentPriceLocal
+            price = item.usdPrice.price
         )
     }
 

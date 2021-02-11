@@ -47,16 +47,7 @@ class CryptoRepositoryImpl @Inject constructor(
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
             })
-            .map {
-                it.map { cryptoRemote ->
-                    Crypto(
-                        id = cryptoRemote.cryptoId,
-                        name = cryptoRemote.name,
-                        symbol = cryptoRemote.symbol,
-                        currentPriceLocal = cryptoRemote.quoteRemoteEntity.usd.price
-                    )
-                }
-            }.map(cryptoToDomainMapper::transform)
+            .map(cryptoToDomainMapper::transform)
     }
 
     override fun getCryptoById(cryptoId: Long): Single<DomainCryptoDetails> {

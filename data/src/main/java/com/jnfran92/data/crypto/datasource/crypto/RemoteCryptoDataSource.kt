@@ -1,6 +1,8 @@
 package com.jnfran92.data.crypto.datasource.crypto
 
+import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.CryptoDetails
+import com.jnfran92.data.crypto.model.crypto.Price
 import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplier
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -16,16 +18,48 @@ class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSuppl
                 "since only a list crypto-currency data will be shown.")
     }
 
-    override fun getCryptoList(): Single<List<com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote>> {
-        return this.cryptoRemoteSupplier.getCryptoList()
+    override fun getCryptoList(): Single<List<Crypto>> {
+        return this.cryptoRemoteSupplier.getCryptoList().map { list ->
+            list.map {
+                Crypto(
+                    id = it.cryptoId,
+                    name = it.name,
+                    symbol = it.symbol,
+                    totalSupply = 0,
+                    tags = listOf(),
+                    maxSupply = 0,
+                    cmcRank = 0,
+                    circulatingSupply = 0,
+                    btcPrice = Price(
+                        price = it.quoteRemoteEntity.btc.price,
+                        volume24h = it.quoteRemoteEntity.btc.volume24h,
+                        percentChange24h = it.quoteRemoteEntity.btc.percentChange24h,
+                        percentChange7d = it.quoteRemoteEntity.btc.percentChange7d,
+                        percentChange1h = it.quoteRemoteEntity.btc.percentChange1h,
+                        lastUpdated = it.quoteRemoteEntity.btc.lastUpdated,
+                        marketCap = it.quoteRemoteEntity.btc.marketCap
+                    ),
+                    slug = it.slug,
+                    usdPrice = Price(
+                        price = it.quoteRemoteEntity.usd.price,
+                        volume24h = it.quoteRemoteEntity.usd.volume24h,
+                        percentChange24h = it.quoteRemoteEntity.usd.percentChange24h,
+                        percentChange7d = it.quoteRemoteEntity.usd.percentChange7d,
+                        percentChange1h = it.quoteRemoteEntity.usd.percentChange1h,
+                        lastUpdated = it.quoteRemoteEntity.usd.lastUpdated,
+                        marketCap = it.quoteRemoteEntity.usd.marketCap
+                    )
+                )
+            }
+        }
     }
 
-    override fun saveCrypto(cryptoRemote: com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote): Completable {
+    override fun saveCrypto(cryptoRemote: Crypto): Completable {
         Timber.d("saveCrypto")
         throw NotImplementedError()
     }
 
-    override fun saveCryptoList(cryptoRemoteList: List<com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote>): Completable {
+    override fun saveCryptoList(cryptoRemoteList: List<Crypto>): Completable {
         Timber.d("saveCryptoList")
         throw NotImplementedError()
     }
