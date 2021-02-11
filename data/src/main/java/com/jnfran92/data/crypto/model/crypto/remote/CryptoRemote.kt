@@ -14,5 +14,8 @@ data class CryptoRemote(
 
     @SerializedName("slug") var slug: String,
 
-    @SerializedName("quote") var quoteRemoteEntity: QuoteRemote
+    @SerializedName("quote") var quoteRemoteEntity: QuoteRemote,
+
+    @SerializedName("tags") var tags: List<String>
+
     )
