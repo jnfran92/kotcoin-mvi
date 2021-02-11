@@ -12,10 +12,6 @@ import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplierImpl
 import com.jnfran92.data.crypto.supplier.db.AppDatabase
 import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.kotcoin.BuildConfig
-import com.jnfran92.kotcoin.rx.JobExecutor
-import com.jnfran92.kotcoin.rx.ObserverThread
-import com.jnfran92.kotcoin.rx.SubscriberExecutor
-import com.jnfran92.kotcoin.rx.UIThread
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -75,16 +71,6 @@ object ApplicationModule {
                 chain.proceed(request)
             }
         return client.build()
-    }
-
-    @Provides @Singleton
-    fun subscriberThread(jobExecutor: JobExecutor): SubscriberExecutor {
-        return jobExecutor
-    }
-
-    @Provides @Singleton
-    fun observerThread(uiThread: UIThread): ObserverThread {
-        return uiThread
     }
 
     @Provides @Singleton
