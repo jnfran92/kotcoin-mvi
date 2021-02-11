@@ -31,15 +31,6 @@ class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSuppl
                     maxSupply = 0,
                     cmcRank = 0,
                     circulatingSupply = 0,
-                    btcPrice = Price(
-                        price = it.quoteRemoteEntity.btc.price,
-                        volume24h = it.quoteRemoteEntity.btc.volume24h,
-                        percentChange24h = it.quoteRemoteEntity.btc.percentChange24h,
-                        percentChange7d = it.quoteRemoteEntity.btc.percentChange7d,
-                        percentChange1h = it.quoteRemoteEntity.btc.percentChange1h,
-                        lastUpdated = it.quoteRemoteEntity.btc.lastUpdated,
-                        marketCap = it.quoteRemoteEntity.btc.marketCap
-                    ),
                     slug = it.slug,
                     usdPrice = Price(
                         price = it.quoteRemoteEntity.usd.price,

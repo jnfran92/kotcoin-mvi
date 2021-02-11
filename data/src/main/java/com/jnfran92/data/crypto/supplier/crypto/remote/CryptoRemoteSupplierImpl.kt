@@ -26,7 +26,7 @@ class CryptoRemoteSupplierImpl @Inject constructor(private val retrofit: Retrofi
         Timber.d("getCryptoList: ")
         return Single.create { emitter ->
             Timber.d("getCryptoList: start single")
-            val call: Call<DefaultApiRequest<CryptoRemote>> = cryptoApi.requestCryptoList(50)
+            val call: Call<DefaultApiRequest<CryptoRemote>> = cryptoApi.requestCryptoList(100)
             call.enqueue(object : Callback<DefaultApiRequest<CryptoRemote>> {
                 override fun onFailure(
                     call: Call<DefaultApiRequest<CryptoRemote>>,

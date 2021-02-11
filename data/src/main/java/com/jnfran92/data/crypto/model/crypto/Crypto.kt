@@ -10,6 +10,5 @@ data class Crypto(
     var circulatingSupply: Int,
     var totalSupply: Int,
     var maxSupply: Int,
-    val usdPrice: Price,
-    val btcPrice: Price
+    val usdPrice: Price
 )
