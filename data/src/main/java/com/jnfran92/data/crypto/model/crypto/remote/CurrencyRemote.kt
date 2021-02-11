@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class CurrencyRemote(
     @SerializedName("price") var price: Double,
     @SerializedName("market_cap") var marketCap: Double,
-    @SerializedName("volume_24h") var volume24h: Long,
+    @SerializedName("volume_24h") var volume24h: Double,
     @SerializedName("percent_change_1h") var percentChange1h: Double,
     @SerializedName("percent_change_24h") var percentChange24h: Double,
     @SerializedName("percent_change_7d") var percentChange7d: Double,

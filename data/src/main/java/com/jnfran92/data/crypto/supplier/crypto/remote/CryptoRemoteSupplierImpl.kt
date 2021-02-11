@@ -23,20 +23,23 @@ class CryptoRemoteSupplierImpl @Inject constructor(private val retrofit: Retrofi
     }
 
     override fun getCryptoList(): Single<List<CryptoRemote>> {
+        Timber.d("getCryptoList: ")
         return Single.create { emitter ->
-
-            val call: Call<DefaultApiRequest<CryptoRemote>> = cryptoApi.requestCryptoList(30)
+            Timber.d("getCryptoList: start single")
+            val call: Call<DefaultApiRequest<CryptoRemote>> = cryptoApi.requestCryptoList(50)
             call.enqueue(object : Callback<DefaultApiRequest<CryptoRemote>> {
                 override fun onFailure(
                     call: Call<DefaultApiRequest<CryptoRemote>>,
                     t: Throwable
                 ) {
-                    emitter.onError(NetworkErrorException("Failed to retrieve data."))
+                    Timber.d("onFailure: $t")
+                    emitter.onError(t)
                 }
 
                 override fun onResponse(
                     call: Call<DefaultApiRequest<CryptoRemote>>,
-                    response: Response<DefaultApiRequest<CryptoRemote>>) {
+                    response: Response<DefaultApiRequest<CryptoRemote>>
+                ) {
                     Timber.d("onResponse: response $response")
                     val cryptoRemoteEntityList: ArrayList<CryptoRemote> =
                         response.body()?.data ?: ArrayList()

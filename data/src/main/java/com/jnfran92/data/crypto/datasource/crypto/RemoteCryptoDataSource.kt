@@ -19,6 +19,7 @@ class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSuppl
     }
 
     override fun getCryptoList(): Single<List<Crypto>> {
+        Timber.d("getCryptoList: ")
         return this.cryptoRemoteSupplier.getCryptoList().map { list ->
             list.map {
                 Crypto(

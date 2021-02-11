@@ -13,7 +13,7 @@ data class CryptoRemote(
     @SerializedName("quote") var quoteRemoteEntity: QuoteRemote,
     @SerializedName("tags") var tags: List<String>,
     @SerializedName("cmc_rank") var cmcRank: Int,
-    @SerializedName("circulating_supply") var circulatingSupply: Int,
-    @SerializedName("total_supply") var totalSupply: Int,
-    @SerializedName("max_supply") var maxSupply: Int
+    @SerializedName("circulating_supply") var circulatingSupply: Double,
+    @SerializedName("total_supply") var totalSupply: Double,
+    @SerializedName("max_supply") var maxSupply: Double
 )

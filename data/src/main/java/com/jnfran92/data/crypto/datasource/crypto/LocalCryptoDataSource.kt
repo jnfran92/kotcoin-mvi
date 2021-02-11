@@ -3,9 +3,6 @@ package com.jnfran92.data.crypto.datasource.crypto
 import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.model.crypto.Price
-import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
-import com.jnfran92.data.crypto.model.crypto.remote.CurrencyRemote
-import com.jnfran92.data.crypto.model.crypto.remote.QuoteRemote
 import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
 import com.jnfran92.data.crypto.model.crypto.local.UsdPriceLocal
 import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
@@ -55,7 +52,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
                         percentChange1h = 0.0,
                         percentChange7d = 0.0,
                         percentChange24h = 0.0,
-                        volume24h = 0),
+                        volume24h = 0.0),
                     slug = cryptoLocal.slug,
                     btcPrice = Price(
                         price = 0.0,
@@ -64,7 +61,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
                         percentChange1h = 0.0,
                         percentChange7d = 0.0,
                         percentChange24h = 0.0,
-                        volume24h = 0),
+                        volume24h = 0.0),
                     circulatingSupply = 0,
                     cmcRank = 0,
                     maxSupply = 0,
