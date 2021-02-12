@@ -173,7 +173,6 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.setTouchEnabled(true)
         binding.chart.setDrawBorders(false)
         binding.chart.setDrawGridBackground(false)
-        binding.chart.animateY(1300, Easing.EaseOutSine)
         binding.chart.invalidate()
     }
 }
