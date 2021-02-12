@@ -14,4 +14,4 @@ data class UIPrice(
     var percentChange24h: Double,
     var percentChange7d: Double,
     var lastUpdated: String
-): Parcelable
+) : Parcelable

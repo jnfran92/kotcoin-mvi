@@ -48,8 +48,10 @@ class CryptoDetailsFragment : Fragment() {
      */
     private val args: CryptoDetailsFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         Timber.d("onCreateView: ")
         this.binding = FragmentCryptoDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -61,7 +63,7 @@ class CryptoDetailsFragment : Fragment() {
         this.initViewModel()
     }
 
-    private fun initViewElements(){
+    private fun initViewElements() {
         Timber.d("initViewElements: ")
         (requireActivity() as AppCompatActivity).supportActionBar?.title = args.CryptoItem.name
     }
@@ -72,10 +74,11 @@ class CryptoDetailsFragment : Fragment() {
         this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.id))
     }
 
-    private fun render(uiState: CryptoDetailsUIState){
+    private fun render(uiState: CryptoDetailsUIState) {
         Timber.d("render: ")
-        when(uiState){
-            CryptoDetailsUIState.ShowDefaultView -> { }
+        when (uiState) {
+            CryptoDetailsUIState.ShowDefaultView -> {
+            }
             CryptoDetailsUIState.ShowLoadingView -> {
                 binding.loadingView.container.visibility = View.VISIBLE
                 binding.lyDataContainer.visibility = View.GONE
@@ -121,7 +124,7 @@ class CryptoDetailsFragment : Fragment() {
     }
 
 
-    private fun setHistoricData(historicData: List<UIPrice>){
+    private fun setHistoricData(historicData: List<UIPrice>) {
         val entries = historicData.mapIndexed { index, uiPrice ->
             Entry(index.toFloat(), uiPrice.price.toFloat())
         }
@@ -170,7 +173,7 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.setTouchEnabled(true)
         binding.chart.setDrawBorders(false)
         binding.chart.setDrawGridBackground(false)
-        binding.chart.animateY(1300 , Easing.EaseOutSine )
+        binding.chart.animateY(1300, Easing.EaseOutSine)
         binding.chart.invalidate()
     }
 }

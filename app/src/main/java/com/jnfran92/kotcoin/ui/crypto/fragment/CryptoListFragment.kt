@@ -5,17 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.FragmentCryptoListBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoListViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUIState
-import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 import com.jnfran92.kotcoin.ui.crypto.adapter.CryptoListAdapter
 import com.jnfran92.kotcoin.ui.crypto.navigator.CryptoListNavigator
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +27,7 @@ class CryptoListFragment : Fragment() {
 
     @Inject
     lateinit var cryptoListAdapter: CryptoListAdapter
+
     @Inject
     lateinit var navigator: CryptoListNavigator
 
@@ -43,8 +41,10 @@ class CryptoListFragment : Fragment() {
      */
     private val viewModel: CryptoListViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         Timber.d("onCreateView: ")
         this.binding = FragmentCryptoListBinding.inflate(inflater, container, false)
         return binding.root
@@ -56,8 +56,8 @@ class CryptoListFragment : Fragment() {
         this.initViewModel()
     }
 
-    private fun initViewElements(){
-        this.cryptoListAdapter.setListener{
+    private fun initViewElements() {
+        this.cryptoListAdapter.setListener {
             navigator.goToCryptoDetails(requireView(), it)
         }
 
@@ -78,9 +78,9 @@ class CryptoListFragment : Fragment() {
     }
 
 
-    private fun render(uiState: CryptoListUIState){
+    private fun render(uiState: CryptoListUIState) {
         Timber.d("render: $uiState")
-        when(uiState){
+        when (uiState) {
             CryptoListUIState.ShowDefaultView -> {
             }
             CryptoListUIState.ShowLoadingView -> {

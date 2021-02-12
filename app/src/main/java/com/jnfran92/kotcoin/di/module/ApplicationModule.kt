@@ -31,23 +31,27 @@ object ApplicationModule {
     private const val BASE_URL = "https://pro-api.coinmarketcap.com/"
 
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun cryptoRepository(cryptoRepository: CryptoRepositoryImpl): CryptoRepository {
         return cryptoRepository
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun cryptoApi(cryptoApi: CryptoRemoteSupplierImpl): CryptoRemoteSupplier {
         return cryptoApi
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun cryptoCache(cryptoCache: CryptoCacheSupplierImpl): CryptoCacheSupplier {
         return cryptoCache
     }
 
-    @Provides @Singleton
-    fun retrofit(okHttpClient: OkHttpClient): Retrofit{
+    @Provides
+    @Singleton
+    fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -57,13 +61,14 @@ object ApplicationModule {
     }
 
 
-    @Provides @Singleton
-    fun okHttpClient(): OkHttpClient{
+    @Provides
+    @Singleton
+    fun okHttpClient(): OkHttpClient {
         val client = OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor{chain ->
+            .addInterceptor { chain ->
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
                     .header("X-CMC_PRO_API_KEY", BuildConfig.API_TOKEN)
@@ -73,16 +78,18 @@ object ApplicationModule {
         return client.build()
     }
 
-    @Provides @Singleton
-    fun appDatabase(@ApplicationContext context: Context):AppDatabase {
+    @Provides
+    @Singleton
+    fun appDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java, "app-database"
         ).build()
     }
 
-    @Provides @Singleton
-    fun cryptoDao(appDatabase: AppDatabase): CryptoDao{
+    @Provides
+    @Singleton
+    fun cryptoDao(appDatabase: AppDatabase): CryptoDao {
         return appDatabase.cryptoDao()
     }
 }

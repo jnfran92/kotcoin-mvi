@@ -14,16 +14,17 @@ import javax.inject.Inject
 
 class CryptoListProcessor @Inject constructor(
     private val useCase: GetCryptoListUseCase,
-    private val toUIMapper: DomainCryptoToUIMapper): ObservableTransformer<CryptoListAction, CryptoListResult> {
+    private val toUIMapper: DomainCryptoToUIMapper
+) : ObservableTransformer<CryptoListAction, CryptoListResult> {
 
     override fun apply(upstream: Observable<CryptoListAction>): ObservableSource<CryptoListResult> {
         Timber.d("apply")
         return upstream.flatMap { action ->
             Timber.d("apply: action $action")
-            when(action){
+            when (action) {
                 CryptoListAction.GetCryptoList -> {
                     useCase()
-                        .map (toUIMapper::transform)
+                        .map(toUIMapper::transform)
                         .toObservable()
                         .map(CryptoListResult.GetCryptoListResult::OnSuccess)
                         .cast(CryptoListResult::class.java)

@@ -15,7 +15,7 @@ class CryptoToDomainMapper @Inject constructor() {
             name = item.name,
             symbol = item.symbol,
             slug = "",
-            usdPrice = with(item.usdPrice){
+            usdPrice = with(item.usdPrice) {
                 DomainPrice(
                     price = price,
                     marketCap = marketCap,

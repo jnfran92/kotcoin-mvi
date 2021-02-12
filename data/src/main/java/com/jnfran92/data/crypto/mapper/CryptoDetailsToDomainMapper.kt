@@ -24,7 +24,8 @@ class CryptoDetailsToDomainMapper @Inject constructor() {
                     percentChange1h = it.percentChange1h,
                     lastUpdated = it.lastUpdated,
                     marketCap = it.marketCap
-                ) }
+                )
+            }
         )
     }
 

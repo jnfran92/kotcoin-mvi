@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class DomainCryptoDetailsToUIMapper @Inject constructor() {
 
-    fun transform(item: DomainCryptoDetails): UICryptoDetails{
+    fun transform(item: DomainCryptoDetails): UICryptoDetails {
         return UICryptoDetails(
             id = item.id,
             slug = item.slug,
@@ -29,5 +29,5 @@ class DomainCryptoDetailsToUIMapper @Inject constructor() {
         )
     }
 
-    fun transform(items: List<DomainCryptoDetails>) : List<UICryptoDetails> = items.map(::transform)
+    fun transform(items: List<DomainCryptoDetails>): List<UICryptoDetails> = items.map(::transform)
 }

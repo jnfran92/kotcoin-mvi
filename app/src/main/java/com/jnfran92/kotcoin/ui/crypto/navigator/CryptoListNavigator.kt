@@ -8,10 +8,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CryptoListNavigator @Inject constructor(){
+class CryptoListNavigator @Inject constructor() {
 
-    fun goToCryptoDetails(view: View, item: UICrypto){
-        val direction = CryptoListFragmentDirections.actionCryptoListFragmentToCryptoDetailsFragment(item)
+    fun goToCryptoDetails(view: View, item: UICrypto) {
+        val direction =
+            CryptoListFragmentDirections.actionCryptoListFragmentToCryptoDetailsFragment(item)
         view.findNavController().navigate(direction)
     }
 }

@@ -2,9 +2,6 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.interpreter
 
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.action.CryptoListAction
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoListIntent
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.processor.CryptoListProcessor
-import com.jnfran92.kotcoin.presentation.crypto.dataflow.result.CryptoListResult
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import io.reactivex.Observable
 import io.reactivex.subjects.ReplaySubject
 import timber.log.Timber

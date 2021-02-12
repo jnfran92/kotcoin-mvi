@@ -17,7 +17,7 @@ import timber.log.Timber
  * View for display a list of [Crypto] objects.
  */
 @AndroidEntryPoint
-class CryptoActivity : AppCompatActivity(){
+class CryptoActivity : AppCompatActivity() {
 
     /**
      * Data binding

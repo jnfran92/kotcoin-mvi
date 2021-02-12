@@ -82,7 +82,8 @@ class CryptoListAdapter @Inject constructor(
         val itemName: TextView = itemView.tv_cryptoItem_name
         val itemSymbol: TextView = itemView.tv_cryptoItem_symbol
         val itemPrice: TextView = itemView.tv_cryptoItem_price
-//        val itemMarketCap: TextView = itemView.tv_cryptoItem_markertCap
+
+        //        val itemMarketCap: TextView = itemView.tv_cryptoItem_markertCap
 //        val itemLastUpdate: TextView = itemView.tv_cryptoItem_lastUpdate
         val container: MaterialCardView = itemView.mc_cryptoItem_container
     }

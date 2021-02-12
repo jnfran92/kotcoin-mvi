@@ -25,7 +25,8 @@ import timber.log.Timber
 class CryptoDetailsViewModel @ViewModelInject constructor(
     private val processor: CryptoDetailsProcessor,
     private val interpreter: CryptoDetailsInterpreter,
-    private val reducer: CryptoDetailsReducer): ViewModel() {
+    private val reducer: CryptoDetailsReducer
+) : ViewModel() {
 
     /**
      * RxJava Disposable
@@ -40,7 +41,7 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
     /**
      * RX: receive User intents
      */
-    fun rx(intent: CryptoDetailsIntent){
+    fun rx(intent: CryptoDetailsIntent) {
         Timber.d("rx: $intent")
         interpreter.processIntent(intent)
     }
@@ -73,14 +74,14 @@ class CryptoDetailsViewModel @ViewModelInject constructor(
      * infix helper: processor to reducer
      */
     private infix fun Observable<CryptoDetailsResult>.flowTo(reducer: CryptoDetailsReducer): Observable<CryptoDetailsUIState> {
-        return this.scan(CryptoDetailsUIState.ShowDefaultView ,reducer)
+        return this.scan(CryptoDetailsUIState.ShowDefaultView, reducer)
     }
 
     /**
      * infix helper: processor to reducer
      */
     private infix fun Observable<CryptoDetailsUIState>.flowOn(scheduler: Scheduler):
-            Observable<CryptoDetailsUIState>{
+            Observable<CryptoDetailsUIState> {
         return this.observeOn(scheduler).subscribeOn(scheduler)
     }
 

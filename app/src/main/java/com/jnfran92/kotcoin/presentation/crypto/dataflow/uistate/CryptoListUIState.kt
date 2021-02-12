@@ -2,13 +2,13 @@ package com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate
 
 import com.jnfran92.kotcoin.presentation.crypto.model.UICrypto
 
-sealed class CryptoListUIState{
+sealed class CryptoListUIState {
 
-    object ShowDefaultView: CryptoListUIState()
+    object ShowDefaultView : CryptoListUIState()
 
-    object ShowLoadingView: CryptoListUIState()
+    object ShowLoadingView : CryptoListUIState()
 
-    class ShowErrorRetryView(val t: Throwable): CryptoListUIState()
+    class ShowErrorRetryView(val t: Throwable) : CryptoListUIState()
 
-    class ShowDataView(val data: List<UICrypto>): CryptoListUIState()
+    class ShowDataView(val data: List<UICrypto>) : CryptoListUIState()
 }

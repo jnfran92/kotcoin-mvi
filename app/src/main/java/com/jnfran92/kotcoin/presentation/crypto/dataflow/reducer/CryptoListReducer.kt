@@ -7,15 +7,19 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState>{
+class CryptoListReducer @Inject constructor() :
+    BiFunction<CryptoListUIState, CryptoListResult, CryptoListUIState> {
 
     override fun apply(t1: CryptoListUIState, t2: CryptoListResult): CryptoListUIState {
         Timber.d("apply $t1 resolve with $t2")
         return resolveNextState(t1, t2)
     }
 
-    private fun resolveNextState(previousState: CryptoListUIState, currentResult: CryptoListResult): CryptoListUIState {
-        return when(previousState){
+    private fun resolveNextState(
+        previousState: CryptoListUIState,
+        currentResult: CryptoListResult
+    ): CryptoListUIState {
+        return when (previousState) {
             is CryptoListUIState.ShowDefaultView -> previousState resolveWith currentResult
             is CryptoListUIState.ShowLoadingView -> previousState resolveWith currentResult
             is CryptoListUIState.ShowErrorRetryView -> previousState resolveWith currentResult
@@ -24,7 +28,7 @@ class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, Cry
     }
 
     private infix fun CryptoListUIState.ShowDefaultView.resolveWith(result: CryptoListResult): CryptoListUIState {
-        return when(result){
+        return when (result) {
             CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
             is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid reduction")
             is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid reduction")
@@ -32,15 +36,19 @@ class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, Cry
     }
 
     private infix fun CryptoListUIState.ShowLoadingView.resolveWith(result: CryptoListResult): CryptoListUIState {
-        return when(result){
+        return when (result) {
             CryptoListResult.GetCryptoListResult.InProgress -> throw Exception("invalid reduction")
-            is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView(result.t)
-            is CryptoListResult.GetCryptoListResult.OnSuccess -> CryptoListUIState.ShowDataView(result.data)
+            is CryptoListResult.GetCryptoListResult.OnError -> CryptoListUIState.ShowErrorRetryView(
+                result.t
+            )
+            is CryptoListResult.GetCryptoListResult.OnSuccess -> CryptoListUIState.ShowDataView(
+                result.data
+            )
         }
     }
 
     private infix fun CryptoListUIState.ShowErrorRetryView.resolveWith(result: CryptoListResult): CryptoListUIState {
-        return when(result){
+        return when (result) {
             CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
             is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid reduction")
             is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid reduction")
@@ -48,7 +56,7 @@ class CryptoListReducer @Inject constructor(): BiFunction<CryptoListUIState, Cry
     }
 
     private infix fun CryptoListUIState.ShowDataView.resolveWith(result: CryptoListResult): CryptoListUIState {
-        return when(result){
+        return when (result) {
             CryptoListResult.GetCryptoListResult.InProgress -> CryptoListUIState.ShowLoadingView
             is CryptoListResult.GetCryptoListResult.OnError -> throw Exception("invalid reduction")
             is CryptoListResult.GetCryptoListResult.OnSuccess -> throw Exception("invalid reduction")

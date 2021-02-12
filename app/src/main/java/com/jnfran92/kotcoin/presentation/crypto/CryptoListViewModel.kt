@@ -12,8 +12,8 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoListUISta
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 
@@ -24,7 +24,8 @@ import timber.log.Timber
 class CryptoListViewModel @ViewModelInject constructor(
     private val processor: CryptoListProcessor,
     private val interpreter: CryptoListInterpreter,
-    private val reducer: CryptoListReducer): ViewModel() {
+    private val reducer: CryptoListReducer
+) : ViewModel() {
 
     /**
      * RxJava Disposable
@@ -39,7 +40,7 @@ class CryptoListViewModel @ViewModelInject constructor(
     /**
      * RX: receive User intents from View
      */
-    fun rx(intent: CryptoListIntent){
+    fun rx(intent: CryptoListIntent) {
         Timber.d("rx: $intent")
         interpreter.processIntent(intent)
     }
@@ -71,15 +72,15 @@ class CryptoListViewModel @ViewModelInject constructor(
      * infix helper: processor to reducer
      */
     private infix fun Observable<CryptoListResult>.flowTo(reducer: CryptoListReducer):
-            Observable<CryptoListUIState>{
-        return this.scan(CryptoListUIState.ShowDefaultView ,reducer)
+            Observable<CryptoListUIState> {
+        return this.scan(CryptoListUIState.ShowDefaultView, reducer)
     }
 
     /**
      * infix helper: processor to reducer
      */
     private infix fun Observable<CryptoListUIState>.flowOn(scheduler: Scheduler):
-            Observable<CryptoListUIState>{
+            Observable<CryptoListUIState> {
         return this.observeOn(scheduler).subscribeOn(scheduler)
     }
 }
