@@ -70,7 +70,7 @@ class CryptoActivity : AppCompatActivity() {
             .build()
 
         val workerRequest = PeriodicWorkRequestBuilder<GetLatestCryptoDataWorker>(6, TimeUnit.HOURS)
-//            .setInitialDelay(1, TimeUnit.HOURS)
+            .setInitialDelay(1, TimeUnit.HOURS)
             .setConstraints(constraints)
             .build()
 
