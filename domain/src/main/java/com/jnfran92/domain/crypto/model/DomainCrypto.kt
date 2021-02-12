@@ -1,11 +1,14 @@
 package com.jnfran92.domain.crypto.model
 
-data class DomainCrypto (
-    val cryptoId:Long,
-    val name:String,
-    val symbol:String,
-    val slug:String,
-    val price:Double,
-    val marketCap:Double,
-    val lastUpdated:String
+data class DomainCrypto(
+    val id: Long,
+    var name: String,
+    var symbol: String,
+    var slug: String,
+    var tags: List<String>,
+    var cmcRank: Int,
+    var circulatingSupply: Int,
+    var totalSupply: Int,
+    var maxSupply: Int,
+    val usdPrice: DomainPrice
 )

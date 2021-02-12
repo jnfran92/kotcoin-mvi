@@ -17,4 +17,4 @@ data class CryptoLocal(
     @ColumnInfo(name = "symbol") var symbol: String,
 
     @ColumnInfo(name = "slug") var slug: String
-    )
+)

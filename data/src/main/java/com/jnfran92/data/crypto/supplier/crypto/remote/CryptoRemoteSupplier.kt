@@ -11,7 +11,7 @@ interface CryptoRemoteSupplier {
     /**
      * returns an Observable with a [CryptoRemote] object (id needed).
      */
-    fun getCryptoById(cryptoId:Int): Single<CryptoRemote>
+    fun getCryptoById(cryptoId: Int): Single<CryptoRemote>
 
     /**
      * Get Crypto List, returns an Observable with a list of [CryptoRemote] objects.

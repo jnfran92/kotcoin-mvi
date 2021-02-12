@@ -11,11 +11,14 @@ import timber.log.Timber
 /**
  * Data source for [CryptoRemote]
  */
-class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSupplier):CryptoDataSource {
+class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSupplier) :
+    CryptoDataSource {
 
     override fun getCryptoById(cryptoId: Long): Single<CryptoDetails> {
-        throw NotImplementedError("Not used for this project, " +
-                "since only a list crypto-currency data will be shown.")
+        throw NotImplementedError(
+            "Not used for this project, " +
+                    "since only a list crypto-currency data will be shown."
+        )
     }
 
     override fun getCryptoList(): Single<List<Crypto>> {

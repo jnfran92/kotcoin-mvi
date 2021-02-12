@@ -5,5 +5,5 @@ data class CryptoDetails(
     val name: String,
     val symbol: String,
     val slug: String,
-    val historicUsdPriceLocal: List<Double>
+    val usdPrices: List<Price>
 )

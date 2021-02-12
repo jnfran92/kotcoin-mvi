@@ -10,7 +10,6 @@ import io.reactivex.Single
  */
 interface CryptoRepository {
 
-
     /**
      * Get List of DomainCrypto objects.
      */

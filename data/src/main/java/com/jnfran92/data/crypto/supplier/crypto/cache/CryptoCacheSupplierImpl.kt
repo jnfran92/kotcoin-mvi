@@ -6,5 +6,4 @@ import javax.inject.Inject
 
 class CryptoCacheSupplierImpl @Inject constructor(
     @ApplicationContext private val context: Context
-    ):CryptoCacheSupplier {
-}
+) : CryptoCacheSupplier

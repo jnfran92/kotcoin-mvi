@@ -17,13 +17,23 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         Timber.d("getCryptoById: $cryptoId")
         return Single.create { emitter ->
             val cryptoLocal = this.cryptoDao.getCryptoById(cryptoId)
-            val prices = this.cryptoDao.getUsdPricesByCryptoId(cryptoId)
+            val prices = this.cryptoDao.getUsdPricesByCryptoId(cryptoId).map {
+                Price(
+                    price = it.value,
+                    marketCap = it.marketCap,
+                    lastUpdated = it.date,
+                    percentChange1h = 0.0,
+                    percentChange7d = 0.0,
+                    percentChange24h = 0.0,
+                    volume24h = 0.0
+                )
+            }
             emitter.onSuccess(
                 CryptoDetails(
                     name = cryptoLocal.name,
                     symbol = cryptoLocal.symbol,
                     id = cryptoLocal.cryptoId,
-                    historicUsdPriceLocal = prices.map { it.value },
+                    usdPrices = prices,
                     slug = cryptoLocal.slug
                 )
             )
@@ -35,24 +45,26 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
         return Single.create { emitter ->
             val results = this.cryptoDao.getAllCrypto()
             Timber.d("getCryptoList: results $results")
-            val mappedResults = results.map{ cryptoLocal ->
+            val mappedResults = results.map { cryptoLocal ->
                 val cryptoPrices = cryptoDao
                     .getUsdPricesByCryptoId(cryptoLocal.cryptoId)
                 Timber.d("getCryptoList: prices of crypto ${cryptoLocal.name}: $cryptoPrices")
                 val cryptoPrice = cryptoPrices.lastOrNull() ?: UsdPriceLocal(
-                    -1,0.0,"",0.0, cryptoLocal.cryptoId)
+                    -1, 0.0, "", 0.0, cryptoLocal.cryptoId
+                )
                 Crypto(
                     id = cryptoLocal.cryptoId,
                     name = cryptoLocal.name,
                     symbol = cryptoLocal.symbol,
                     usdPrice = Price(
-                         price = cryptoPrice.value,
+                        price = cryptoPrice.value,
                         marketCap = cryptoPrice.marketCap,
                         lastUpdated = cryptoPrice.date,
                         percentChange1h = 0.0,
                         percentChange7d = 0.0,
                         percentChange24h = 0.0,
-                        volume24h = 0.0),
+                        volume24h = 0.0
+                    ),
                     slug = cryptoLocal.slug,
                     circulatingSupply = 0,
                     cmcRank = 0,
@@ -72,7 +84,7 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
 
     override fun saveCryptoList(cryptoRemoteList: List<Crypto>): Completable {
         Timber.d("saveCryptoList")
-        return Completable.create {emitter ->
+        return Completable.create { emitter ->
             Timber.d("saveCryptoList: saving data")
             val mappedInput = cryptoRemoteList.map {
                 CryptoLocal(
@@ -86,9 +98,9 @@ class LocalCryptoDataSource(private val cryptoDao: CryptoDao) : CryptoDataSource
             val prices = cryptoRemoteList.map {
                 UsdPriceLocal(
                     usdPriceId = null,
-                    value =  it.usdPrice.price,
+                    value = it.usdPrice.price,
                     date = it.usdPrice.lastUpdated,
-                    marketCap =  it.usdPrice.marketCap,
+                    marketCap = it.usdPrice.marketCap,
                     cryptoLocalId = it.id
                 )
             }

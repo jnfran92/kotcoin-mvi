@@ -7,9 +7,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Keep
 data class UICryptoDetails(
-    val cryptoId: Long,
+    val id: Long,
     val name: String,
     val symbol: String,
     val slug: String,
-    val price: List<Double>,
+    val usdPrices: List<UIPrice>
 ) : Parcelable

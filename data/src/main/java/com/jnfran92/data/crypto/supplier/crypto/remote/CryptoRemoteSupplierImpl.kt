@@ -13,7 +13,8 @@ import javax.inject.Inject
 /**
  * REST API Implementation for request Crypto Entities from Cloud
  */
-class CryptoRemoteSupplierImpl @Inject constructor(private val retrofit: Retrofit):CryptoRemoteSupplier {
+class CryptoRemoteSupplierImpl @Inject constructor(private val retrofit: Retrofit) :
+    CryptoRemoteSupplier {
 
     private val cryptoApi = this.retrofit.create(CryptoRetrofitService::class.java)
 

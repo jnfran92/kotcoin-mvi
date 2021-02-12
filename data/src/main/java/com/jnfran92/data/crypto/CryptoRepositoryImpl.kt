@@ -3,12 +3,10 @@ package com.jnfran92.data.crypto
 import com.jnfran92.data.crypto.datasource.CryptoDataSourceFactory
 import com.jnfran92.data.crypto.mapper.CryptoDetailsToDomainMapper
 import com.jnfran92.data.crypto.mapper.CryptoToDomainMapper
-import com.jnfran92.data.crypto.model.crypto.Crypto
-import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
-import com.jnfran92.domain.crypto.repository.CryptoRepository
 import com.jnfran92.domain.crypto.model.DomainCrypto
 import com.jnfran92.domain.crypto.model.DomainCryptoDetails
+import com.jnfran92.domain.crypto.repository.CryptoRepository
 import io.reactivex.Single
 import io.reactivex.internal.operators.single.SingleDefer
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +21,8 @@ import javax.inject.Singleton
 class CryptoRepositoryImpl @Inject constructor(
     private val cryptoDataSourceFactory: CryptoDataSourceFactory,
     private val cryptoToDomainMapper: CryptoToDomainMapper,
-    private val cryptoDetailsToDomainMapper: CryptoDetailsToDomainMapper): CryptoRepository {
+    private val cryptoDetailsToDomainMapper: CryptoDetailsToDomainMapper
+) : CryptoRepository {
 
 
     /**

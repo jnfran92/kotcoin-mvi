@@ -9,21 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.jnfran92.kotcoin.R
 import com.jnfran92.kotcoin.databinding.FragmentCryptoDetailsBinding
 import com.jnfran92.kotcoin.presentation.crypto.CryptoDetailsViewModel
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.intent.CryptoDetailsIntent
 import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUIState
+import com.jnfran92.kotcoin.presentation.crypto.model.UIPrice
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import kotlin.math.PI
-import kotlin.math.pow
-import kotlin.math.sin
 
 /**
  * Fragment for displaying Crypto List
@@ -65,9 +63,9 @@ class CryptoDetailsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        Timber.d("initViewModel: get crypto details by id: ${args.CryptoItem.cryptoId}")
+        Timber.d("initViewModel: get crypto details by id: ${args.CryptoItem.id}")
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
-        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.cryptoId))
+        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.id))
     }
 
     private fun render(uiState: CryptoDetailsUIState){
@@ -86,13 +84,13 @@ class CryptoDetailsFragment : Fragment() {
 
                 binding.lyErrorRetryContainer.btErrorRetryViewGenericRetry.setOnClickListener {
                     Timber.d("render: onClickListener")
-                    viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.cryptoId))
+                    viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.id))
                 }
             }
             is CryptoDetailsUIState.ShowDataView -> {
                 Timber.d("render: show data details: ${uiState.data}")
-                Timber.d("render: show data details price list: ${uiState.data.price}")
-                setHistoricData(uiState.data.price)
+                Timber.d("render: show data details price list: ${uiState.data.usdPrices}")
+                setHistoricData(uiState.data.usdPrices)
 
                 binding.loadingView.container.visibility = View.GONE
 
@@ -112,18 +110,18 @@ class CryptoDetailsFragment : Fragment() {
                 binding.symbol.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_insert_emoticon_24))
 
                 binding.price.label.text = "Last Price[USD]"
-                binding.price.textContent.text = uiState.data.price.last().toString()
+                binding.price.textContent.text = uiState.data.usdPrices.last().price.toString()
                 binding.price.icon.setImageDrawable(requireContext().getDrawable(R.drawable.ic_baseline_attach_money_24))
             }
         }
     }
 
 
-    private fun setHistoricData(historicData: List<Double>){
+    private fun setHistoricData(historicData: List<UIPrice>){
         val entries = arrayListOf<Entry>()
 
         for (i in historicData.indices){
-            entries.add(Entry(i.toFloat(), historicData[i].toFloat()))
+            entries.add(Entry(i.toFloat(), historicData[i].price.toFloat()))
         }
 
         val dataSet = LineDataSet(entries, null)
@@ -135,6 +133,7 @@ class CryptoDetailsFragment : Fragment() {
         dataSet.setDrawValues(false)
 
         val lineData = LineData(dataSet)
+
         binding.chart.data = lineData
         binding.chart.legend.isEnabled = false
         binding.chart.description = null
@@ -151,6 +150,12 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.axisLeft.textColor = resources.getColor(R.color.white, null)
         binding.chart.xAxis.textColor = resources.getColor(R.color.white, null)
         binding.chart.legend.textColor = resources.getColor(R.color.white, null)
+
+        binding.chart.xAxis.valueFormatter = object: ValueFormatter(){
+            override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+                return historicData[value.toInt()].lastUpdated
+            }
+        }
 
 //        binding.chart.setTouchEnabled(true)
 //        binding.chart.setClickable(false)

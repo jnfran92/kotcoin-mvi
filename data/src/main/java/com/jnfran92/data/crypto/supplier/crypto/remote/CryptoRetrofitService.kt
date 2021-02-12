@@ -13,10 +13,10 @@ import retrofit2.http.Query
 interface CryptoRetrofitService {
 
     @GET("")
-    fun requestCrypto(@Path("id") cryptoId:Int): Call<DefaultApiRequest<CryptoRemote>>
+    fun requestCrypto(@Path("id") cryptoId: Int): Call<DefaultApiRequest<CryptoRemote>>
 
     @GET("/v1/cryptocurrency/listings/latest")
-    fun requestCryptoList(@Query("limit") limit:Int)
+    fun requestCryptoList(@Query("limit") limit: Int)
             : Call<DefaultApiRequest<CryptoRemote>>
 
     @GET("/v1/cryptocurrency/listings/latest")

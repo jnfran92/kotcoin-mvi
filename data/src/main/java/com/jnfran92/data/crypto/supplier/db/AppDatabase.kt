@@ -7,11 +7,13 @@ import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
 import com.jnfran92.data.crypto.model.crypto.local.UsdPriceLocal
 import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
 
-@Database(entities = [
-    CryptoLocal::class,
-    UsdPriceLocal::class
-],
-    version = 1)
+@Database(
+    entities = [
+        CryptoLocal::class,
+        UsdPriceLocal::class
+    ],
+    version = 1
+)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cryptoDao(): CryptoDao

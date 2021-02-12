@@ -56,17 +56,17 @@ class CryptoListAdapter @Inject constructor(
         holder.itemSymbol.text = crypto.symbol
 
         val price: String = context.getText(R.string.money_symbol).toString() +
-                "%,.3f".format(crypto.price)
+                "%,.3f".format(crypto.usdPrice)
         holder.itemPrice.text = price
 
-        val marketCap = context.getText(R.string.money_symbol).toString() +
-                "%,.2f".format(crypto.marketCap / 10e9) +
-                "MM"
+//        val marketCap = context.getText(R.string.money_symbol).toString() +
+//                "%,.2f".format(crypto.mar / 10e9) +
+//                "MM"
 //        holder.itemMarketCap.text = marketCap
 
-        val lastUpdate: String = context.getString(R.string.updated_at) + " " +
-                crypto.lastUpdated
-//        holder.itemLastUpdate.text = lastUpdate
+//        val lastUpdate: String = context.getString(R.string.updated_at) + " " +
+//                crypto.lastUpdated
+////        holder.itemLastUpdate.text = lastUpdate
 
         holder.container.setOnClickListener { onClickItemListener?.invoke(crypto) }
     }
