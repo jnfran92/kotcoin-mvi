@@ -1,11 +1,11 @@
-package com.jnfran92.data.crypto.supplier.crypto.local
+package com.jnfran92.data.crypto.source.crypto.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.jnfran92.data.crypto.model.crypto.local.CryptoLocal
-import com.jnfran92.data.crypto.model.crypto.local.UsdPriceLocal
+import com.jnfran92.data.crypto.model.crypto.local.PriceLocal
 
 @Dao
 interface CryptoDao {
@@ -23,15 +23,15 @@ interface CryptoDao {
     fun addCryptoList(crypto: List<CryptoLocal>)
 
 
-    @Query("SELECT * FROM usd_prices")
-    fun getAllUsdPrice(): List<UsdPriceLocal>
+    @Query("SELECT * FROM prices")
+    fun getAllUsdPrices(): List<PriceLocal>
 
-    @Query("SELECT * FROM usd_prices WHERE cryptoLocalId = :cryptoId")
-    fun getUsdPricesByCryptoId(cryptoId: Long): List<UsdPriceLocal>
-
-    @Insert
-    fun addUsdPrice(usdPriceLocal: UsdPriceLocal): Long
+    @Query("SELECT * FROM prices WHERE crypto_id = :cryptoId")
+    fun getUsdPricesByCryptoId(cryptoId: Long): List<PriceLocal>
 
     @Insert
-    fun addUsdPriceList(usdPriceLocalList: List<UsdPriceLocal>)
+    fun addUsdPrice(priceLocal: PriceLocal): Long
+
+    @Insert
+    fun addUsdPriceList(priceLocalList: List<PriceLocal>)
 }

@@ -3,7 +3,7 @@ package com.jnfran92.data.crypto.datasource.crypto
 import android.content.Context
 import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.CryptoDetails
-import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheSupplier
+import com.jnfran92.data.crypto.source.crypto.cache.CryptoCacheSupplier
 import io.reactivex.Completable
 import io.reactivex.Single
 import timber.log.Timber

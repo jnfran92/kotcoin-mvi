@@ -2,7 +2,6 @@ package com.jnfran92.kotcoin.presentation.crypto.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import com.jnfran92.data.crypto.model.crypto.Price
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -14,8 +13,8 @@ data class UICrypto(
     var slug: String,
     var tags: List<String>,
     var cmcRank: Int,
-    var circulatingSupply: Int,
-    var totalSupply: Int,
-    var maxSupply: Int,
+    var circulatingSupply: Double,
+    var totalSupply: Double,
+    var maxSupply: Double,
     val usdPrice: UIPrice
 ) : Parcelable

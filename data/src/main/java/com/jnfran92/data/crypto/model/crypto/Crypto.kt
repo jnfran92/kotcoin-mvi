@@ -7,8 +7,8 @@ data class Crypto(
     var slug: String,
     var tags: List<String>,
     var cmcRank: Int,
-    var circulatingSupply: Int,
-    var totalSupply: Int,
-    var maxSupply: Int,
+    var circulatingSupply: Double,
+    var totalSupply: Double,
+    var maxSupply: Double,
     val usdPrice: Price
 )

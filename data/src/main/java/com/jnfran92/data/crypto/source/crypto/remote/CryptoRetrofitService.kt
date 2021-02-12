@@ -1,4 +1,4 @@
-package com.jnfran92.data.crypto.supplier.crypto.remote
+package com.jnfran92.data.crypto.source.crypto.remote
 
 import com.jnfran92.data.crypto.model.crypto.remote.CryptoRemote
 import com.jnfran92.data.crypto.model.crypto.remote.api.DefaultApiRequest

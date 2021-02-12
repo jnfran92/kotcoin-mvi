@@ -10,7 +10,7 @@ data class CryptoRemote(
     @SerializedName("name") var name: String,
     @SerializedName("symbol") var symbol: String,
     @SerializedName("slug") var slug: String,
-    @SerializedName("quote") var quoteRemoteEntity: QuoteRemote,
+    @SerializedName("quote") var quote: QuoteRemote,
     @SerializedName("tags") var tags: List<String>,
     @SerializedName("cmc_rank") var cmcRank: Int,
     @SerializedName("circulating_supply") var circulatingSupply: Double,

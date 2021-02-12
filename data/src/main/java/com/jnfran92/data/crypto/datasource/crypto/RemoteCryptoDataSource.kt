@@ -3,7 +3,7 @@ package com.jnfran92.data.crypto.datasource.crypto
 import com.jnfran92.data.crypto.model.crypto.Crypto
 import com.jnfran92.data.crypto.model.crypto.CryptoDetails
 import com.jnfran92.data.crypto.model.crypto.Price
-import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplier
+import com.jnfran92.data.crypto.source.crypto.remote.CryptoRemoteSupplier
 import io.reactivex.Completable
 import io.reactivex.Single
 import timber.log.Timber
@@ -29,20 +29,20 @@ class RemoteCryptoDataSource(private val cryptoRemoteSupplier: CryptoRemoteSuppl
                     id = it.cryptoId,
                     name = it.name,
                     symbol = it.symbol,
-                    totalSupply = 0,
+                    totalSupply = it.totalSupply,
                     tags = listOf(),
-                    maxSupply = 0,
-                    cmcRank = 0,
-                    circulatingSupply = 0,
+                    maxSupply = it.maxSupply,
+                    cmcRank = it.cmcRank,
+                    circulatingSupply = it.circulatingSupply,
                     slug = it.slug,
                     usdPrice = Price(
-                        price = it.quoteRemoteEntity.usd.price,
-                        volume24h = it.quoteRemoteEntity.usd.volume24h,
-                        percentChange24h = it.quoteRemoteEntity.usd.percentChange24h,
-                        percentChange7d = it.quoteRemoteEntity.usd.percentChange7d,
-                        percentChange1h = it.quoteRemoteEntity.usd.percentChange1h,
-                        lastUpdated = it.quoteRemoteEntity.usd.lastUpdated,
-                        marketCap = it.quoteRemoteEntity.usd.marketCap
+                        price = it.quote.usd.price,
+                        volume24h = it.quote.usd.volume24h,
+                        percentChange24h = it.quote.usd.percentChange24h,
+                        percentChange7d = it.quote.usd.percentChange7d,
+                        percentChange1h = it.quote.usd.percentChange1h,
+                        lastUpdated = it.quote.usd.lastUpdated,
+                        marketCap = it.quote.usd.marketCap
                     )
                 )
             }

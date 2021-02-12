@@ -5,9 +5,9 @@ import com.jnfran92.data.crypto.datasource.crypto.CacheCryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.CryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.LocalCryptoDataSource
 import com.jnfran92.data.crypto.datasource.crypto.RemoteCryptoDataSource
-import com.jnfran92.data.crypto.supplier.crypto.cache.CryptoCacheSupplier
-import com.jnfran92.data.crypto.supplier.crypto.local.CryptoDao
-import com.jnfran92.data.crypto.supplier.crypto.remote.CryptoRemoteSupplier
+import com.jnfran92.data.crypto.source.crypto.cache.CryptoCacheSupplier
+import com.jnfran92.data.crypto.source.crypto.local.CryptoDao
+import com.jnfran92.data.crypto.source.crypto.remote.CryptoRemoteSupplier
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton

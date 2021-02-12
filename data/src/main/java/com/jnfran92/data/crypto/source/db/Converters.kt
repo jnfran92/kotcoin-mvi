@@ -1,4 +1,4 @@
-package com.jnfran92.data.crypto.supplier.db
+package com.jnfran92.data.crypto.source.db
 
 import androidx.room.TypeConverter
 import java.util.*

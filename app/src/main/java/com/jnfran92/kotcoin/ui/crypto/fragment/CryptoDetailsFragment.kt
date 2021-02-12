@@ -122,10 +122,8 @@ class CryptoDetailsFragment : Fragment() {
 
 
     private fun setHistoricData(historicData: List<UIPrice>){
-        val entries = arrayListOf<Entry>()
-
-        for (i in historicData.indices){
-            entries.add(Entry(i.toFloat(), historicData[i].price.toFloat()))
+        val entries = historicData.mapIndexed { index, uiPrice ->
+            Entry(index.toFloat(), uiPrice.price.toFloat())
         }
 
         val dataSet = LineDataSet(entries, null)
@@ -160,24 +158,19 @@ class CryptoDetailsFragment : Fragment() {
 
         binding.chart.xAxis.valueFormatter = object : ValueFormatter() {
             override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-                return with(value.toInt()) {
-                    val date = formatter.parse(historicData[this].lastUpdated)
-                    formatter.format(date)
-                }
+                val date = formatter.parse(historicData[value.toInt()].lastUpdated)
+                return formatter.format(date ?: "")
             }
         }
         binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         binding.chart.xAxis.labelRotationAngle = 45.0f
-//        binding.chart.xAxis.mLabelRotatedWidth = 40
-
+        binding.chart.xAxis.isGranularityEnabled = true
+        binding.chart.xAxis.granularity = 7f
+        binding.chart.extraBottomOffset = 40f
         binding.chart.setTouchEnabled(true)
-//        binding.chart.setClickable(false)
-//        binding.chart.setDoubleTapToZoomEnabled(false)
         binding.chart.setDrawBorders(false)
         binding.chart.setDrawGridBackground(false)
-        binding.chart.animateY(1000 , Easing.EaseInBack )
-//        binding.chart.
-
+        binding.chart.animateY(1300 , Easing.EaseOutSine )
         binding.chart.invalidate()
     }
 }
