@@ -56,7 +56,7 @@ class CryptoListAdapter @Inject constructor(
         holder.itemSymbol.text = crypto.symbol
 
         val price: String = context.getText(R.string.money_symbol).toString() +
-                "%,.3f".format(crypto.usdPrice)
+                "%,.3f".format(crypto.usdPrice.price)
         holder.itemPrice.text = price
 
 //        val marketCap = context.getText(R.string.money_symbol).toString() +

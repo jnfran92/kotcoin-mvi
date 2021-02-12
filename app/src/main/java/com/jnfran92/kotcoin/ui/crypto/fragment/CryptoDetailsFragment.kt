@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -22,6 +24,8 @@ import com.jnfran92.kotcoin.presentation.crypto.dataflow.uistate.CryptoDetailsUI
 import com.jnfran92.kotcoin.presentation.crypto.model.UIPrice
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Fragment for displaying Crypto List
@@ -145,24 +149,33 @@ class CryptoDetailsFragment : Fragment() {
         binding.chart.xAxis.setDrawAxisLine(false)
         binding.chart.axisLeft.setDrawAxisLine(false)
         binding.chart.axisRight.setDrawAxisLine(false)
+        binding.chart.axisRight.isEnabled = false
 
         binding.chart.axisRight.textColor = resources.getColor(R.color.white, null)
         binding.chart.axisLeft.textColor = resources.getColor(R.color.white, null)
         binding.chart.xAxis.textColor = resources.getColor(R.color.white, null)
         binding.chart.legend.textColor = resources.getColor(R.color.white, null)
 
-        binding.chart.xAxis.valueFormatter = object: ValueFormatter(){
+        val formatter = SimpleDateFormat("yyyy-mm-dd", Locale.US)
+
+        binding.chart.xAxis.valueFormatter = object : ValueFormatter() {
             override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-                return historicData[value.toInt()].lastUpdated
+                return with(value.toInt()) {
+                    val date = formatter.parse(historicData[this].lastUpdated)
+                    formatter.format(date)
+                }
             }
         }
+        binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.chart.xAxis.labelRotationAngle = 45.0f
+//        binding.chart.xAxis.mLabelRotatedWidth = 40
 
-//        binding.chart.setTouchEnabled(true)
+        binding.chart.setTouchEnabled(true)
 //        binding.chart.setClickable(false)
 //        binding.chart.setDoubleTapToZoomEnabled(false)
         binding.chart.setDrawBorders(false)
         binding.chart.setDrawGridBackground(false)
-//        binding.chart.animateY(1000 , Easing.EaseInBack )
+        binding.chart.animateY(1000 , Easing.EaseInBack )
 //        binding.chart.
 
         binding.chart.invalidate()
