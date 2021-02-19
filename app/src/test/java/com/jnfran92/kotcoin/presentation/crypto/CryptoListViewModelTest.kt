@@ -88,6 +88,104 @@ class CryptoListViewModelTest {
     }
 
 
+    @Test
+    fun testInterpreter(){
+        val testObserver = interpreter.toObservable().test()
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        val values = testObserver.values()
+        println(values)
+    }
+
+    @Test
+    fun testInterpreterPlusProcessor(){
+        val fakeDataList = listOf(
+            DomainCrypto(
+                id = 0L,
+                name= "whatever",
+                symbol= "whatever",
+                slug= "whatever",
+                tags= listOf( "whatever"),
+                cmcRank= -1,
+                circulatingSupply= 0.0,
+                totalSupply= 0.0,
+                maxSupply= 0.0,
+                usdPrice= DomainPrice(
+                    price = 0.0,
+                    marketCap = 0.0,
+                    volume24h = 0.0,
+                    percentChange1h = 0.0,
+                    percentChange7d = 0.0,
+                    percentChange24h = 0.0,
+                    lastUpdated = "whatever"
+                ),
+            )
+        )
+        whenever(useCaseMock.invoke()).thenReturn(Single.just(fakeDataList))
+
+        val testObserver0 = interpreter.toObservable().test()
+
+        val testObserver1 = interpreter.toObservable().compose(processor).test()
+
+
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+
+        val values0 = testObserver0.values()
+        val values1 = testObserver1.values()
+        println(values0)
+        println(values1)
+    }
+
+
+    @Test
+    fun testInterpreterPlusProcessorPlusReducer(){
+        val fakeDataList = listOf(
+            DomainCrypto(
+                id = 0L,
+                name= "whatever",
+                symbol= "whatever",
+                slug= "whatever",
+                tags= listOf( "whatever"),
+                cmcRank= -1,
+                circulatingSupply= 0.0,
+                totalSupply= 0.0,
+                maxSupply= 0.0,
+                usdPrice= DomainPrice(
+                    price = 0.0,
+                    marketCap = 0.0,
+                    volume24h = 0.0,
+                    percentChange1h = 0.0,
+                    percentChange7d = 0.0,
+                    percentChange24h = 0.0,
+                    lastUpdated = "whatever"
+                ),
+            )
+        )
+        whenever(useCaseMock.invoke()).thenReturn(Single.just(fakeDataList))
+
+        val testObserver0 = interpreter.toObservable().test()
+
+        val testObserver1 = interpreter.toObservable().compose(processor).test()
+
+        val testObserver2  = interpreter.toObservable().compose(processor).scan(CryptoListUIState.ShowDefaultView, reducer).test()
+
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+        interpreter.processIntent(CryptoListIntent.GetCryptoListIntent)
+
+        val values0 = testObserver0.values()
+        val values1 = testObserver1.values()
+        val values2 = testObserver2.values()
+        println(values0)
+        println(values1)
+        println(values2)
+    }
+
+
     /**
      * infix helper: interpreter to processor
      */

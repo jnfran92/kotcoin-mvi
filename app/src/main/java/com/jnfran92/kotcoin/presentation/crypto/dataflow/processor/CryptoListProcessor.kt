@@ -30,8 +30,6 @@ class CryptoListProcessor @Inject constructor(
                         .cast(CryptoListResult::class.java)
                         .startWith(CryptoListResult.GetCryptoListResult.InProgress)
                         .onErrorReturn(CryptoListResult.GetCryptoListResult::OnError)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io())
                 }
             }
         }
