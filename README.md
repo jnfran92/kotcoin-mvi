@@ -12,9 +12,9 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (_Note
 
 ## Preview
 
-<img src="./imgs/main.png" alt="kotcoin-intro">
+<img src="./imgs/main.png" alt="kotcoin-intro" width="50%">
 
-<img src="./imgs/details.png" alt="kotcoin-intro">
+<img src="./imgs/details.png" alt="kotcoin-intro" width="50%">
 
 ## Features
 
