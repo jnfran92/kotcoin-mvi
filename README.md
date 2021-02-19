@@ -6,9 +6,22 @@ Crypto matters!
 <img src="https://media.giphy.com/media/TzM708yJfPFcY/giphy.gif" alt="kotcoin-intro">
 
 
-Android Application MVI-based and written all in Kotlin for retrieving 10 most capitalized 
-Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (Note: a free API Key is needed).
+Android Application **MVI-based** and written all in Kotlin for retrieving 10 most capitalized 
+Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (_Note: eventually you will need a free API Key_).
 
+
+## Preview
+
+<img src="./imgs/main.png" alt="kotcoin-intro">
+
+<img src="./imgs/details.png" alt="kotcoin-intro">
+
+## Features
+
+- MVI Architecture
+- Dependency Injection with **Hilt**
+- Modularized App: Data + Domain + Presentation + UI
+- Retrieve Data from cloud and store locally using **ROOM**
 
 ## Current work
 
