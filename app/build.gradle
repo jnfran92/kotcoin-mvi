@@ -156,6 +156,9 @@ dependencies {
     // module dependency presentation(app) -> domain
     implementation project(':domain')
     implementation project(':data')
+
+    // mockito
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 }
 
 kapt {
