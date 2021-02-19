@@ -21,9 +21,14 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (_Note
 - MVI Architecture
 - Dependency Injection with **Hilt**
 - Modularized App: Data + Domain + Presentation + UI
-- Retrieve Data from cloud and store locally using **ROOM**
+- Cloud and Local data handling
+- Local DB using **ROOM**
+- Uses a **Worker** for retrieving data each 6 hours from cloud.
+- Plot historic prices.
 
 ## Current work
+
+Status of current work and new ideas which will be implemented soon...
 
 - Adding DataBinding ✅
 - Migrating to MVI ✅
@@ -39,30 +44,4 @@ Crypto-currencies from [CoinMarketCap](https://coinmarketcap.com/api) API (_Note
 - Adding MotionLayout for on-boardings 
 - Adding a MockServer!
 - Adding security wrapper API
-
-## Requirements
-
-- Hilt Dagger 
-- Retrofit 
-- Gson/Kotson 
-- AndroidRx 
-- Mockito (Just few tests) 
-
-
-## About Kotcoin
-
-<img src="./app/src/main/res/drawable/backkotcoin.png" alt="kotcoin-background" width="250">
-
-Kotcoin is based on Model-View-Intent MVI Arch. DI handled by Dagger and Reactive data flow handled by
-RXJava. SOLID and CLEAN based project!
-
-## What's Next!
-
-- Add Crypto single views
-- Add Controller methods for filter, apply, modify data.
-- Unit, Integration and UI Testing
-- Errors handling
-- Add more languages
-- Improve UI/UX
-
 
