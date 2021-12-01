@@ -65,13 +65,13 @@ class CryptoDetailsFragment : Fragment() {
 
     private fun initViewElements() {
         Timber.d("initViewElements: ")
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = args.CryptoItem.name
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = args.cryptoItem.name
     }
 
     private fun initViewModel() {
-        Timber.d("initViewModel: get crypto details by id: ${args.CryptoItem.id}")
+        Timber.d("initViewModel: get crypto details by id: ${args.cryptoItem.id}")
         this.viewModel.tx.observe(viewLifecycleOwner, Observer(::render))
-        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.id))
+        this.viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.cryptoItem.id))
     }
 
     private fun render(uiState: CryptoDetailsUIState) {
@@ -91,7 +91,7 @@ class CryptoDetailsFragment : Fragment() {
 
                 binding.lyErrorRetryContainer.btErrorRetryViewGenericRetry.setOnClickListener {
                     Timber.d("render: onClickListener")
-                    viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.CryptoItem.id))
+                    viewModel.rx(CryptoDetailsIntent.GetCryptoDetailsIntent(args.cryptoItem.id))
                 }
             }
             is CryptoDetailsUIState.ShowDataView -> {

@@ -22,7 +22,7 @@
         android:name="com.jnfran92.kotcoin.ui.crypto.fragment.CryptoDetailsFragment"
         android:label="CryptoDetailsFragment">
         <argument
-            android:name="CryptoItem"
+            android:name="cryptoItem"
             app:argType="com.jnfran92.kotcoin.presentation.crypto.model.UICrypto" />
     </fragment>
 </navigation>
