@@ -1,4 +1,4 @@
-# Kotcoin :computer: :moneybag:  [![Build Status](https://travis-ci.org/jnfran92/kotcoin.svg?branch=master)](https://travis-ci.org/jnfran92/kotcoin)
+# Kotcoin :computer: :moneybag: 
 
 Crypto matters!
 
