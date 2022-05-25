@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity">
+        <activity android:name="com.jnfran92.kotcoin.ui.crypto.activity.CryptoActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
